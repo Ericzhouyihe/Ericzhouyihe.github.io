@@ -27,7 +27,7 @@
 <meta property="og:description" content="1. PCA 是什么？PCA，全称 Principal Component Analysis，中文叫 主成分分析。 它是一种经典的 无监督线性降维算法，主要作用是：  将高维数据映射到低维空间中，在尽可能保留原始信息的前提下，减少特征数量。  PCA 并不是简单地从原始特征中挑几个“重要特征”，然后丢掉其他特征。 它真正做的是：  把原始特征重新组合，生成一组新的特征，这些新特征叫做主成分。  这">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-06-15T07:14:46.655Z">
+<meta property="article:modified_time" content="2026-06-15T07:19:51.434Z">
 <meta property="article:author" content="一人一口粥">
 <meta property="article:tag" content="PCA">
 <meta property="article:tag" content="无监督学习">
@@ -467,7 +467,7 @@
 <hr>
 <h3 id="6-1-数据标准化"><a href="#6-1-数据标准化" class="headerlink" title="6.1 数据标准化"></a>6.1 数据标准化</h3><p>PCA 对特征尺度非常敏感，所以通常需要先做标准化。</p>
 <p>常用方法是 Z-Score 标准化：</p>
-<p>[ x’ &#x3D; \frac{x - \mu}{\sigma} ]</p>
+<p>$x’ &#x3D; \frac{x - \mu}{\sigma}$</p>
 <p>其中：</p>
 <ul>
 <li>$\mu$ 是特征均值</li>
@@ -478,11 +478,11 @@
 <hr>
 <h3 id="6-2-计算协方差矩阵"><a href="#6-2-计算协方差矩阵" class="headerlink" title="6.2 计算协方差矩阵"></a>6.2 计算协方差矩阵</h3><p>协方差用来衡量两个变量之间的线性相关程度。</p>
 <p>标准化后，协方差矩阵可以写成：</p>
-<p>[ C &#x3D; \frac{1}{m-1}X^TX ]</p>
+<p>$C &#x3D; \frac{1}{m-1}X^TX $</p>
 <p>协方差矩阵反映了不同特征之间的相关关系。</p>
 <hr>
 <h3 id="6-3-求特征值和特征向量"><a href="#6-3-求特征值和特征向量" class="headerlink" title="6.3 求特征值和特征向量"></a>6.3 求特征值和特征向量</h3><p>对协方差矩阵做特征分解：</p>
-<p>[ Cv &#x3D; \lambda v ]</p>
+<p>$Cv &#x3D; \lambda v $</p>
 <p>可以得到：</p>
 <ul>
 <li>特征值 $\lambda$</li>
@@ -496,13 +496,13 @@
 <p>特征值越大，说明该主成分保留的信息越多。</p>
 <hr>
 <h3 id="6-4-选择前-k-个主成分"><a href="#6-4-选择前-k-个主成分" class="headerlink" title="6.4 选择前 k 个主成分"></a>6.4 选择前 k 个主成分</h3><p>将特征值从大到小排序：</p>
-<p>[ \lambda_1 \geq \lambda_2 \geq … \geq \lambda_n ]</p>
+<p>$\lambda_1 \geq \lambda_2 \geq … \geq \lambda_n $</p>
 <p>选择前 <code>k</code> 个最大特征值对应的特征向量，组成投影矩阵：</p>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">W:</span> n × k<br></code></pre></td></tr></table></figure>
 
 <hr>
 <h3 id="6-5-得到降维后的数据"><a href="#6-5-得到降维后的数据" class="headerlink" title="6.5 得到降维后的数据"></a>6.5 得到降维后的数据</h3><p>最后将原始数据投影到新的主成分空间：</p>
-<p>[ Y &#x3D; XW ]</p>
+<p>$Y &#x3D; XW $</p>
 <p>其中：</p>
 <ul>
 <li><code>X</code> 是标准化后的原始数据</li>
@@ -514,9 +514,9 @@
 <p>常见方法有两种。</p>
 <hr>
 <h3 id="7-1-累计方差贡献率"><a href="#7-1-累计方差贡献率" class="headerlink" title="7.1 累计方差贡献率"></a>7.1 累计方差贡献率</h3><p>单个主成分的方差贡献率为：</p>
-<p>[ \frac{\lambda_i}{\sum_{j&#x3D;1}^{n}\lambda_j} ]</p>
+<p>$\frac{\lambda_i}{\sum_{j&#x3D;1}^{n}\lambda_j} $</p>
 <p>前 <code>k</code> 个主成分的累计方差贡献率为：</p>
-<p>[ \frac{\sum_{j&#x3D;1}^{k}\lambda_j}{\sum_{j&#x3D;1}^{n}\lambda_j} ]</p>
+<p>$\frac{\sum_{j&#x3D;1}^{k}\lambda_j}{\sum_{j&#x3D;1}^{n}\lambda_j} $</p>
 <p>实际使用时，通常选择最小的 <code>k</code>，使累计方差贡献率达到：</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">85</span>% ~ <span class="hljs-number">95</span>%<br></code></pre></td></tr></table></figure>
 
