@@ -13,7 +13,7 @@
     
     <categories>
       
-      <category>机器学习</category>
+      <category>编程技术</category>
       
     </categories>
     
@@ -82,11 +82,11 @@
       
       <tag>机器学习</tag>
       
-      <tag>特征工程</tag>
-      
       <tag>PCA</tag>
       
       <tag>降维</tag>
+      
+      <tag>特征工程</tag>
       
       <tag>无监督学习</tag>
       
