@@ -16,23 +16,23 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="author" content="John Doe">
+  <meta name="author" content="一人一口粥">
   <meta name="keywords" content="">
   
     <meta name="description" content="什么是编程语言？用来和计算机交流，控制计算机，让计算机按照我们的要求做事情，这样的语言叫做编程语言。 编程语言的发展历程？计算机语言经历了3个主要阶段：机器语言、汇编语言、高级语言 机器语言：用二进制编码表示的机器指令，是CPU能直接识别并执行的唯一一种语言 汇编语言：符号语言。用与机器指令含义相近的英文缩写、字母和数字等符号来取代机器指令 高级语言：机器语言和汇编语言都是面向机器(硬件)的语言，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="p01_认识编程语言，Python环境搭建">
-<meta property="og:url" content="http://example.com/2026/06/14/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:url" content="https://zyhblog.dpdns.org/2026/06/14/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="什么是编程语言？用来和计算机交流，控制计算机，让计算机按照我们的要求做事情，这样的语言叫做编程语言。 编程语言的发展历程？计算机语言经历了3个主要阶段：机器语言、汇编语言、高级语言 机器语言：用二进制编码表示的机器指令，是CPU能直接识别并执行的唯一一种语言 汇编语言：符号语言。用与机器指令含义相近的英文缩写、字母和数字等符号来取代机器指令 高级语言：机器语言和汇编语言都是面向机器(硬件)的语言，">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/assets/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/TIOBE.png">
-<meta property="og:image" content="http://example.com/assets/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/ZenOfPython.png">
+<meta property="og:image" content="https://zyhblog.dpdns.org/assets/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/TIOBE.png">
+<meta property="og:image" content="https://zyhblog.dpdns.org/assets/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/ZenOfPython.png">
 <meta property="article:published_time" content="2026-06-14T15:56:00.000Z">
 <meta property="article:modified_time" content="2026-06-15T00:58:41.473Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="一人一口粥">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/assets/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/TIOBE.png">
+<meta name="twitter:image" content="https://zyhblog.dpdns.org/assets/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/TIOBE.png">
   
   
   
@@ -78,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"zyhblog.dpdns.org","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -456,13 +456,13 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>p01_认识编程语言，Python环境搭建</div>
-      <div>http://example.com/2026/06/14/p01-认识编程语言，Python环境搭建/</div>
+      <div>https://zyhblog.dpdns.org/2026/06/14/p01-认识编程语言，Python环境搭建/</div>
     </div>
     <div class="license-meta">
       
         <div class="license-meta-item">
           <div>作者</div>
-          <div>John Doe</div>
+          <div>一人一口粥</div>
         </div>
       
       
