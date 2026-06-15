@@ -20,8 +20,8 @@
   <meta name="keywords" content="">
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="https://zyhblog.dpdns.org/tags/index.html">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://zyhblog.dpdns.org/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="一人一口粥">
@@ -29,7 +29,7 @@
   
   
   
-  <title>标签 - Hexo</title>
+  <title>Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -87,7 +87,7 @@
   <header>
     
 
-<div class="header-inner" style="height: 80vh;">
+<div class="header-inner" style="height: 100vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -296,7 +296,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="标签"></span>
+            <span id="subtitle" data-typed-text="毕竟几人真得鹿，不知终日梦为鱼。"></span>
           
         </div>
 
@@ -322,16 +322,81 @@
     
       <div class="container nopadding-x-md">
         <div id="board"
-          >
+          style="margin-top: 0">
           
           <div class="container">
             <div class="row">
               <div class="col-12 col-md-10 m-auto">
                 
 
-<div class="text-center tagcloud">
-  <a href="/tags/Python%E5%9F%BA%E7%A1%80/" style="font-size: 15px; color: #bbe">Python基础</a> <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" style="font-size: 15px; color: #bbe">环境搭建</a>
-</div>
+<h1 style="display: none">Hexo</h1>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2026/06/14/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" target="_self">
+          p01_认识编程语言，Python环境搭建
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/14/p01-%E8%AE%A4%E8%AF%86%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%EF%BC%8CPython%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" target="_self">
+        <div>
+          什么是编程语言？用来和计算机交流，控制计算机，让计算机按照我们的要求做事情，这样的语言叫做编程语言。 编程语言的发展历程？计算机语言经历了3个主要阶段：机器语言、汇编语言、高级语言 机器语言：用二进制编码表示的机器指令，是CPU能直接识别并执行的唯一一种语言 汇编语言：符号语言。用与机器指令含义相近的英文缩写、字母和数字等符号来取代机器指令 高级语言：机器语言和汇编语言都是面向机器(硬件)的语言，
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2026-06-14 23:56" pubdate>
+              2026-06-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/" class="category-chain-item">编程技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Python%E5%9F%BA%E7%A1%80/">#Python基础</a>
+            
+              <a href="/tags/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">#环境搭建</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+
+
+
 
               </div>
             </div>
@@ -416,7 +481,37 @@
       }
       var text = subtitle.getAttribute('data-typed-text');
       
-        typing(text);
+        jQuery.ajax({
+          type: 'GET',
+          url: 'https://v1.jinrishici.com/all.json',
+          headers: {},
+          dataType: 'json',
+          success: function(result) {
+            var apiText;
+            if (result) {
+              var keys = 'content'.split(',');
+              if (result instanceof Array) {
+                result = result[0];
+              }
+              for (const k of keys) {
+                var value = result[k];
+                if (typeof value === 'string') {
+                  apiText = value;
+                  break;
+                } else if (value instanceof Object) {
+                  result = value;
+                }
+              }
+            }
+            apiText ? typing(apiText) : typing(text);
+          },
+          error: function(xhr, status, error) {
+            if (error) {
+              console.error('Failed to request https://v1.jinrishici.com/all.json:', error);
+            }
+            typing(text);
+          }
+        })
       
     })(window, document);
   </script>
