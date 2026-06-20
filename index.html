@@ -78,7 +78,7 @@
 
 
   
-<!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha512-fHwaWebuwA7NSF5Qg/af4UeDx9XqUpYpOGgubo3yWu+b2IQR4UeQwbb42Ti7gVAjNtVoI/I9TEoYeu9omwcC6g==" crossorigin="anonymous" referrerpolicy="no-referrer" /><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"></head>
+<meta name="generator" content="Hexo 8.1.2"></head>
 
 
 <body>
@@ -311,15 +311,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
-        <a href="/2026/06/18/%E6%89%8B%E5%86%99Bagging%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" target="_self">
-          从抽样到投票：手写 Bagging 集成学习原理与实现
+        <a href="/2026/06/20/Bagging%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" target="_self">
+          Bagging 集成学习：让多个&#34;笨&#34;模型组成&#34;聪明&#34;团队
         </a>
       </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/18/%E6%89%8B%E5%86%99Bagging%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2026/06/20/Bagging%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/" target="_self">
         <div>
-          一、什么是 Bagging？Bagging 是集成学习中非常经典的一种方法，全称是 Bootstrap Aggregating。 如果用生活化的例子来理解，可以想象你要判断一家餐厅好不好吃。你不会只听一个人的评价，而是会问很多人，然后综合大家的意见：  如果是打分问题，比如预测餐厅评分，就把大家的分数取平均； 如果是分类问题，比如判断“推荐”还是“不推荐”，就让大家投票，票数多的一方获胜。  Ba
+          什么是 Bagging？想象你要做一个重要决定，比如买哪只股票。一个人的判断可能有偏差，但如果你问 10 个朋友，综合他们的意见，结果往往更可靠。Bagging（Bootstrap Aggregating）就是这个道理——让多个模型各自学习，最后”投票”得出答案。 Bagging 是集成学习的经典方法之一，核心思想是：  多样性：每个模型看到的训练数据略有不同 协作：多个”弱”模型组合成一个”强”
         </div>
       </a>
 
@@ -327,8 +327,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2026-06-18 00:32" pubdate>
-              2026-06-18
+            <time datetime="2026-06-20 00:00" pubdate>
+              2026-06-20
             </time>
           </div>
         
@@ -358,11 +358,15 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">#决策树</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
+            
+              <a href="/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/">#集成学习</a>
             
               <a href="/tags/Bagging/">#Bagging</a>
             
-              <a href="/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/">#集成学习</a>
+              <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">#决策树</a>
+            
+              <a href="/tags/Python/">#Python</a>
             
           </div>
         
@@ -567,9 +571,9 @@
             
               <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
             
-              <a href="/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/">#特征选择</a>
-            
               <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">#决策树</a>
+            
+              <a href="/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/">#特征选择</a>
             
               <a href="/tags/Gini%E7%B3%BB%E6%95%B0/">#Gini系数</a>
             
@@ -595,7 +599,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2026/06/16/%E4%BF%A1%E6%81%AF%E7%86%B5%E4%B8%8E%E6%9D%A1%E4%BB%B6%E7%86%B5/" target="_self">
         <div>
-          信息熵信息熵用于衡量一个随机变量的不确定性。 在决策树中，如果一个数据集中的类别越混乱、不确定性越高，那么它的信息熵就越大；如果数据集越纯，信息熵就越小。 信息熵公式为： H(X)=−∑i=1npilog⁡2pi H(X) = -\sum_{i=1}^{n} p_i \log_2 p_i H(X)=−i=1∑n​pi​log2​pi​  其中：  pip_ipi​ 表示第 iii 类样本出现的概率
+          信息熵信息熵用于衡量一个随机变量的不确定性。 在决策树中，如果一个数据集中的类别越混乱、不确定性越高，那么它的信息熵就越大；如果数据集越纯，信息熵就越小。 信息熵公式为： $$H(X) &#x3D; -\sum_{i&#x3D;1}^{n} p_i \log_2 p_i$$ 其中：  $p_i$ 表示第 $i$ 类样本出现的概率 $\log_2$ 表示以 2 为底的对数 信息熵的单位通常是 bit
         </div>
       </a>
 
@@ -636,13 +640,13 @@
             
               <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
             
-              <a href="/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/">#特征选择</a>
-            
               <a href="/tags/%E5%86%B3%E7%AD%96%E6%A0%91/">#决策树</a>
             
               <a href="/tags/%E4%BF%A1%E6%81%AF%E7%86%B5/">#信息熵</a>
             
               <a href="/tags/%E6%9D%A1%E4%BB%B6%E7%86%B5/">#条件熵</a>
+            
+              <a href="/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/">#特征选择</a>
             
           </div>
         
@@ -772,9 +776,9 @@
             
               <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">#机器学习</a>
             
-              <a href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">#特征工程</a>
-            
               <a href="/tags/%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9/">#特征选择</a>
+            
+              <a href="/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/">#特征工程</a>
             
           </div>
         
