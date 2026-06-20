@@ -19,12 +19,12 @@
   <meta name="author" content="一人一口粥">
   <meta name="keywords" content="">
   
-    <meta name="description" content="词袋法与 TF-IDF在机器学习里，模型一般不能直接处理文本。 比如下面这句话： 1This is spark, spark sql a every good  对人来说，这是文本；但对模型来说，它需要的是数字。 所以文本特征处理的核心问题就是：  怎么把一句话、一段话、一个文档，转换成模型能理解的数字向量？  常见方法有：  词袋法，也叫 Bag of Words TF-IDF Word2Vec">
+    <meta name="description" content="词袋法与 TF-IDF 在机器学习里，模型一般不能直接处理文本。 比如下面这句话： 1This is spark, spark sql a every good 对人来说，这是文本；但对模型来说，它需要的是数字。 所以文本特征处理的核心问题就是：  怎么把一句话、一段话、一个文档，转换成模型能理解的数字向量？  常见方法有：  词袋法，也叫 Bag of Words TF-IDF Word2Vec">
 <meta property="og:type" content="article">
 <meta property="og:title" content="词袋法与 TF-IDF">
 <meta property="og:url" content="https://zyhblog.dpdns.org/2026/06/16/%E8%AF%8D%E8%A2%8B%E6%B3%95%E4%B8%8ETF-IDF/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="词袋法与 TF-IDF在机器学习里，模型一般不能直接处理文本。 比如下面这句话： 1This is spark, spark sql a every good  对人来说，这是文本；但对模型来说，它需要的是数字。 所以文本特征处理的核心问题就是：  怎么把一句话、一段话、一个文档，转换成模型能理解的数字向量？  常见方法有：  词袋法，也叫 Bag of Words TF-IDF Word2Vec">
+<meta property="og:description" content="词袋法与 TF-IDF 在机器学习里，模型一般不能直接处理文本。 比如下面这句话： 1This is spark, spark sql a every good 对人来说，这是文本；但对模型来说，它需要的是数字。 所以文本特征处理的核心问题就是：  怎么把一句话、一段话、一个文档，转换成模型能理解的数字向量？  常见方法有：  词袋法，也叫 Bag of Words TF-IDF Word2Vec">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-15T16:00:00.000Z">
 <meta property="article:modified_time" content="2026-06-15T16:07:29.194Z">
@@ -364,10 +364,10 @@
             
               <div class="markdown-body">
                 
-                <h1 id="词袋法与-TF-IDF"><a href="#词袋法与-TF-IDF" class="headerlink" title="词袋法与 TF-IDF"></a>词袋法与 TF-IDF</h1><p>在机器学习里，模型一般不能直接处理文本。</p>
+                <h1 id="词袋法与-tf-idf">词袋法与 TF-IDF</h1>
+<p>在机器学习里，模型一般不能直接处理文本。</p>
 <p>比如下面这句话：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">This is spark, spark sql a every good<br></code></pre></td></tr></table></figure>
-
 <p>对人来说，这是文本；但对模型来说，它需要的是数字。</p>
 <p>所以文本特征处理的核心问题就是：</p>
 <blockquote>
@@ -381,58 +381,60 @@
 </ul>
 <p>这节主要看词袋法和 TF-IDF。</p>
 <hr>
-<h2 id="1-准备数据"><a href="#1-准备数据" class="headerlink" title="1. 准备数据"></a>1. 准备数据</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> (<br>    TfidfVectorizer,<br>    CountVectorizer,<br>    TfidfTransformer<br>)<br></code></pre></td></tr></table></figure>
-
+<h2 id="1-准备数据">1. 准备数据</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> (<br>    TfidfVectorizer,<br>    CountVectorizer,<br>    TfidfTransformer<br>)<br></code></pre></td></tr></table></figure>
 <p>准备两组文本：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python">arr1 = [<br>    <span class="hljs-string">&quot;This is spark, spark sql a every good&quot;</span>,<br>    <span class="hljs-string">&quot;Spark Hadoop Hbase&quot;</span>,<br>    <span class="hljs-string">&quot;This is sample&quot;</span>,<br>    <span class="hljs-string">&quot;This is anthor example anthor example&quot;</span>,<br>    <span class="hljs-string">&quot;spark hbase hadoop spark hive hbase hue oozie&quot;</span>,<br>    <span class="hljs-string">&quot;hue oozie spark&quot;</span><br>]<br><br>arr2 = [<br>    <span class="hljs-string">&quot;this is a sample a example&quot;</span>,<br>    <span class="hljs-string">&quot;this cd is another another sample example example&quot;</span>,<br>    <span class="hljs-string">&quot;spark Hbase hadoop Spark hive hbase&quot;</span><br>]<br></code></pre></td></tr></table></figure>
-
 <p>这里：</p>
 <ul>
 <li><code>arr1</code>：训练文本，用来学习词表和 TF-IDF 权重</li>
 <li><code>arr2</code>：新文本，用来测试转换效果</li>
 </ul>
-<p>注意，<code>arr1</code> 里面有一个拼写是 <code>anthor</code>，而 <code>arr2</code> 里面是 <code>another</code>。<br>这两个词在程序看来是两个完全不同的词。</p>
+<p>注意，<code>arr1</code> 里面有一个拼写是 <code>anthor</code>，而 <code>arr2</code> 里面是 <code>another</code>。<br>
+这两个词在程序看来是两个完全不同的词。</p>
 <hr>
-<h1 id="一、词袋法"><a href="#一、词袋法" class="headerlink" title="一、词袋法"></a>一、词袋法</h1><h2 id="2-什么是词袋法"><a href="#2-什么是词袋法" class="headerlink" title="2. 什么是词袋法"></a>2. 什么是词袋法</h2><p>词袋法的英文是 Bag of Words，简称 BOW。</p>
+<h1 id="一、词袋法">一、词袋法</h1>
+<h2 id="2-什么是词袋法">2. 什么是词袋法</h2>
+<p>词袋法的英文是 Bag of Words，简称 BOW。</p>
 <p>它的思想很简单：</p>
 <blockquote>
 <p>不关心词语顺序，只关心每个词出现了几次。</p>
 </blockquote>
 <p>比如有两句话：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">spark hadoop spark<br>hadoop hive<br></code></pre></td></tr></table></figure>
-
 <p>词表是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">spark, hadoop, hive<br></code></pre></td></tr></table></figure>
-
 <p>那么可以转换成：</p>
 <table>
 <thead>
 <tr>
 <th>文档</th>
-<th align="right">spark</th>
-<th align="right">hadoop</th>
-<th align="right">hive</th>
+<th style="text-align:right">spark</th>
+<th style="text-align:right">hadoop</th>
+<th style="text-align:right">hive</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>spark hadoop spark</td>
-<td align="right">2</td>
-<td align="right">1</td>
-<td align="right">0</td>
+<td style="text-align:right">2</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">0</td>
 </tr>
 <tr>
 <td>hadoop hive</td>
-<td align="right">0</td>
-<td align="right">1</td>
-<td align="right">1</td>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>这就是词袋法。</p>
 <p>它把文本变成了一个“词频矩阵”。</p>
 <hr>
-<h2 id="3-CountVectorizer"><a href="#3-CountVectorizer" class="headerlink" title="3. CountVectorizer"></a>3. CountVectorizer</h2><p>sklearn 里可以用 <code>CountVectorizer</code> 实现词袋法。</p>
+<h2 id="3-CountVectorizer">3. CountVectorizer</h2>
+<p>sklearn 里可以用 <code>CountVectorizer</code> 实现词袋法。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">count = CountVectorizer(<br>    min_df=<span class="hljs-number">0.1</span>,<br>    dtype=np.float64,<br>    ngram_range=(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<br>)<br><br>df1 = count.fit_transform(arr1)<br></code></pre></td></tr></table></figure>
-
 <p>几个参数解释一下：</p>
 <ul>
 <li><code>min_df=0.1</code>：词至少要在一定比例的文档里出现，才会被加入词表</li>
@@ -441,14 +443,12 @@
 </ul>
 <p>实际项目里，如果只做普通词袋法，更推荐写：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">CountVectorizer(ngram_range=(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="4-查看词袋矩阵"><a href="#4-查看词袋矩阵" class="headerlink" title="4. 查看词袋矩阵"></a>4. 查看词袋矩阵</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(df1)<br><span class="hljs-built_in">print</span>(df1.toarray())<br></code></pre></td></tr></table></figure>
-
+<h2 id="4-查看词袋矩阵">4. 查看词袋矩阵</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(df1)<br><span class="hljs-built_in">print</span>(df1.toarray())<br></code></pre></td></tr></table></figure>
 <p><code>df1</code> 默认是稀疏矩阵。</p>
 <p>稀疏矩阵的显示形式类似：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">(0, 13)  1.0<br>(0, 8)   1.0<br>(0, 11)  2.0<br></code></pre></td></tr></table></figure>
-
 <p>意思是：</p>
 <ul>
 <li>第 0 篇文档</li>
@@ -456,20 +456,20 @@
 <li>第 8 个词出现了 1 次</li>
 <li>第 11 个词出现了 2 次</li>
 </ul>
-<p>之所以用稀疏矩阵，是因为文本数据通常特别稀疏。<br>比如词表有 10000 个词，但一篇文章可能只出现其中几十个。</p>
+<p>之所以用稀疏矩阵，是因为文本数据通常特别稀疏。<br>
+比如词表有 10000 个词，但一篇文章可能只出现其中几十个。</p>
 <p>如果想看普通数组，可以用：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">df1.toarray()<br></code></pre></td></tr></table></figure>
-
 <p>输出类似：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">[[<span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">2.</span> <span class="hljs-number">1.</span> <span class="hljs-number">1.</span>]<br> [<span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span>]<br> [<span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">1.</span> <span class="hljs-number">0.</span> <span class="hljs-number">0.</span> <span class="hljs-number">1.</span>]<br> ...<br>]<br></code></pre></td></tr></table></figure>
-
-<p>每一行表示一篇文档。<br>每一列表示词表里的一个词。<br>每个数字表示这个词在当前文档中出现的次数。</p>
+<p>每一行表示一篇文档。<br>
+每一列表示词表里的一个词。<br>
+每个数字表示这个词在当前文档中出现的次数。</p>
 <hr>
-<h2 id="5-查看词表"><a href="#5-查看词表" class="headerlink" title="5. 查看词表"></a>5. 查看词表</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(count.get_feature_names_out())<br></code></pre></td></tr></table></figure>
-
+<h2 id="5-查看词表">5. 查看词表</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(count.get_feature_names_out())<br></code></pre></td></tr></table></figure>
 <p>输出：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">[<span class="hljs-string">&#x27;anthor&#x27;</span> <span class="hljs-string">&#x27;every&#x27;</span> <span class="hljs-string">&#x27;example&#x27;</span> <span class="hljs-string">&#x27;good&#x27;</span> <span class="hljs-string">&#x27;hadoop&#x27;</span> <span class="hljs-string">&#x27;hbase&#x27;</span> <span class="hljs-string">&#x27;hive&#x27;</span> <span class="hljs-string">&#x27;hue&#x27;</span> <span class="hljs-string">&#x27;is&#x27;</span><br> <span class="hljs-string">&#x27;oozie&#x27;</span> <span class="hljs-string">&#x27;sample&#x27;</span> <span class="hljs-string">&#x27;spark&#x27;</span> <span class="hljs-string">&#x27;sql&#x27;</span> <span class="hljs-string">&#x27;this&#x27;</span>]<br></code></pre></td></tr></table></figure>
-
 <p>这就是模型从 <code>arr1</code> 里学到的词表。</p>
 <p>有几个细节：</p>
 <ol>
@@ -478,14 +478,12 @@
 <li><code>arr2</code> 里出现但 <code>arr1</code> 没出现的词，转换时会被忽略。</li>
 </ol>
 <hr>
-<h2 id="6-转换新文本"><a href="#6-转换新文本" class="headerlink" title="6. 转换新文本"></a>6. 转换新文本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;转换另外的文档数据&quot;</span>)<br><span class="hljs-built_in">print</span>(count.transform(arr2).toarray())<br></code></pre></td></tr></table></figure>
-
+<h2 id="6-转换新文本">6. 转换新文本</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;转换另外的文档数据&quot;</span>)<br><span class="hljs-built_in">print</span>(count.transform(arr2).toarray())<br></code></pre></td></tr></table></figure>
 <p>注意这里用的是：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">count.transform(arr2)<br></code></pre></td></tr></table></figure>
-
 <p>而不是：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">count.fit_transform(arr2)<br></code></pre></td></tr></table></figure>
-
 <p>两者区别很重要：</p>
 <ul>
 <li><code>fit_transform</code>：重新学习词表，并转换数据</li>
@@ -494,17 +492,17 @@
 <p>在真实项目里，训练集用 <code>fit_transform</code>，测试集和新样本用 <code>transform</code>。</p>
 <p>如果对测试集也用 <code>fit_transform</code>，那测试集的词表就可能和训练集不一样，模型就没法正确使用。</p>
 <hr>
-<h1 id="二、TF-IDF"><a href="#二、TF-IDF" class="headerlink" title="二、TF-IDF"></a>二、TF-IDF</h1><h2 id="7-为什么需要-TF-IDF"><a href="#7-为什么需要-TF-IDF" class="headerlink" title="7. 为什么需要 TF-IDF"></a>7. 为什么需要 TF-IDF</h2><p>词袋法只统计词频，有一个问题：</p>
+<h1 id="二、tf-idf">二、TF-IDF</h1>
+<h2 id="7-为什么需要-TF-IDF">7. 为什么需要 TF-IDF</h2>
+<p>词袋法只统计词频，有一个问题：</p>
 <blockquote>
 <p>高频词不一定重要。</p>
 </blockquote>
 <p>比如在英文文本里：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">this, is, the, a<br></code></pre></td></tr></table></figure>
-
 <p>这些词可能经常出现，但它们对区分文本主题帮助不大。</p>
 <p>而像：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">spark, hadoop, hbase<br></code></pre></td></tr></table></figure>
-
 <p>这些词虽然不一定每篇都出现，但更能表达文档主题。</p>
 <p>所以我们希望：</p>
 <ul>
@@ -513,21 +511,21 @@
 </ul>
 <p>这就是 TF-IDF 的思想。</p>
 <hr>
-<h2 id="8-TF-是什么"><a href="#8-TF-是什么" class="headerlink" title="8. TF 是什么"></a>8. TF 是什么</h2><p>TF 是 Term Frequency，词频。</p>
+<h2 id="8-TF-是什么">8. TF 是什么</h2>
+<p>TF 是 Term Frequency，词频。</p>
 <p>它表示某个词在当前文档中出现的频率。</p>
 <p>简单理解：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">某个词在文档中出现次数越多，TF 越高<br></code></pre></td></tr></table></figure>
-
 <p>比如：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">spark hadoop spark<br></code></pre></td></tr></table></figure>
-
-<p><code>spark</code> 出现了 2 次，<code>hadoop</code> 出现了 1 次。<br>所以 <code>spark</code> 的 TF 更高。</p>
+<p><code>spark</code> 出现了 2 次，<code>hadoop</code> 出现了 1 次。<br>
+所以 <code>spark</code> 的 TF 更高。</p>
 <hr>
-<h2 id="9-IDF-是什么"><a href="#9-IDF-是什么" class="headerlink" title="9. IDF 是什么"></a>9. IDF 是什么</h2><p>IDF 是 Inverse Document Frequency，逆文档频率。</p>
+<h2 id="9-IDF-是什么">9. IDF 是什么</h2>
+<p>IDF 是 Inverse Document Frequency，逆文档频率。</p>
 <p>它表示一个词在整个语料库中是否稀有。</p>
 <p>简单理解：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs text">一个词在很多文档里都出现，IDF 较低<br>一个词只在少数文档里出现，IDF 较高<br></code></pre></td></tr></table></figure>
-
 <p>比如：</p>
 <ul>
 <li><code>is</code> 很常见，区分度低</li>
@@ -535,151 +533,141 @@
 </ul>
 <p>所以 <code>hadoop</code> 的 IDF 通常会比 <code>is</code> 高。</p>
 <hr>
-<h2 id="10-TF-IDF-的直观理解"><a href="#10-TF-IDF-的直观理解" class="headerlink" title="10. TF-IDF 的直观理解"></a>10. TF-IDF 的直观理解</h2><p>TF-IDF 可以粗略理解成：</p>
+<h2 id="10-TF-IDF-的直观理解">10. TF-IDF 的直观理解</h2>
+<p>TF-IDF 可以粗略理解成：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">TF-IDF = 当前文档里的词频 × 这个词在全局的稀有程度<br></code></pre></td></tr></table></figure>
-
 <p>也就是：</p>
 <blockquote>
 <p>一个词在当前文章里经常出现，并且在其他文章里不常出现，那么它就更重要。</p>
 </blockquote>
 <hr>
-<h1 id="三、TfidfTransformer"><a href="#三、TfidfTransformer" class="headerlink" title="三、TfidfTransformer"></a>三、TfidfTransformer</h1><h2 id="11-先词袋，再-TF-IDF"><a href="#11-先词袋，再-TF-IDF" class="headerlink" title="11. 先词袋，再 TF-IDF"></a>11. 先词袋，再 TF-IDF</h2><p><code>TfidfTransformer</code> 的作用是：</p>
+<h1 id="三、tfidftransformer">三、TfidfTransformer</h1>
+<h2 id="11-先词袋，再-TF-IDF">11. 先词袋，再 TF-IDF</h2>
+<p><code>TfidfTransformer</code> 的作用是：</p>
 <blockquote>
 <p>把已经计算好的词频矩阵，转换成 TF-IDF 矩阵。</p>
 </blockquote>
 <p>它不能直接处理原始文本，需要先用 <code>CountVectorizer</code> 得到词袋矩阵。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">tfidf_t = TfidfTransformer()<br>df2 = tfidf_t.fit_transform(df1)<br><br><span class="hljs-built_in">print</span>(df2.toarray())<br></code></pre></td></tr></table></figure>
-
 <p>流程是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs text">原始文本<br>  ↓<br>CountVectorizer<br>  ↓<br>词频矩阵<br>  ↓<br>TfidfTransformer<br>  ↓<br>TF-IDF 矩阵<br></code></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="12-TF-IDF-矩阵怎么看"><a href="#12-TF-IDF-矩阵怎么看" class="headerlink" title="12. TF-IDF 矩阵怎么看"></a>12. TF-IDF 矩阵怎么看</h2><p>输出类似：</p>
+<h2 id="12-TF-IDF-矩阵怎么看">12. TF-IDF 矩阵怎么看</h2>
+<p>输出类似：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">[[<span class="hljs-number">0.</span>         <span class="hljs-number">0.43167582</span> <span class="hljs-number">0.</span>         <span class="hljs-number">0.43167582</span> ...]<br> [<span class="hljs-number">0.</span>         <span class="hljs-number">0.</span>         <span class="hljs-number">0.</span>         <span class="hljs-number">0.</span>         ...]<br> ...<br>]<br></code></pre></td></tr></table></figure>
-
-<p>每一行还是一篇文档。<br>每一列还是词表中的一个词。</p>
+<p>每一行还是一篇文档。<br>
+每一列还是词表中的一个词。</p>
 <p>但矩阵里的值已经不是简单的出现次数，而是 TF-IDF 权重。</p>
 <p>值越大，说明这个词对当前文档越重要。</p>
 <hr>
-<h2 id="13-转换新文本"><a href="#13-转换新文本" class="headerlink" title="13. 转换新文本"></a>13. 转换新文本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;转换另外的文档数据&quot;</span>)<br><span class="hljs-built_in">print</span>(tfidf_t.transform(count.transform(arr2)).toarray())<br></code></pre></td></tr></table></figure>
-
+<h2 id="13-转换新文本">13. 转换新文本</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;转换另外的文档数据&quot;</span>)<br><span class="hljs-built_in">print</span>(tfidf_t.transform(count.transform(arr2)).toarray())<br></code></pre></td></tr></table></figure>
 <p>这里要注意流程：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">count.transform(arr2)<br></code></pre></td></tr></table></figure>
-
 <p>先把新文本转换成词频矩阵。</p>
 <p>然后：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">tfidf_t.transform(...)<br></code></pre></td></tr></table></figure>
-
 <p>再把词频矩阵转换成 TF-IDF 矩阵。</p>
 <p>完整流程是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">arr2<br>  ↓<br>使用 arr1 学到的词表做词袋转换<br>  ↓<br>使用 arr1 学到的 IDF 做 TF-IDF 转换<br></code></pre></td></tr></table></figure>
-
-<p>也就是说，新文本不能重新学习词表，也不能重新学习 IDF。<br>必须使用训练集上学到的规则。</p>
+<p>也就是说，新文本不能重新学习词表，也不能重新学习 IDF。<br>
+必须使用训练集上学到的规则。</p>
 <hr>
-<h1 id="四、TfidfVectorizer"><a href="#四、TfidfVectorizer" class="headerlink" title="四、TfidfVectorizer"></a>四、TfidfVectorizer</h1><h2 id="14-一步完成词袋和-TF-IDF"><a href="#14-一步完成词袋和-TF-IDF" class="headerlink" title="14. 一步完成词袋和 TF-IDF"></a>14. 一步完成词袋和 TF-IDF</h2><p><code>TfidfVectorizer</code> 可以理解成：</p>
+<h1 id="四、tfidfvectorizer">四、TfidfVectorizer</h1>
+<h2 id="14-一步完成词袋和-TF-IDF">14. 一步完成词袋和 TF-IDF</h2>
+<p><code>TfidfVectorizer</code> 可以理解成：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">CountVectorizer + TfidfTransformer<br></code></pre></td></tr></table></figure>
-
 <p>它可以直接从原始文本得到 TF-IDF 矩阵。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">tfidf_v = TfidfVectorizer(<br>    min_df=<span class="hljs-number">0</span>,<br>    dtype=np.float64<br>)<br><br>df3 = tfidf_v.fit_transform(arr1)<br><br><span class="hljs-built_in">print</span>(df3.toarray())<br><span class="hljs-built_in">print</span>(tfidf_v.get_feature_names_out())<br></code></pre></td></tr></table></figure>
-
 <p>相比前面的两步写法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">count = CountVectorizer()<br>df1 = count.fit_transform(arr1)<br><br>tfidf_t = TfidfTransformer()<br>df2 = tfidf_t.fit_transform(df1)<br></code></pre></td></tr></table></figure>
-
 <p><code>TfidfVectorizer</code> 更简洁：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">tfidf_v = TfidfVectorizer()<br>df3 = tfidf_v.fit_transform(arr1)<br></code></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="15-查看词表"><a href="#15-查看词表" class="headerlink" title="15. 查看词表"></a>15. 查看词表</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(tfidf_v.get_feature_names_out())<br></code></pre></td></tr></table></figure>
-
+<h2 id="15-查看词表">15. 查看词表</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(tfidf_v.get_feature_names_out())<br></code></pre></td></tr></table></figure>
 <p>输出：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">[<span class="hljs-string">&#x27;anthor&#x27;</span> <span class="hljs-string">&#x27;every&#x27;</span> <span class="hljs-string">&#x27;example&#x27;</span> <span class="hljs-string">&#x27;good&#x27;</span> <span class="hljs-string">&#x27;hadoop&#x27;</span> <span class="hljs-string">&#x27;hbase&#x27;</span> <span class="hljs-string">&#x27;hive&#x27;</span> <span class="hljs-string">&#x27;hue&#x27;</span> <span class="hljs-string">&#x27;is&#x27;</span><br> <span class="hljs-string">&#x27;oozie&#x27;</span> <span class="hljs-string">&#x27;sample&#x27;</span> <span class="hljs-string">&#x27;spark&#x27;</span> <span class="hljs-string">&#x27;sql&#x27;</span> <span class="hljs-string">&#x27;this&#x27;</span>]<br></code></pre></td></tr></table></figure>
-
 <p>可以看到，它学到的词表和 <code>CountVectorizer</code> 是一致的。</p>
 <hr>
-<h2 id="16-转换新文本"><a href="#16-转换新文本" class="headerlink" title="16. 转换新文本"></a>16. 转换新文本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;转换另外的文档数据&quot;</span>)<br><span class="hljs-built_in">print</span>(tfidf_v.transform(arr2).toarray())<br></code></pre></td></tr></table></figure>
-
+<h2 id="16-转换新文本">16. 转换新文本</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;转换另外的文档数据&quot;</span>)<br><span class="hljs-built_in">print</span>(tfidf_v.transform(arr2).toarray())<br></code></pre></td></tr></table></figure>
 <p>这里也一样：</p>
 <ul>
 <li>训练文本：<code>fit_transform</code></li>
 <li>新文本：<code>transform</code></li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">tfidf_v.fit_transform(arr1)<br>tfidf_v.transform(arr2)<br></code></pre></td></tr></table></figure>
-
 <p>这样可以保证训练数据和新数据使用同一套词表、同一套 IDF 权重。</p>
 <hr>
-<h1 id="五、CountVectorizer、TfidfTransformer、TfidfVectorizer-的关系"><a href="#五、CountVectorizer、TfidfTransformer、TfidfVectorizer-的关系" class="headerlink" title="五、CountVectorizer、TfidfTransformer、TfidfVectorizer 的关系"></a>五、CountVectorizer、TfidfTransformer、TfidfVectorizer 的关系</h1><p>可以这样记：</p>
-<h2 id="CountVectorizer"><a href="#CountVectorizer" class="headerlink" title="CountVectorizer"></a>CountVectorizer</h2><p>作用：</p>
+<h1 id="五、countvectorizer、tfidftransformer、tfidfvectorizer-的关系">五、CountVectorizer、TfidfTransformer、TfidfVectorizer 的关系</h1>
+<p>可以这样记：</p>
+<h2 id="CountVectorizer">CountVectorizer</h2>
+<p>作用：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">文本 → 词频矩阵<br></code></pre></td></tr></table></figure>
-
 <p>只统计每个词出现了几次。</p>
 <p>适合理解词袋法。</p>
 <hr>
-<h2 id="TfidfTransformer"><a href="#TfidfTransformer" class="headerlink" title="TfidfTransformer"></a>TfidfTransformer</h2><p>作用：</p>
+<h2 id="TfidfTransformer">TfidfTransformer</h2>
+<p>作用：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">词频矩阵 → TF-IDF 矩阵<br></code></pre></td></tr></table></figure>
-
 <p>它不直接处理文本，而是处理 <code>CountVectorizer</code> 的输出。</p>
 <hr>
-<h2 id="TfidfVectorizer"><a href="#TfidfVectorizer" class="headerlink" title="TfidfVectorizer"></a>TfidfVectorizer</h2><p>作用：</p>
+<h2 id="TfidfVectorizer">TfidfVectorizer</h2>
+<p>作用：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">文本 → TF-IDF 矩阵<br></code></pre></td></tr></table></figure>
-
 <p>它等价于：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">CountVectorizer + TfidfTransformer<br></code></pre></td></tr></table></figure>
-
 <p>所以实际项目里，如果直接想要 TF-IDF，一般用 <code>TfidfVectorizer</code> 更方便。</p>
 <hr>
-<h1 id="六、几个容易混淆的点"><a href="#六、几个容易混淆的点" class="headerlink" title="六、几个容易混淆的点"></a>六、几个容易混淆的点</h1><h2 id="1-为什么输出里没有单词-a？"><a href="#1-为什么输出里没有单词-a？" class="headerlink" title="1. 为什么输出里没有单词 a？"></a>1. 为什么输出里没有单词 a？</h2><p>因为 sklearn 默认的分词规则会忽略单个字符。</p>
+<h1 id="六、几个容易混淆的点">六、几个容易混淆的点</h1>
+<h2 id="1-为什么输出里没有单词-a？">1. 为什么输出里没有单词 a？</h2>
+<p>因为 sklearn 默认的分词规则会忽略单个字符。</p>
 <p>默认 <code>token_pattern</code> 类似：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">r&quot;(?u)\b\w\w+\b&quot;</span><br></code></pre></td></tr></table></figure>
-
 <p>意思是只保留长度至少为 2 的词。</p>
 <p>所以 <code>a</code> 被忽略了。</p>
 <hr>
-<h2 id="2-为什么-Spark-和-spark-算同一个词？"><a href="#2-为什么-Spark-和-spark-算同一个词？" class="headerlink" title="2. 为什么 Spark 和 spark 算同一个词？"></a>2. 为什么 Spark 和 spark 算同一个词？</h2><p>因为 <code>CountVectorizer</code> 和 <code>TfidfVectorizer</code> 默认会做小写转换。</p>
+<h2 id="2-为什么-Spark-和-spark-算同一个词？">2. 为什么 Spark 和 spark 算同一个词？</h2>
+<p>因为 <code>CountVectorizer</code> 和 <code>TfidfVectorizer</code> 默认会做小写转换。</p>
 <p>也就是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs text">Spark → spark<br>Hbase → hbase<br>This → this<br></code></pre></td></tr></table></figure>
-
 <p>如果不想自动转小写，可以设置：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">lowercase=<span class="hljs-literal">False</span><br></code></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="3-为什么-arr2-里的-cd-没有出现在结果里？"><a href="#3-为什么-arr2-里的-cd-没有出现在结果里？" class="headerlink" title="3. 为什么 arr2 里的 cd 没有出现在结果里？"></a>3. 为什么 arr2 里的 cd 没有出现在结果里？</h2><p>因为词表是在 <code>arr1</code> 上学到的。</p>
+<h2 id="3-为什么-arr2-里的-cd-没有出现在结果里？">3. 为什么 arr2 里的 cd 没有出现在结果里？</h2>
+<p>因为词表是在 <code>arr1</code> 上学到的。</p>
 <p><code>cd</code> 只出现在 <code>arr2</code>，没有出现在 <code>arr1</code>，所以转换时会被忽略。</p>
 <p>这也是为什么新数据要用 <code>transform</code>，而不是重新 <code>fit_transform</code>。</p>
 <hr>
-<h2 id="4-anthor-和-another-为什么不是一个词？"><a href="#4-anthor-和-another-为什么不是一个词？" class="headerlink" title="4. anthor 和 another 为什么不是一个词？"></a>4. anthor 和 another 为什么不是一个词？</h2><p>因为程序不会自动纠错。</p>
+<h2 id="4-anthor-和-another-为什么不是一个词？">4. anthor 和 another 为什么不是一个词？</h2>
+<p>因为程序不会自动纠错。</p>
 <p><code>arr1</code> 里是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">anthor<br></code></pre></td></tr></table></figure>
-
 <p><code>arr2</code> 里是：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">another<br></code></pre></td></tr></table></figure>
-
 <p>这两个词拼写不同，所以会被当成两个不同的词。</p>
 <p>而且 <code>another</code> 没有出现在训练词表里，所以转换 <code>arr2</code> 时会被忽略。</p>
 <hr>
-<h1 id="七、实际使用建议"><a href="#七、实际使用建议" class="headerlink" title="七、实际使用建议"></a>七、实际使用建议</h1><p>如果只是学习词袋法，可以用：</p>
+<h1 id="七、实际使用建议">七、实际使用建议</h1>
+<p>如果只是学习词袋法，可以用：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">CountVectorizer()<br></code></pre></td></tr></table></figure>
-
 <p>如果已经有词频矩阵，想转 TF-IDF，可以用：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">TfidfTransformer()<br></code></pre></td></tr></table></figure>
-
 <p>如果直接想把文本转成 TF-IDF 特征，推荐用：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">TfidfVectorizer()<br></code></pre></td></tr></table></figure>
-
 <p>实际项目中最常见的是：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.feature_extraction.text <span class="hljs-keyword">import</span> TfidfVectorizer<br><br>tfidf = TfidfVectorizer()<br>X_train = tfidf.fit_transform(train_texts)<br>X_test = tfidf.transform(test_texts)<br></code></pre></td></tr></table></figure>
-
 <p>然后把 <code>X_train</code>、<code>X_test</code> 送给分类模型或聚类模型。</p>
 <hr>
-<h1 id="八、小结"><a href="#八、小结" class="headerlink" title="八、小结"></a>八、小结</h1><p>这节主要讲了文本特征提取里两个基础方法。</p>
+<h1 id="八、小结">八、小结</h1>
+<p>这节主要讲了文本特征提取里两个基础方法。</p>
 <p>词袋法：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">只看词出现了几次<br></code></pre></td></tr></table></figure>
-
 <p>TF-IDF：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">既看词在当前文档中是否常出现，也看它在全局是否稀有<br></code></pre></td></tr></table></figure>
-
 <p>三种工具的关系：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">CountVectorizer：文本 → 词频矩阵<br><br>TfidfTransformer：词频矩阵 → TF-IDF 矩阵<br><br>TfidfVectorizer：文本 → TF-IDF 矩阵<br></code></pre></td></tr></table></figure>
-
 <p>一句话总结：</p>
 <blockquote>
 <p>词袋法负责数词频，TF-IDF 负责判断哪些词更重要。</p>

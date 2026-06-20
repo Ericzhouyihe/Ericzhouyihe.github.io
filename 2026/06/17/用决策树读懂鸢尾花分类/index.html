@@ -19,12 +19,12 @@
   <meta name="author" content="一人一口粥">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、要解决什么问题决策树是一种非常直观的机器学习算法。它的思路很像我们日常做判断：  如果花瓣长度很短，那么它大概率是山鸢尾；否则继续看花瓣宽度，再继续细分。  也就是说，决策树会把一个复杂问题拆成一连串“是 &#x2F; 否”判断，最后走到某个叶子节点，得到分类结果。 本文基于鸢尾花数据集，完整梳理一个使用 sklearn.tree.DecisionTreeClassifier 完成分类预测的流">
+    <meta name="description" content="一、要解决什么问题 决策树是一种非常直观的机器学习算法。它的思路很像我们日常做判断：  如果花瓣长度很短，那么它大概率是山鸢尾；否则继续看花瓣宽度，再继续细分。  也就是说，决策树会把一个复杂问题拆成一连串“是 &#x2F; 否”判断，最后走到某个叶子节点，得到分类结果。 本文基于鸢尾花数据集，完整梳理一个使用 sklearn.tree.DecisionTreeClassifier 完成分类预测的流程，包括">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用决策树读懂鸢尾花分类：从基尼系数到模型评估">
 <meta property="og:url" content="https://zyhblog.dpdns.org/2026/06/17/%E7%94%A8%E5%86%B3%E7%AD%96%E6%A0%91%E8%AF%BB%E6%87%82%E9%B8%A2%E5%B0%BE%E8%8A%B1%E5%88%86%E7%B1%BB/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="一、要解决什么问题决策树是一种非常直观的机器学习算法。它的思路很像我们日常做判断：  如果花瓣长度很短，那么它大概率是山鸢尾；否则继续看花瓣宽度，再继续细分。  也就是说，决策树会把一个复杂问题拆成一连串“是 &#x2F; 否”判断，最后走到某个叶子节点，得到分类结果。 本文基于鸢尾花数据集，完整梳理一个使用 sklearn.tree.DecisionTreeClassifier 完成分类预测的流">
+<meta property="og:description" content="一、要解决什么问题 决策树是一种非常直观的机器学习算法。它的思路很像我们日常做判断：  如果花瓣长度很短，那么它大概率是山鸢尾；否则继续看花瓣宽度，再继续细分。  也就是说，决策树会把一个复杂问题拆成一连串“是 &#x2F; 否”判断，最后走到某个叶子节点，得到分类结果。 本文基于鸢尾花数据集，完整梳理一个使用 sklearn.tree.DecisionTreeClassifier 完成分类预测的流程，包括">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-06-17T15:12:29.000Z">
 <meta property="article:modified_time" content="2026-06-17T16:12:55.676Z">
@@ -322,7 +322,7 @@
         
         
         
-          89 分钟
+          95 分钟
         
       </span>
     
@@ -366,11 +366,12 @@
             
               <div class="markdown-body">
                 
-                <h2 id="一、要解决什么问题"><a href="#一、要解决什么问题" class="headerlink" title="一、要解决什么问题"></a>一、要解决什么问题</h2><p>决策树是一种非常直观的机器学习算法。它的思路很像我们日常做判断：</p>
+                <h2 id="一、要解决什么问题">一、要解决什么问题</h2>
+<p>决策树是一种非常直观的机器学习算法。它的思路很像我们日常做判断：</p>
 <blockquote>
 <p>如果花瓣长度很短，那么它大概率是山鸢尾；否则继续看花瓣宽度，再继续细分。</p>
 </blockquote>
-<p>也就是说，决策树会把一个复杂问题拆成一连串“是 &#x2F; 否”判断，最后走到某个叶子节点，得到分类结果。</p>
+<p>也就是说，决策树会把一个复杂问题拆成一连串“是 / 否”判断，最后走到某个叶子节点，得到分类结果。</p>
 <p>本文基于鸢尾花数据集，完整梳理一个使用 <code>sklearn.tree.DecisionTreeClassifier</code> 完成分类预测的流程，包括：</p>
 <ol>
 <li>数据加载与特征、标签拆分；</li>
@@ -382,7 +383,8 @@
 <li>决策树可视化结果解读。</li>
 </ol>
 <hr>
-<h2 id="二、鸢尾花数据集是什么"><a href="#二、鸢尾花数据集是什么" class="headerlink" title="二、鸢尾花数据集是什么"></a>二、鸢尾花数据集是什么</h2><p>鸢尾花数据集是机器学习入门中非常经典的数据集。它的任务是：根据一朵花的 4 个测量值，预测它属于哪一种鸢尾花。</p>
+<h2 id="二、鸢尾花数据集是什么">二、鸢尾花数据集是什么</h2>
+<p>鸢尾花数据集是机器学习入门中非常经典的数据集。它的任务是：根据一朵花的 4 个测量值，预测它属于哪一种鸢尾花。</p>
 <p>数据中的 4 个特征通常表示为：</p>
 <table>
 <thead>
@@ -391,7 +393,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>A 或 sepal length</td>
 <td>花萼长度</td>
 </tr>
@@ -407,7 +410,8 @@
 <td>D 或 petal width</td>
 <td>花瓣宽度</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>目标类别有 3 种：</p>
 <table>
 <thead>
@@ -416,7 +420,8 @@
 <th>编码后</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Iris-setosa</td>
 <td>0</td>
 </tr>
@@ -428,12 +433,13 @@
 <td>Iris-virginica</td>
 <td>2</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>可以把这个问题想象成一个植物学小助手：你告诉它花萼和花瓣的尺寸，它根据历史样本总结出来的规则，判断这朵花最像哪一种。</p>
 <hr>
-<h2 id="三、导入相关库"><a href="#三、导入相关库" class="headerlink" title="三、导入相关库"></a>三、导入相关库</h2><p>代码中主要使用了以下工具：</p>
+<h2 id="三、导入相关库">三、导入相关库</h2>
+<p>代码中主要使用了以下工具：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> warnings<br><span class="hljs-keyword">import</span> sys<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><span class="hljs-keyword">import</span> matplotlib <span class="hljs-keyword">as</span> mpl<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><span class="hljs-keyword">from</span> sklearn.preprocessing <span class="hljs-keyword">import</span> StandardScaler, LabelEncoder<br><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br><span class="hljs-keyword">from</span> sklearn.tree <span class="hljs-keyword">import</span> DecisionTreeClassifier, DecisionTreeRegressor<br><span class="hljs-keyword">from</span> sklearn.metrics <span class="hljs-keyword">import</span> auc, roc_curve, classification_report<br></code></pre></td></tr></table></figure>
-
 <p>这些库的作用可以简单理解为：</p>
 <table>
 <thead>
@@ -442,7 +448,8 @@
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>numpy</code></td>
 <td>数值计算</td>
 </tr>
@@ -474,27 +481,27 @@
 <td><code>roc_curve</code>、<code>auc</code></td>
 <td>计算 ROC 曲线和 AUC 值</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>代码中还设置了忽略警告和中文字体：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">warnings.filterwarnings(<span class="hljs-string">&#x27;ignore&#x27;</span>)<br>mpl.rcParams[<span class="hljs-string">&#x27;font.sans-serif&#x27;</span>] = [<span class="hljs-string">u&#x27;simHei&#x27;</span>]<br></code></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="四、加载数据"><a href="#四、加载数据" class="headerlink" title="四、加载数据"></a>四、加载数据</h2><p>原始数据通过 <code>pandas.read_csv()</code> 读取：</p>
+<h2 id="四、加载数据">四、加载数据</h2>
+<p>原始数据通过 <code>pandas.read_csv()</code> 读取：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">path = <span class="hljs-string">&quot;../datas/iris.data&quot;</span><br>names = [<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;D&#x27;</span>, <span class="hljs-string">&#x27;cla&#x27;</span>]<br><br>df = pd.read_csv(<br>    filepath_or_buffer=path,<br>    sep=<span class="hljs-string">&quot;,&quot;</span>,<br>    header=<span class="hljs-literal">None</span>,<br>    names=names<br>)<br></code></pre></td></tr></table></figure>
-
 <p>这里手动指定了 5 列：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">names = [<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;D&#x27;</span>, <span class="hljs-string">&#x27;cla&#x27;</span>]<br></code></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <ul>
 <li><code>A</code>、<code>B</code>、<code>C</code>、<code>D</code> 是 4 个特征；</li>
 <li><code>cla</code> 是类别标签，也就是模型要预测的目标。</li>
 </ul>
-<p>举个生活化例子：<br>如果我们要判断一个水果是苹果、梨还是桃子，特征可能是“重量、颜色、硬度、甜度”，标签就是“水果种类”。鸢尾花分类也是同样逻辑，只不过这里的特征是花萼和花瓣尺寸。</p>
+<p>举个生活化例子：<br>
+如果我们要判断一个水果是苹果、梨还是桃子，特征可能是“重量、颜色、硬度、甜度”，标签就是“水果种类”。鸢尾花分类也是同样逻辑，只不过这里的特征是花萼和花瓣尺寸。</p>
 <hr>
-<h2 id="五、拆分特征-X-和标签-Y"><a href="#五、拆分特征-X-和标签-Y" class="headerlink" title="五、拆分特征 X 和标签 Y"></a>五、拆分特征 X 和标签 Y</h2><p>模型训练时，需要把输入特征和预测目标分开。</p>
+<h2 id="五、拆分特征-X-和标签-Y">五、拆分特征 X 和标签 Y</h2>
+<p>模型训练时，需要把输入特征和预测目标分开。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">X = df.iloc[:, :<span class="hljs-number">4</span>]<br>X = np.asarray(X).astype(np.float64)<br><br>Y = df[<span class="hljs-string">&#x27;cla&#x27;</span>]<br></code></pre></td></tr></table></figure>
-
 <p>这里：</p>
 <ul>
 <li><code>X</code> 取前 4 列，也就是花的测量数据；</li>
@@ -502,25 +509,23 @@
 <li><code>astype(np.float64)</code> 是把特征数据转换成浮点数，方便模型计算。</li>
 </ul>
 <p>机器学习模型可以理解成一个函数：</p>
-<p>$Y &#x3D; f(X)$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>X</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Y = f(X)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.2222em;">Y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span><span class="mclose">)</span></span></span></span></p>
 <p>其中：</p>
 <ul>
-<li>$X$ 表示输入特征；</li>
-<li>$Y$ 表示预测结果；</li>
-<li>$f$ 表示模型学到的规律。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0785em;">X</span></span></span></span> 表示输入特征；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.2222em;">Y</span></span></span></span> 表示预测结果；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span></span></span></span> 表示模型学到的规律。</li>
 </ul>
 <p>在这个例子中，模型要学习的是：</p>
-<p>$鸢尾花类别 &#x3D; f(花萼长度, 花萼宽度, 花瓣长度, 花瓣宽度)$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>鸢尾花类别</mtext><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mtext>花萼长度</mtext><mo separator="true">,</mo><mtext>花萼宽度</mtext><mo separator="true">,</mo><mtext>花瓣长度</mtext><mo separator="true">,</mo><mtext>花瓣宽度</mtext><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">鸢尾花类别 = f(花萼长度, 花萼宽度, 花瓣长度, 花瓣宽度)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord cjk_fallback">鸢尾花类别</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1076em;">f</span><span class="mopen">(</span><span class="mord cjk_fallback">花萼长度</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord cjk_fallback">花萼宽度</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord cjk_fallback">花瓣长度</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord cjk_fallback">花瓣宽度</span><span class="mclose">)</span></span></span></span></p>
 <hr>
-<h2 id="六、标签编码：把文字类别转成数字"><a href="#六、标签编码：把文字类别转成数字" class="headerlink" title="六、标签编码：把文字类别转成数字"></a>六、标签编码：把文字类别转成数字</h2><p>原始标签是字符串，例如：</p>
+<h2 id="六、标签编码：把文字类别转成数字">六、标签编码：把文字类别转成数字</h2>
+<p>原始标签是字符串，例如：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs scheme"><span class="hljs-symbol">&#x27;Iris-setosa</span>&#x27;<br><span class="hljs-symbol">&#x27;Iris-versicolor</span>&#x27;<br><span class="hljs-symbol">&#x27;Iris-virginica</span>&#x27;<br></code></pre></td></tr></table></figure>
-
 <p>但大多数机器学习模型更习惯处理数字，因此需要使用 <code>LabelEncoder</code> 编码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">label_encoder = LabelEncoder()<br>Y = label_encoder.fit_transform(Y)<br><span class="hljs-built_in">print</span>(label_encoder.classes_)<br><span class="hljs-built_in">print</span>(label_encoder.transform([<span class="hljs-string">&#x27;Iris-setosa&#x27;</span>, <span class="hljs-string">&#x27;Iris-versicolor&#x27;</span>, <span class="hljs-string">&#x27;Iris-virginica&#x27;</span>]))<br><span class="hljs-built_in">print</span>(label_encoder.inverse_transform([<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">1</span>]))<br></code></pre></td></tr></table></figure>
-
 <p>输出结果说明：</p>
 <figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs scheme">[<span class="hljs-symbol">&#x27;Iris-setosa</span>&#x27; <span class="hljs-symbol">&#x27;Iris-versicolor</span>&#x27; <span class="hljs-symbol">&#x27;Iris-virginica</span>&#x27;]<br>[<span class="hljs-name">0</span> <span class="hljs-number">1</span> <span class="hljs-number">2</span>]<br>[<span class="hljs-symbol">&#x27;Iris-setosa</span>&#x27; <span class="hljs-symbol">&#x27;Iris-versicolor</span>&#x27; <span class="hljs-symbol">&#x27;Iris-virginica</span>&#x27; <span class="hljs-symbol">&#x27;Iris-setosa</span>&#x27;<br> <span class="hljs-symbol">&#x27;Iris-virginica</span>&#x27; <span class="hljs-symbol">&#x27;Iris-versicolor</span>&#x27;]<br></code></pre></td></tr></table></figure>
-
 <p>也就是说，编码关系为：</p>
 <table>
 <thead>
@@ -529,7 +534,8 @@
 <th>数字</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Iris-setosa</td>
 <td>0</td>
 </tr>
@@ -541,16 +547,18 @@
 <td>Iris-virginica</td>
 <td>2</td>
 </tr>
-</tbody></table>
-<p>注意：这里的数字只是类别编号，不代表大小关系。<br>也就是说，类别 2 并不比类别 1 “更大”，它们只是名字不同。</p>
+</tbody>
+</table>
+<p>注意：这里的数字只是类别编号，不代表大小关系。<br>
+也就是说，类别 2 并不比类别 1 “更大”，它们只是名字不同。</p>
 <hr>
-<h2 id="七、划分训练集和测试集"><a href="#七、划分训练集和测试集" class="headerlink" title="七、划分训练集和测试集"></a>七、划分训练集和测试集</h2><p>为了判断模型是否真的学会规律，需要把数据分成两部分：</p>
+<h2 id="七、划分训练集和测试集">七、划分训练集和测试集</h2>
+<p>为了判断模型是否真的学会规律，需要把数据分成两部分：</p>
 <ul>
 <li>训练集：给模型学习；</li>
 <li>测试集：检查模型在新数据上的表现。</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">x_train, x_test, y_train, y_test = train_test_split(<br>    X,<br>    Y,<br>    test_size=<span class="hljs-number">0.2</span>,<br>    random_state=<span class="hljs-number">2</span><br>)<br></code></pre></td></tr></table></figure>
-
 <p>参数含义：</p>
 <table>
 <thead>
@@ -559,7 +567,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>test_size=0.2</code></td>
 <td>20% 数据作为测试集</td>
 </tr>
@@ -567,76 +576,84 @@
 <td><code>random_state=2</code></td>
 <td>固定随机种子，保证每次划分结果一致</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>输出结果：</p>
 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">训练数据X的格式: (120, 4)</span><br><span class="hljs-section">测试数据X的格式: (30, 4)</span><br><span class="hljs-section">Y的取值范围: [0 1 2]</span><br></code></pre></td></tr></table></figure>
-
 <p>鸢尾花数据集共有 150 条样本：</p>
 <ul>
 <li>120 条用于训练；</li>
 <li>30 条用于测试。</li>
 </ul>
-<p>这就像考试复习：<br>训练集是平时练习题，测试集是正式考试题。如果模型只会背训练集，而不会做测试集，就说明泛化能力不好。</p>
+<p>这就像考试复习：<br>
+训练集是平时练习题，测试集是正式考试题。如果模型只会背训练集，而不会做测试集，就说明泛化能力不好。</p>
 <hr>
-<h2 id="八、是否需要标准化"><a href="#八、是否需要标准化" class="headerlink" title="八、是否需要标准化"></a>八、是否需要标准化</h2><p>代码中保留了标准化操作，但被注释掉了：</p>
+<h2 id="八、是否需要标准化">八、是否需要标准化</h2>
+<p>代码中保留了标准化操作，但被注释掉了：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># scaler = StandardScaler()</span><br><span class="hljs-comment"># x_train = scaler.fit_transform(x_train, y_train)</span><br><span class="hljs-comment"># x_test = scaler.transform(x_test)</span><br></code></pre></td></tr></table></figure>
-
 <p>标准化的常见公式是：</p>
-<p>$z &#x3D; \frac{x - \mu}{\sigma}$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mfrac><mrow><mi>x</mi><mo>−</mo><mi>μ</mi></mrow><mi>σ</mi></mfrac></mrow><annotation encoding="application/x-tex">z = \frac{x - \mu}{\sigma}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1994em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8544em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0359em;">σ</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.4461em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">x</span><span class="mbin mtight">−</span><span class="mord mathnormal mtight">μ</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>其中：</p>
 <ul>
-<li>$x$ 是原始值；</li>
-<li>$\mu$ 是均值；</li>
-<li>$\sigma$ 是标准差；</li>
-<li>$z$ 是标准化后的值。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 是原始值；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">μ</span></span></span></span> 是均值；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">σ</span></span></span></span> 是标准差；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi></mrow><annotation encoding="application/x-tex">z</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal" style="margin-right:0.044em;">z</span></span></span></span> 是标准化后的值。</li>
 </ul>
-<p>不过，对于决策树来说，通常不强制要求标准化。<br>因为决策树关心的是“某个特征是否小于等于某个阈值”，例如：</p>
-<p>$x_3 \leq 2.35$</p>
+<p>不过，对于决策树来说，通常不强制要求标准化。<br>
+因为决策树关心的是“某个特征是否小于等于某个阈值”，例如：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>3</mn></msub><mo>≤</mo><mn>2.35</mn></mrow><annotation encoding="application/x-tex">x_3 \leq 2.35</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.786em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2.35</span></span></span></span></p>
 <p>它并不像 KNN、SVM、逻辑回归那样非常依赖特征尺度。</p>
 <p>所以这里不做标准化也是合理的。</p>
 <hr>
-<h2 id="九、决策树的核心思想"><a href="#九、决策树的核心思想" class="headerlink" title="九、决策树的核心思想"></a>九、决策树的核心思想</h2><p>决策树每次都会选择一个特征和一个阈值，把数据分成两部分，让分裂后的数据尽量“纯”。</p>
+<h2 id="九、决策树的核心思想">九、决策树的核心思想</h2>
+<p>决策树每次都会选择一个特征和一个阈值，把数据分成两部分，让分裂后的数据尽量“纯”。</p>
 <p>所谓“纯”，可以理解为：</p>
 <blockquote>
 <p>一个节点里最好都是同一种类别。</p>
 </blockquote>
-<p>比如一个盒子里全是苹果，那么它很纯；<br>如果里面既有苹果、梨、香蕉，就不纯。</p>
+<p>比如一个盒子里全是苹果，那么它很纯；<br>
+如果里面既有苹果、梨、香蕉，就不纯。</p>
 <p>决策树常用的不纯度指标有基尼系数和信息熵。</p>
 <hr>
-<h2 id="十、基尼系数原理"><a href="#十、基尼系数原理" class="headerlink" title="十、基尼系数原理"></a>十、基尼系数原理</h2><p>代码中使用的模型默认评价指标是 <code>gini</code>，也就是基尼系数。</p>
+<h2 id="十、基尼系数原理">十、基尼系数原理</h2>
+<p>代码中使用的模型默认评价指标是 <code>gini</code>，也就是基尼系数。</p>
 <p>基尼系数公式为：</p>
-<p>$Gini(D) &#x3D; 1 - \sum_{k&#x3D;1}^{K} p_k^2$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>i</mi><mi>n</mi><mi>i</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></msubsup><msubsup><mi>p</mi><mi>k</mi><mn>2</mn></msubsup></mrow><annotation encoding="application/x-tex">Gini(D) = 1 - \sum_{k=1}^{K} p_k^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">ini</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2809em;vertical-align:-0.2997em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9812em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-2.4169em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2831em;"><span></span></span></span></span></span></span></span></span></span></p>
 <p>其中：</p>
 <ul>
-<li>$D$ 表示当前数据集；</li>
-<li>$K$ 表示类别数量；</li>
-<li>$p_k$ 表示第 $k$ 类样本在当前节点中的占比。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi></mrow><annotation encoding="application/x-tex">D</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span></span></span></span> 表示当前数据集；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi></mrow><annotation encoding="application/x-tex">K</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">K</span></span></span></span> 表示类别数量；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">p_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.1944em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 表示第 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0315em;">k</span></span></span></span> 类样本在当前节点中的占比。</li>
 </ul>
 <p>如果一个节点里所有样本都属于同一类，例如类别分布是：</p>
-<p>$1, 0, 0$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>0</mn><mo separator="true">,</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">1, 0, 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0</span></span></span></span></p>
 <p>则：</p>
-<p>$Gini(D) &#x3D; 1 - (1^2 + 0^2 + 0^2) &#x3D; 0$</p>
-<p>基尼系数为 $0$，表示节点非常纯。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>i</mi><mi>n</mi><mi>i</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><msup><mn>1</mn><mn>2</mn></msup><mo>+</mo><msup><mn>0</mn><mn>2</mn></msup><mo>+</mo><msup><mn>0</mn><mn>2</mn></msup><mo stretchy="false">)</mo><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Gini(D) = 1 - (1^2 + 0^2 + 0^2) = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">ini</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord">1</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8974em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0641em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></p>
+<p>基尼系数为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>，表示节点非常纯。</p>
 <p>如果一个节点里三类样本比较混杂，比如：</p>
-<p>$\frac{1}{3}, \frac{1}{3}, \frac{1}{3}$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mn>1</mn><mn>3</mn></mfrac><mo separator="true">,</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo separator="true">,</mo><mfrac><mn>1</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{3}, \frac{1}{3}, \frac{1}{3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>则：</p>
-<p>$Gini(D) &#x3D; 1 - ((\frac{1}{3})^2 + (\frac{1}{3})^2 + (\frac{1}{3})^2) &#x3D; \frac{2}{3}$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>i</mi><mi>n</mi><mi>i</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mo stretchy="false">(</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>2</mn><mn>3</mn></mfrac></mrow><annotation encoding="application/x-tex">Gini(D) = 1 - ((\frac{1}{3})^2 + (\frac{1}{3})^2 + (\frac{1}{3})^2) = \frac{2}{3}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">ini</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mopen">((</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">3</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>基尼系数越大，说明越混乱；基尼系数越小，说明越纯。</p>
 <hr>
-<h2 id="十一、信息熵补充理解"><a href="#十一、信息熵补充理解" class="headerlink" title="十一、信息熵补充理解"></a>十一、信息熵补充理解</h2><p>虽然本模型使用的是基尼系数，但决策树中也经常使用信息熵。</p>
+<h2 id="十一、信息熵补充理解">十一、信息熵补充理解</h2>
+<p>虽然本模型使用的是基尼系数，但决策树中也经常使用信息熵。</p>
 <p>信息熵公式为：</p>
-<p>$H(D) &#x3D; - \sum_{k&#x3D;1}^{K} p_k \log_2 p_k$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo stretchy="false">(</mo><mi>D</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></msubsup><msub><mi>p</mi><mi>k</mi></msub><msub><mrow><mi>log</mi><mo>⁡</mo></mrow><mn>2</mn></msub><msub><mi>p</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">H(D) = - \sum_{k=1}^{K} p_k \log_2 p_k</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0813em;">H</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0278em;">D</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2809em;vertical-align:-0.2997em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:0em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.9812em;"><span style="top:-2.4003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.0715em;">K</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2997em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.0139em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.207em;"><span style="top:-2.4559em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2441em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord"><span class="mord mathnormal">p</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.0315em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></p>
 <p>信息熵也是衡量混乱程度的指标：</p>
 <ul>
 <li>熵越大，数据越混乱；</li>
 <li>熵越小，数据越确定；</li>
-<li>如果所有样本都属于同一类，熵为 $0$。</li>
+<li>如果所有样本都属于同一类，熵为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn></mrow><annotation encoding="application/x-tex">0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span>。</li>
 </ul>
-<p>生活化理解：<br>如果你闭眼从袋子里摸糖，袋子里全是苹果味糖果，你不用猜也知道摸到什么，信息熵低。<br>如果袋子里有很多种口味，而且比例接近，你就很难猜，信息熵高。</p>
+<p>生活化理解：<br>
+如果你闭眼从袋子里摸糖，袋子里全是苹果味糖果，你不用猜也知道摸到什么，信息熵低。<br>
+如果袋子里有很多种口味，而且比例接近，你就很难猜，信息熵高。</p>
 <hr>
-<h2 id="十二、构建决策树模型"><a href="#十二、构建决策树模型" class="headerlink" title="十二、构建决策树模型"></a>十二、构建决策树模型</h2><p>代码中创建模型如下：</p>
+<h2 id="十二、构建决策树模型">十二、构建决策树模型</h2>
+<p>代码中创建模型如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">algo = DecisionTreeClassifier(max_depth=<span class="hljs-number">3</span>)<br></code></pre></td></tr></table></figure>
-
 <p>这里只设置了一个关键参数：</p>
 <table>
 <thead>
@@ -645,14 +662,17 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>max_depth=3</code></td>
 <td>限制树的最大深度为 3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>为什么要限制深度？</p>
 <p>如果不限制，决策树可能会把训练数据分得特别细，甚至记住每一个训练样本。这样训练集表现很好，但测试集可能表现变差，这种现象叫过拟合。</p>
-<p>可以把它理解成：<br>一个学生把练习册答案全背下来了，练习题全对，但换一套新题就不会了。</p>
+<p>可以把它理解成：<br>
+一个学生把练习册答案全背下来了，练习题全对，但换一套新题就不会了。</p>
 <p>限制树深度，就是让模型不要学得太死。</p>
 <p>常见参数还有：</p>
 <table>
@@ -662,7 +682,8 @@
 <th>作用</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>criterion</code></td>
 <td>不纯度指标，可选 <code>gini</code> 或 <code>entropy</code></td>
 </tr>
@@ -686,23 +707,22 @@
 <td><code>class_weight</code></td>
 <td>类别权重，适合类别不平衡问题</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <hr>
-<h2 id="十三、训练模型"><a href="#十三、训练模型" class="headerlink" title="十三、训练模型"></a>十三、训练模型</h2><p>训练代码非常简洁：</p>
+<h2 id="十三、训练模型">十三、训练模型</h2>
+<p>训练代码非常简洁：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">algo.fit(x_train, y_train)<br></code></pre></td></tr></table></figure>
-
 <p>这一步就是让决策树从训练数据中学习分类规则。</p>
 <p>训练完成后，模型内部已经形成了一系列类似下面的判断规则：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">if</span> x3 &lt;= <span class="hljs-number">2.35</span>:<br>    <span class="hljs-keyword">class</span> = Iris-setosa<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-keyword">if</span> x4 &lt;= <span class="hljs-number">1.65</span>:<br>        <span class="hljs-keyword">class</span> = Iris-versicolor<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">class</span> = Iris-virginica<br></code></pre></td></tr></table></figure>
-
 <p>真实模型规则会更细一些，但整体思路就是一层层判断。</p>
 <hr>
-<h2 id="十四、特征重要性解读"><a href="#十四、特征重要性解读" class="headerlink" title="十四、特征重要性解读"></a>十四、特征重要性解读</h2><p>模型训练完成后，可以查看每个特征的重要性：</p>
+<h2 id="十四、特征重要性解读">十四、特征重要性解读</h2>
+<p>模型训练完成后，可以查看每个特征的重要性：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(algo.feature_importances_)<br></code></pre></td></tr></table></figure>
-
 <p>输出结果：</p>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">[<span class="hljs-number">0</span>.         <span class="hljs-number">0</span>.         <span class="hljs-number">0.55131392</span> <span class="hljs-number">0.44868608</span>]<br></code></pre></td></tr></table></figure>
-
 <p>这表示：</p>
 <table>
 <thead>
@@ -711,7 +731,8 @@
 <th>重要性</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>A</td>
 <td>0</td>
 </tr>
@@ -727,66 +748,71 @@
 <td>D</td>
 <td>0.4487</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>可以看出，模型主要依赖第 3 个和第 4 个特征，也就是花瓣相关特征。</p>
-<p>这非常符合鸢尾花数据集的特点：<br>不同鸢尾花在花瓣长度、花瓣宽度上的差异通常比花萼特征更明显。</p>
+<p>这非常符合鸢尾花数据集的特点：<br>
+不同鸢尾花在花瓣长度、花瓣宽度上的差异通常比花萼特征更明显。</p>
 <p>特征重要性的总和为：</p>
-<p>$0 + 0 + 0.55131392 + 0.44868608 &#x3D; 1$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>+</mo><mn>0</mn><mo>+</mo><mn>0.55131392</mn><mo>+</mo><mn>0.44868608</mn><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">0 + 0 + 0.55131392 + 0.44868608 = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">0.55131392</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.44868608</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span></p>
 <p>所以可以理解为：</p>
 <ul>
-<li>花瓣长度贡献约 $55.13%$；</li>
-<li>花瓣宽度贡献约 $44.87%$；</li>
+<li>花瓣长度贡献约 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>55.13</mn></mrow><annotation encoding="application/x-tex">55.13%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">55.13</span></span></span></span>；</li>
+<li>花瓣宽度贡献约 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>44.87</mn></mrow><annotation encoding="application/x-tex">44.87%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">44.87</span></span></span></span>；</li>
 <li>花萼长度和花萼宽度在这棵树中没有被使用。</li>
 </ul>
 <hr>
-<h2 id="十五、分类评估报告"><a href="#十五、分类评估报告" class="headerlink" title="十五、分类评估报告"></a>十五、分类评估报告</h2><p>代码分别输出了训练集和测试集的分类报告：</p>
+<h2 id="十五、分类评估报告">十五、分类评估报告</h2>
+<p>代码分别输出了训练集和测试集的分类报告：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(classification_report(y_train, algo.predict(x_train)))<br><span class="hljs-built_in">print</span>(classification_report(y_test, algo.predict(x_test)))<br></code></pre></td></tr></table></figure>
-
 <p>训练集结果：</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache">          <span class="hljs-attribute">precision</span>    recall  f1-score   support<br><br>       <span class="hljs-attribute">0</span>       <span class="hljs-number">1</span>.<span class="hljs-number">00</span>      <span class="hljs-number">1</span>.<span class="hljs-number">00</span>      <span class="hljs-number">1</span>.<span class="hljs-number">00</span>        <span class="hljs-number">36</span><br>       <span class="hljs-attribute">1</span>       <span class="hljs-number">1</span>.<span class="hljs-number">00</span>      <span class="hljs-number">0</span>.<span class="hljs-number">95</span>      <span class="hljs-number">0</span>.<span class="hljs-number">98</span>        <span class="hljs-number">42</span><br>       <span class="hljs-attribute">2</span>       <span class="hljs-number">0</span>.<span class="hljs-number">95</span>      <span class="hljs-number">1</span>.<span class="hljs-number">00</span>      <span class="hljs-number">0</span>.<span class="hljs-number">98</span>        <span class="hljs-number">42</span><br><br><span class="hljs-attribute">accuracy</span>                           <span class="hljs-number">0</span>.<span class="hljs-number">98</span>       <span class="hljs-number">120</span><br></code></pre></td></tr></table></figure>
-
 <p>测试集结果：</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs apache">          <span class="hljs-attribute">precision</span>    recall  f1-score   support<br><br>       <span class="hljs-attribute">0</span>       <span class="hljs-number">1</span>.<span class="hljs-number">00</span>      <span class="hljs-number">1</span>.<span class="hljs-number">00</span>      <span class="hljs-number">1</span>.<span class="hljs-number">00</span>        <span class="hljs-number">14</span><br>       <span class="hljs-attribute">1</span>       <span class="hljs-number">1</span>.<span class="hljs-number">00</span>      <span class="hljs-number">0</span>.<span class="hljs-number">88</span>      <span class="hljs-number">0</span>.<span class="hljs-number">93</span>         <span class="hljs-number">8</span><br>       <span class="hljs-attribute">2</span>       <span class="hljs-number">0</span>.<span class="hljs-number">89</span>      <span class="hljs-number">1</span>.<span class="hljs-number">00</span>      <span class="hljs-number">0</span>.<span class="hljs-number">94</span>         <span class="hljs-number">8</span><br><br><span class="hljs-attribute">accuracy</span>                           <span class="hljs-number">0</span>.<span class="hljs-number">97</span>        <span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
-
 <p>几个指标的含义如下。</p>
-<h3 id="1-准确率-Accuracy"><a href="#1-准确率-Accuracy" class="headerlink" title="1. 准确率 Accuracy"></a>1. 准确率 Accuracy</h3><p>准确率表示所有预测中，有多少预测对了：</p>
-<p>$Accuracy &#x3D; \frac{预测正确的样本数}{总样本数}$</p>
+<h3 id="1-准确率-Accuracy">1. 准确率 Accuracy</h3>
+<p>准确率表示所有预测中，有多少预测对了：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>c</mi><mi>c</mi><mi>u</mi><mi>r</mi><mi>a</mi><mi>c</mi><mi>y</mi><mo>=</mo><mfrac><mtext>预测正确的样本数</mtext><mtext>总样本数</mtext></mfrac></mrow><annotation encoding="application/x-tex">Accuracy = \frac{预测正确的样本数}{总样本数}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal">cc</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0359em;">cy</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2173em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">总样本数</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord cjk_fallback mtight">预测正确的样本数</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>本例中：</p>
 <ul>
-<li>训练集准确率为 $0.9833$；</li>
-<li>测试集准确率为 $0.9667$。</li>
+<li>训练集准确率为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.9833</mn></mrow><annotation encoding="application/x-tex">0.9833</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.9833</span></span></span></span>；</li>
+<li>测试集准确率为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.9667</mn></mrow><annotation encoding="application/x-tex">0.9667</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.9667</span></span></span></span>。</li>
 </ul>
 <p>说明模型整体表现很好。</p>
-<h3 id="2-精确率-Precision"><a href="#2-精确率-Precision" class="headerlink" title="2. 精确率 Precision"></a>2. 精确率 Precision</h3><p>精确率表示：模型预测为某一类的样本中，有多少是真的。</p>
-<p>$Precision &#x3D; \frac{TP}{TP + FP}$</p>
+<h3 id="2-精确率-Precision">2. 精确率 Precision</h3>
+<p>精确率表示：模型预测为某一类的样本中，有多少是真的。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>r</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>P</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">Precision = \frac{TP}{TP + FP}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">i</span><span class="mord mathnormal">s</span><span class="mord mathnormal">i</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2757em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>其中：</p>
 <ul>
-<li>$TP$ 表示真正例；</li>
-<li>$FP$ 表示假正例。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">TP</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span></span></span></span> 表示真正例；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mi>P</mi></mrow><annotation encoding="application/x-tex">FP</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span></span></span></span> 表示假正例。</li>
 </ul>
-<p>生活化理解：<br>如果模型说“这些都是 Iris-versicolor”，精确率关心的是：这些被模型点名的样本里，有多少真的就是 Iris-versicolor。</p>
-<h3 id="3-召回率-Recall"><a href="#3-召回率-Recall" class="headerlink" title="3. 召回率 Recall"></a>3. 召回率 Recall</h3><p>召回率表示：真实属于某一类的样本中，有多少被模型找出来了。</p>
-<p>$Recall &#x3D; \frac{TP}{TP + FN}$</p>
+<p>生活化理解：<br>
+如果模型说“这些都是 Iris-versicolor”，精确率关心的是：这些被模型点名的样本里，有多少真的就是 Iris-versicolor。</p>
+<h3 id="3-召回率-Recall">3. 召回率 Recall</h3>
+<p>召回率表示：真实属于某一类的样本中，有多少被模型找出来了。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">Recall = \frac{TP}{TP + FN}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mord mathnormal">ec</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2757em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span><span class="mord mathnormal mtight" style="margin-right:0.109em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>其中：</p>
 <ul>
-<li>$FN$ 表示假负例。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mi>N</mi></mrow><annotation encoding="application/x-tex">FN</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mord mathnormal" style="margin-right:0.109em;">N</span></span></span></span> 表示假负例。</li>
 </ul>
-<p>生活化理解：<br>如果真实有 100 个目标客户，模型找出了 90 个，那么召回率就是 $90%$。</p>
-<h3 id="4-F1-score"><a href="#4-F1-score" class="headerlink" title="4. F1-score"></a>4. F1-score</h3><p>F1 值是精确率和召回率的综合指标：</p>
-<p>$F1 &#x3D; \frac{2 \times Precision \times Recall}{Precision + Recall}$</p>
+<p>生活化理解：<br>
+如果真实有 100 个目标客户，模型找出了 90 个，那么召回率就是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>90</mn></mrow><annotation encoding="application/x-tex">90%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">90</span></span></span></span>。</p>
+<h3 id="4-F1-score">4. F1-score</h3>
+<p>F1 值是精确率和召回率的综合指标：</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mn>1</mn><mo>=</mo><mfrac><mrow><mn>2</mn><mo>×</mo><mi>P</mi><mi>r</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>×</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi></mrow><mrow><mi>P</mi><mi>r</mi><mi>e</mi><mi>c</mi><mi>i</mi><mi>s</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo>+</mo><mi>R</mi><mi>e</mi><mi>c</mi><mi>a</mi><mi>l</mi><mi>l</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">F1 = \frac{2 \times Precision \times Recall}{Precision + Recall}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2834em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span><span class="mord mathnormal mtight" style="margin-right:0.0278em;">r</span><span class="mord mathnormal mtight">ec</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.0077em;">R</span><span class="mord mathnormal mtight">ec</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.0197em;">l</span><span class="mord mathnormal mtight" style="margin-right:0.0197em;">l</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span><span class="mord mathnormal mtight" style="margin-right:0.0278em;">r</span><span class="mord mathnormal mtight">ec</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight">n</span><span class="mbin mtight">×</span><span class="mord mathnormal mtight" style="margin-right:0.0077em;">R</span><span class="mord mathnormal mtight">ec</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.0197em;">l</span><span class="mord mathnormal mtight" style="margin-right:0.0197em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>当我们既关心“找得准”，又关心“找得全”时，F1 值很有用。</p>
 <hr>
-<h2 id="十六、单个样本预测与概率输出"><a href="#十六、单个样本预测与概率输出" class="headerlink" title="十六、单个样本预测与概率输出"></a>十六、单个样本预测与概率输出</h2><p>代码中取了测试集中的一个样本进行预测：</p>
+<h2 id="十六、单个样本预测与概率输出">十六、单个样本预测与概率输出</h2>
+<p>代码中取了测试集中的一个样本进行预测：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">test1 = [x_test[<span class="hljs-number">6</span>]]<br><br><span class="hljs-built_in">print</span>(algo.predict(test1))<br><span class="hljs-built_in">print</span>(algo.predict_proba(test1))<br></code></pre></td></tr></table></figure>
-
 <p>输出结果：</p>
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua">[<span class="hljs-number">0</span>]<br><span class="hljs-string">[[1. 0. 0.]]</span><br></code></pre></td></tr></table></figure>
-
 <p>解释如下：</p>
 <ul>
 <li><code>predict()</code> 输出最终类别，结果为 <code>0</code>，即 <code>Iris-setosa</code>；</li>
 <li><code>predict_proba()</code> 输出属于每个类别的概率；</li>
-<li><code>[[1. 0. 0.]]</code> 表示模型认为该样本属于类别 0 的概率是 $1.0$。</li>
+<li><code>[[1. 0. 0.]]</code> 表示模型认为该样本属于类别 0 的概率是 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1.0</mn></mrow><annotation encoding="application/x-tex">1.0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1.0</span></span></span></span>。</li>
 </ul>
 <p>概率顺序对应标签编码：</p>
 <table>
@@ -796,7 +822,8 @@
 <th>类别</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>第 1 个概率</td>
 <td>Iris-setosa</td>
 </tr>
@@ -808,25 +835,25 @@
 <td>第 3 个概率</td>
 <td>Iris-virginica</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>所以：</p>
-<p>$P(Iris-setosa) &#x3D; 1.0$</p>
-<p>$P(Iris-versicolor) &#x3D; 0.0$</p>
-<p>$P(Iris-virginica) &#x3D; 0.0$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>I</mi><mi>r</mi><mi>i</mi><mi>s</mi><mo>−</mo><mi>s</mi><mi>e</mi><mi>t</mi><mi>o</mi><mi>s</mi><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1.0</mn></mrow><annotation encoding="application/x-tex">P(Iris-setosa) = 1.0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">se</span><span class="mord mathnormal">t</span><span class="mord mathnormal">os</span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1.0</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>I</mi><mi>r</mi><mi>i</mi><mi>s</mi><mo>−</mo><mi>v</mi><mi>e</mi><mi>r</mi><mi>s</mi><mi>i</mi><mi>c</mi><mi>o</mi><mi>l</mi><mi>o</mi><mi>r</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">P(Iris-versicolor) = 0.0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mord mathnormal" style="margin-right:0.0278em;">er</span><span class="mord mathnormal">s</span><span class="mord mathnormal">i</span><span class="mord mathnormal">co</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal" style="margin-right:0.0278em;">or</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.0</span></span></span></span></p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo stretchy="false">(</mo><mi>I</mi><mi>r</mi><mi>i</mi><mi>s</mi><mo>−</mo><mi>v</mi><mi>i</mi><mi>r</mi><mi>g</mi><mi>i</mi><mi>n</mi><mi>i</mi><mi>c</mi><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><mn>0.0</mn></mrow><annotation encoding="application/x-tex">P(Iris-virginica) = 0.0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.0785em;">I</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal">i</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">v</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.0278em;">r</span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mord mathnormal">ini</span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.0</span></span></span></span></p>
 <hr>
-<h2 id="十七、ROC-与-AUC"><a href="#十七、ROC-与-AUC" class="headerlink" title="十七、ROC 与 AUC"></a>十七、ROC 与 AUC</h2><p>代码中计算了三个类别各自的 ROC 和 AUC：</p>
+<h2 id="十七、ROC-与-AUC">十七、ROC 与 AUC</h2>
+<p>代码中计算了三个类别各自的 ROC 和 AUC：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python">y_predict_proba = algo.predict_proba(x_train)<br><br>y1_true = (y_train == <span class="hljs-number">0</span>).astype(np.<span class="hljs-built_in">int</span>)<br>y1_score = y_predict_proba[:, <span class="hljs-number">0</span>]<br>fpr1, tpr1, _ = roc_curve(y1_true, y1_score)<br>auc1 = auc(fpr1, tpr1)<br><br>y2_true = (y_train == <span class="hljs-number">1</span>).astype(np.<span class="hljs-built_in">int</span>)<br>y2_score = y_predict_proba[:, <span class="hljs-number">1</span>]<br>fpr2, tpr2, _ = roc_curve(y2_true, y2_score)<br>auc2 = auc(fpr2, tpr2)<br><br>y3_true = (y_train == <span class="hljs-number">2</span>).astype(np.<span class="hljs-built_in">int</span>)<br>y3_score = y_predict_proba[:, <span class="hljs-number">2</span>]<br>fpr3, tpr3, _ = roc_curve(y3_true, y3_score)<br>auc3 = auc(fpr3, tpr3)<br><br><span class="hljs-built_in">print</span>((auc1, auc2, auc3))<br></code></pre></td></tr></table></figure>
-
 <p>输出：</p>
 <figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clojure">(<span class="hljs-number">1.0</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9981684981684982</span><span class="hljs-punctuation">,</span> <span class="hljs-number">0.9981684981684982</span>)<br></code></pre></td></tr></table></figure>
-
 <p>AUC 可以理解为模型区分正负样本的能力：</p>
 <ul>
-<li>$AUC &#x3D; 1$ 表示完美区分；</li>
-<li>$AUC &#x3D; 0.5$ 表示和随机猜差不多；</li>
-<li>$AUC &lt; 0.5$ 通常说明模型判断方向可能反了。</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>U</mi><mi>C</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">AUC = 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 表示完美区分；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>U</mi><mi>C</mi><mo>=</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">AUC = 0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.5</span></span></span></span> 表示和随机猜差不多；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>U</mi><mi>C</mi><mo>&lt;</mo><mn>0.5</mn></mrow><annotation encoding="application/x-tex">AUC &lt; 0.5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.109em;">U</span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.5</span></span></span></span> 通常说明模型判断方向可能反了。</li>
 </ul>
-<p>本例中三个类别的 AUC 都非常接近 $1$，说明模型对三类鸢尾花的区分能力很强。</p>
+<p>本例中三个类别的 AUC 都非常接近 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>，说明模型对三类鸢尾花的区分能力很强。</p>
 <p>因为这是三分类问题，所以代码采用“一类对其他类”的方式分别计算：</p>
 <ul>
 <li>类别 0 vs 其他类别；</li>
@@ -835,7 +862,6 @@
 </ul>
 <p>例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">y1_true = (y_train == <span class="hljs-number">0</span>).astype(np.<span class="hljs-built_in">int</span>)<br></code></pre></td></tr></table></figure>
-
 <p>这行代码的意思是：</p>
 <ul>
 <li>如果样本真实类别是 0，就记为 1；</li>
@@ -843,9 +869,9 @@
 </ul>
 <p>这样就把多分类问题临时转成了二分类问题，方便计算 ROC 曲线。</p>
 <hr>
-<h2 id="十八、ROC-曲线绘制"><a href="#十八、ROC-曲线绘制" class="headerlink" title="十八、ROC 曲线绘制"></a>十八、ROC 曲线绘制</h2><p>绘图代码如下：</p>
+<h2 id="十八、ROC-曲线绘制">十八、ROC 曲线绘制</h2>
+<p>绘图代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">plt.plot(fpr1, tpr1, <span class="hljs-string">&#x27;r-o&#x27;</span>)<br>plt.plot(fpr2, tpr2, <span class="hljs-string">&#x27;g-o&#x27;</span>)<br>plt.plot(fpr3, tpr3, <span class="hljs-string">&#x27;b-o&#x27;</span>)<br>plt.show()<br></code></pre></td></tr></table></figure>
-
 <p>其中：</p>
 <table>
 <thead>
@@ -854,7 +880,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>fpr</code></td>
 <td>假正例率</td>
 </tr>
@@ -874,25 +901,27 @@
 <td>蓝色曲线</td>
 <td>类别 2 的 ROC</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>真正例率公式：</p>
-<p>$TPR &#x3D; \frac{TP}{TP + FN}$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mi>P</mi><mi>R</mi><mo>=</mo><mfrac><mrow><mi>T</mi><mi>P</mi></mrow><mrow><mi>T</mi><mi>P</mi><mo>+</mo><mi>F</mi><mi>N</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">TPR = \frac{TP}{TP + FN}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2757em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span><span class="mord mathnormal mtight" style="margin-right:0.109em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
 <p>假正例率公式：</p>
-<p>$FPR &#x3D; \frac{FP}{FP + TN}$</p>
-<p>ROC 曲线越靠近左上角，模型越好。<br>本例 AUC 接近 $1$，因此曲线整体表现非常优秀。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>F</mi><mi>P</mi><mi>R</mi><mo>=</mo><mfrac><mrow><mi>F</mi><mi>P</mi></mrow><mrow><mi>F</mi><mi>P</mi><mo>+</mo><mi>T</mi><mi>N</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">FPR = \frac{FP}{FP + TN}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">F</span><span class="mord mathnormal" style="margin-right:0.1389em;">P</span><span class="mord mathnormal" style="margin-right:0.0077em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1.2757em;vertical-align:-0.4033em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8723em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span><span class="mbin mtight">+</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">T</span><span class="mord mathnormal mtight" style="margin-right:0.109em;">N</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1389em;">F</span><span class="mord mathnormal mtight" style="margin-right:0.1389em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.4033em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+<p>ROC 曲线越靠近左上角，模型越好。<br>
+本例 AUC 接近 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>，因此曲线整体表现非常优秀。</p>
 <hr>
-<h2 id="十九、决策树可视化"><a href="#十九、决策树可视化" class="headerlink" title="十九、决策树可视化"></a>十九、决策树可视化</h2><p>代码中提供了两种可视化方式。</p>
-<h3 id="方式一：导出-dot-文件"><a href="#方式一：导出-dot-文件" class="headerlink" title="方式一：导出 dot 文件"></a>方式一：导出 dot 文件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> tree<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;iris01.dot&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> writer:<br>    tree.export_graphviz(<br>        decision_tree=algo,<br>        out_file=writer,<br>        feature_names=[<span class="hljs-string">&#x27;x1&#x27;</span>, <span class="hljs-string">&#x27;x2&#x27;</span>, <span class="hljs-string">&#x27;x3&#x27;</span>, <span class="hljs-string">&#x27;x4&#x27;</span>],<br>        class_names=[<span class="hljs-string">&#x27;Iris-setosa&#x27;</span>, <span class="hljs-string">&#x27;Iris-versicolor&#x27;</span>, <span class="hljs-string">&#x27;Iris-virginica&#x27;</span>],<br>        filled=<span class="hljs-literal">True</span>,<br>        rounded=<span class="hljs-literal">True</span>,<br>        special_characters=<span class="hljs-literal">True</span>,<br>        node_ids=<span class="hljs-literal">True</span><br>    )<br></code></pre></td></tr></table></figure>
-
+<h2 id="十九、决策树可视化">十九、决策树可视化</h2>
+<p>代码中提供了两种可视化方式。</p>
+<h3 id="方式一：导出-dot-文件">方式一：导出 dot 文件</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> tree<br><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;iris01.dot&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> writer:<br>    tree.export_graphviz(<br>        decision_tree=algo,<br>        out_file=writer,<br>        feature_names=[<span class="hljs-string">&#x27;x1&#x27;</span>, <span class="hljs-string">&#x27;x2&#x27;</span>, <span class="hljs-string">&#x27;x3&#x27;</span>, <span class="hljs-string">&#x27;x4&#x27;</span>],<br>        class_names=[<span class="hljs-string">&#x27;Iris-setosa&#x27;</span>, <span class="hljs-string">&#x27;Iris-versicolor&#x27;</span>, <span class="hljs-string">&#x27;Iris-virginica&#x27;</span>],<br>        filled=<span class="hljs-literal">True</span>,<br>        rounded=<span class="hljs-literal">True</span>,<br>        special_characters=<span class="hljs-literal">True</span>,<br>        node_ids=<span class="hljs-literal">True</span><br>    )<br></code></pre></td></tr></table></figure>
 <p>导出后，可以使用 Graphviz 命令转成图片：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">dot -Tpdf iris01.dot -o iris01.pdf<br>dot -Tpng iris01.dot -o iris01.png<br></code></pre></td></tr></table></figure>
-
-<h3 id="方式二：使用-pydotplus-直接生成图片"><a href="#方式二：使用-pydotplus-直接生成图片" class="headerlink" title="方式二：使用 pydotplus 直接生成图片"></a>方式二：使用 pydotplus 直接生成图片</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pydotplus<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> tree<br><br>dot_data = tree.export_graphviz(<br>    decision_tree=algo,<br>    out_file=<span class="hljs-literal">None</span>,<br>    class_names=[<span class="hljs-string">&#x27;Iris-setosa&#x27;</span>, <span class="hljs-string">&#x27;Iris-versicolor&#x27;</span>, <span class="hljs-string">&#x27;Iris-virginica&#x27;</span>],<br>    filled=<span class="hljs-literal">True</span>,<br>    rounded=<span class="hljs-literal">True</span>,<br>    special_characters=<span class="hljs-literal">True</span>,<br>    node_ids=<span class="hljs-literal">True</span><br>)<br><br>graph = pydotplus.graph_from_dot_data(dot_data)<br>graph.write_png(<span class="hljs-string">&quot;iris02.png&quot;</span>)<br>graph.write_pdf(<span class="hljs-string">&quot;iris02.pdf&quot;</span>)<br></code></pre></td></tr></table></figure>
-
+<h3 id="方式二：使用-pydotplus-直接生成图片">方式二：使用 pydotplus 直接生成图片</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pydotplus<br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> tree<br><br>dot_data = tree.export_graphviz(<br>    decision_tree=algo,<br>    out_file=<span class="hljs-literal">None</span>,<br>    class_names=[<span class="hljs-string">&#x27;Iris-setosa&#x27;</span>, <span class="hljs-string">&#x27;Iris-versicolor&#x27;</span>, <span class="hljs-string">&#x27;Iris-virginica&#x27;</span>],<br>    filled=<span class="hljs-literal">True</span>,<br>    rounded=<span class="hljs-literal">True</span>,<br>    special_characters=<span class="hljs-literal">True</span>,<br>    node_ids=<span class="hljs-literal">True</span><br>)<br><br>graph = pydotplus.graph_from_dot_data(dot_data)<br>graph.write_png(<span class="hljs-string">&quot;iris02.png&quot;</span>)<br>graph.write_pdf(<span class="hljs-string">&quot;iris02.pdf&quot;</span>)<br></code></pre></td></tr></table></figure>
 <hr>
-<h2 id="二十、树图结果解读"><a href="#二十、树图结果解读" class="headerlink" title="二十、树图结果解读"></a>二十、树图结果解读</h2><p>可视化结果中，每个节点通常包含这些信息：</p>
+<h2 id="二十、树图结果解读">二十、树图结果解读</h2>
+<p>可视化结果中，每个节点通常包含这些信息：</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">node</span> #<span class="hljs-number">0</span><br><span class="hljs-attribute">x3</span> &lt;= <span class="hljs-number">2</span>.<span class="hljs-number">35</span><br><span class="hljs-attribute">gini</span> = <span class="hljs-number">0</span>.<span class="hljs-number">665</span><br><span class="hljs-attribute">samples</span> = <span class="hljs-number">120</span><br><span class="hljs-attribute">value</span> =<span class="hljs-meta"> [36, 42, 42]</span><br><span class="hljs-attribute">class</span> = Iris-versicolor<br></code></pre></td></tr></table></figure>
-
 <p>逐项解释：</p>
 <table>
 <thead>
@@ -901,7 +930,8 @@
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>node #0</code></td>
 <td>节点编号</td>
 </tr>
@@ -925,32 +955,33 @@
 <td><code>class = Iris-versicolor</code></td>
 <td>当前节点中数量最多的类别</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>根节点含义是：</p>
 <ul>
 <li>当前一共有 120 个训练样本；</li>
 <li>其中类别 0 有 36 个；</li>
 <li>类别 1 有 42 个；</li>
 <li>类别 2 有 42 个；</li>
-<li>节点还比较混杂，所以 $gini &#x3D; 0.665$。</li>
+<li>节点还比较混杂，所以 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mi>i</mi><mi>n</mi><mi>i</mi><mo>=</mo><mn>0.665</mn></mrow><annotation encoding="application/x-tex">gini = 0.665</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.854em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.0359em;">g</span><span class="mord mathnormal">ini</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.665</span></span></span></span>。</li>
 </ul>
 <p>第一层判断是：</p>
-<p>$x_3 \leq 2.35$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>3</mn></msub><mo>≤</mo><mn>2.35</mn></mrow><annotation encoding="application/x-tex">x_3 \leq 2.35</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.786em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2.35</span></span></span></span></p>
 <p>如果条件为真，则进入左子节点。左子节点显示：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">gini</span> = <span class="hljs-number">0.0</span><br><span class="hljs-attr">samples</span> = <span class="hljs-number">36</span><br><span class="hljs-attr">value</span> = [<span class="hljs-number">36</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>]<br><span class="hljs-attr">class</span> = Iris-setosa<br></code></pre></td></tr></table></figure>
-
 <p>这说明，只要满足这个条件的 36 个样本全部都是 <code>Iris-setosa</code>，没有混杂样本，所以基尼系数为：</p>
-<p>$Gini &#x3D; 0$</p>
-<p>这也是决策树非常直观的地方：<br>它发现“花瓣长度较短”的样本几乎可以直接判断为山鸢尾。</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>i</mi><mi>n</mi><mi>i</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">Gini = 0</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">G</span><span class="mord mathnormal">ini</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span></p>
+<p>这也是决策树非常直观的地方：<br>
+它发现“花瓣长度较短”的样本几乎可以直接判断为山鸢尾。</p>
 <p>如果第一层条件不满足，则继续看其他条件，例如：</p>
-<p>$x_4 \leq 1.65$</p>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>4</mn></msub><mo>≤</mo><mn>1.65</mn></mrow><annotation encoding="application/x-tex">x_4 \leq 1.65</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.786em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3011em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">4</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1.65</span></span></span></span></p>
 <p>后续节点主要继续用花瓣长度和花瓣宽度区分 <code>Iris-versicolor</code> 和 <code>Iris-virginica</code>。</p>
 <p>这也和特征重要性结果对应：</p>
 <figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dns">[<span class="hljs-number">0</span>.         <span class="hljs-number">0</span>.         <span class="hljs-number">0.55131392</span> <span class="hljs-number">0.44868608</span>]<br></code></pre></td></tr></table></figure>
-
 <p>说明这棵树基本只依赖花瓣相关特征完成分类。</p>
 <hr>
-<h2 id="二十一、为什么决策树适合入门"><a href="#二十一、为什么决策树适合入门" class="headerlink" title="二十一、为什么决策树适合入门"></a>二十一、为什么决策树适合入门</h2><p>决策树的优点非常明显：</p>
+<h2 id="二十一、为什么决策树适合入门">二十一、为什么决策树适合入门</h2>
+<p>决策树的优点非常明显：</p>
 <ol>
 <li>可解释性强：可以画出树图，看到每一步判断；</li>
 <li>不需要复杂的数据预处理；</li>
@@ -965,7 +996,8 @@
 <li>单棵树的稳定性不如随机森林、梯度提升树；</li>
 <li>如果树太深，规则会变得复杂，不容易泛化。</li>
 </ol>
-<p>因此实际项目中，决策树常常作为理解模型原理的第一站。<br>如果追求更强效果，可以进一步学习：</p>
+<p>因此实际项目中，决策树常常作为理解模型原理的第一站。<br>
+如果追求更强效果，可以进一步学习：</p>
 <ul>
 <li>随机森林；</li>
 <li>AdaBoost；</li>
@@ -976,14 +1008,14 @@
 </ul>
 <p>这些算法本质上都和树模型有密切关系。</p>
 <hr>
-<h2 id="二十二、完整流程总结"><a href="#二十二、完整流程总结" class="headerlink" title="二十二、完整流程总结"></a>二十二、完整流程总结</h2><p>本案例的机器学习流程可以总结为：</p>
+<h2 id="二十二、完整流程总结">二十二、完整流程总结</h2>
+<p>本案例的机器学习流程可以总结为：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs css">读取数据<br>  ↓<br>拆分特征 <span class="hljs-attribute">X</span> 和标签 <span class="hljs-attribute">Y</span><br>  ↓<br>标签编码<br>  ↓<br>划分训练集和测试集<br>  ↓<br>创建决策树分类器<br>  ↓<br>训练模型<br>  ↓<br>输出特征重要性<br>  ↓<br>评估训练集和测试集效果<br>  ↓<br>计算 ROC 和 AUC<br>  ↓<br>导出决策树可视化图<br></code></pre></td></tr></table></figure>
-
 <p>对应到代码核心步骤：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python">df = pd.read_csv(path, sep=<span class="hljs-string">&quot;,&quot;</span>, header=<span class="hljs-literal">None</span>, names=[<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;B&#x27;</span>, <span class="hljs-string">&#x27;C&#x27;</span>, <span class="hljs-string">&#x27;D&#x27;</span>, <span class="hljs-string">&#x27;cla&#x27;</span>])<br><br>X = df.iloc[:, :<span class="hljs-number">4</span>]<br>X = np.asarray(X).astype(np.float64)<br><br>Y = df[<span class="hljs-string">&#x27;cla&#x27;</span>]<br>label_encoder = LabelEncoder()<br>Y = label_encoder.fit_transform(Y)<br><br>x_train, x_test, y_train, y_test = train_test_split(<br>    X,<br>    Y,<br>    test_size=<span class="hljs-number">0.2</span>,<br>    random_state=<span class="hljs-number">2</span><br>)<br><br>algo = DecisionTreeClassifier(max_depth=<span class="hljs-number">3</span>)<br>algo.fit(x_train, y_train)<br><br><span class="hljs-built_in">print</span>(algo.feature_importances_)<br><span class="hljs-built_in">print</span>(classification_report(y_test, algo.predict(x_test)))<br><span class="hljs-built_in">print</span>(algo.score(x_test, y_test))<br></code></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="二十三、应用场景"><a href="#二十三、应用场景" class="headerlink" title="二十三、应用场景"></a>二十三、应用场景</h2><p>决策树不仅能用于鸢尾花分类，还可以应用在很多实际业务中。</p>
+<h2 id="二十三、应用场景">二十三、应用场景</h2>
+<p>决策树不仅能用于鸢尾花分类，还可以应用在很多实际业务中。</p>
 <table>
 <thead>
 <tr>
@@ -991,7 +1023,8 @@
 <th>示例</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>医疗诊断</td>
 <td>根据检查指标判断疾病风险</td>
 </tr>
@@ -1015,13 +1048,14 @@
 <td>工业检测</td>
 <td>根据传感器数据判断设备是否异常</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>比如在贷款审批中，决策树可能学到类似规则：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs">如果收入较高，并且历史还款记录良好，则通过；<br>如果收入较低，并且逾期次数较多，则拒绝；<br>否则继续查看负债率、工作年限等特征。<br></code></pre></td></tr></table></figure>
-
 <p>这种规则非常适合给业务人员解释，因此决策树常用于需要模型可解释性的场景。</p>
 <hr>
-<h2 id="二十四、本文小结"><a href="#二十四、本文小结" class="headerlink" title="二十四、本文小结"></a>二十四、本文小结</h2><p>这次鸢尾花分类案例展示了一个完整的决策树建模流程。</p>
+<h2 id="二十四、本文小结">二十四、本文小结</h2>
+<p>这次鸢尾花分类案例展示了一个完整的决策树建模流程。</p>
 <p>核心收获如下：</p>
 <ol>
 <li>决策树通过一系列条件判断完成分类；</li>
@@ -1030,8 +1064,8 @@
 <li><code>train_test_split</code> 用于划分训练集和测试集；</li>
 <li><code>max_depth=3</code> 可以限制树深度，降低过拟合风险；</li>
 <li>模型主要依赖花瓣长度和花瓣宽度完成鸢尾花分类；</li>
-<li>测试集准确率约为 $0.9667$，说明模型泛化效果较好；</li>
-<li>AUC 接近 $1$，说明模型区分三类鸢尾花的能力很强；</li>
+<li>测试集准确率约为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.9667</mn></mrow><annotation encoding="application/x-tex">0.9667</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0.9667</span></span></span></span>，说明模型泛化效果较好；</li>
+<li>AUC 接近 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span>，说明模型区分三类鸢尾花的能力很强；</li>
 <li>决策树可视化能直观看到模型每一步的判断逻辑。</li>
 </ol>
 <p>决策树的魅力在于：它不像黑盒模型那样难以理解，而是把“模型为什么这样判断”清清楚楚地画了出来。对于机器学习初学者来说，它是理解分类算法、特征选择、模型评估和可解释性的绝佳入口。</p>
