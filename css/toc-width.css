@@ -1,23 +1,9 @@
-/* Fluid 目录单行截断 + 省略号 */
-.post-toc .toc-item a {
+/* 限制目录条目标题宽度，超出部分显示省略号 */
+.toc-link {
     display: block;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100%;
-    padding: 5px 10px;
-    font-size: 13px;
-}
-
-/* hover 显示完整标题 */
-.post-toc .toc-item a:hover {
-    overflow: visible;
-    white-space: normal;
-    background: #f8f9fa;
-    border-radius: 4px;
-}
-
-/* 加宽 Fluid 右侧目录 */
-.post-toc {
-    width: 240px !important;
+    white-space: nowrap;
+    max-width: 220px;
+    /* 可根据自己侧边栏宽度调整 */
 }
