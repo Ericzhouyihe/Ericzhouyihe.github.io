@@ -1,9 +1,0 @@
-/* 限制目录条目标题宽度，超出部分显示省略号 */
-.toc-link {
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 300px;
-    /* 可根据自己侧边栏宽度调整 */
-}
