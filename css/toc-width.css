@@ -4,6 +4,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 220px;
+    max-width: 300px;
     /* 可根据自己侧边栏宽度调整 */
 }
