@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="一人一口粥">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一、什么是优先队列1.1 通俗理解普通队列遵循 先进先出（FIFO） 原则，就像日常排队，先来的人先办事。优先队列不遵循入队顺序，而是遵循 优先级高者先出，类似医院急诊：重症患者无论来的早晚，永远优先接诊。 1.2 正式定义优先队列是一种抽象数据类型（ADT），核心支持两个操作：  插入元素：向集合中加入一个带优先级的元素 取出极值：快速获取并删除当前优先级最高（最大&#x2F;最小）的元素  在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="优先队列（堆）">
+<meta property="og:url" content="https://zyhblog.dpdns.org/2026/07/01/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88%E5%A0%86%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、什么是优先队列1.1 通俗理解普通队列遵循 先进先出（FIFO） 原则，就像日常排队，先来的人先办事。优先队列不遵循入队顺序，而是遵循 优先级高者先出，类似医院急诊：重症患者无论来的早晚，永远优先接诊。 1.2 正式定义优先队列是一种抽象数据类型（ADT），核心支持两个操作：  插入元素：向集合中加入一个带优先级的元素 取出极值：快速获取并删除当前优先级最高（最大&#x2F;最小）的元素  在">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-01T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-01T02:33:02.219Z">
+<meta property="article:author" content="一人一口粥">
+<meta property="article:tag" content="优先队列">
+<meta property="article:tag" content="堆">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>优先队列（堆） - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zyhblog.dpdns.org","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>zyh&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="优先队列（堆）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-01 12:00" pubdate>
+          2026年7月1日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">优先队列（堆）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="一、什么是优先队列"><a href="#一、什么是优先队列" class="headerlink" title="一、什么是优先队列"></a>一、什么是优先队列</h2><h3 id="1-1-通俗理解"><a href="#1-1-通俗理解" class="headerlink" title="1.1 通俗理解"></a>1.1 通俗理解</h3><p>普通队列遵循 <strong>先进先出（FIFO）</strong> 原则，就像日常排队，先来的人先办事。<br>优先队列不遵循入队顺序，而是遵循 <strong>优先级高者先出</strong>，类似医院急诊：重症患者无论来的早晚，永远优先接诊。</p>
+<h3 id="1-2-正式定义"><a href="#1-2-正式定义" class="headerlink" title="1.2 正式定义"></a>1.2 正式定义</h3><p>优先队列是一种<strong>抽象数据类型（ADT）</strong>，核心支持两个操作：</p>
+<ol>
+<li><strong>插入元素</strong>：向集合中加入一个带优先级的元素</li>
+<li><strong>取出极值</strong>：快速获取并删除当前优先级最高（最大&#x2F;最小）的元素</li>
+</ol>
+<p>在工程与算法面试中，<strong>优先队列几乎都用「二叉堆」实现</strong>，因此入门阶段可以近似认为：</p>
+<blockquote>
+<p>优先队列 ≈ 堆</p>
+</blockquote>
+<hr>
+<h2 id="二、核心特性与时间复杂度"><a href="#二、核心特性与时间复杂度" class="headerlink" title="二、核心特性与时间复杂度"></a>二、核心特性与时间复杂度</h2><p>优先队列的核心价值：<strong>在动态变化的数据中，高效维护最大值或最小值</strong>。</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作</th>
+<th align="center">普通数组遍历</th>
+<th align="center">全程排序</th>
+<th align="center">优先队列（二叉堆）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">查看当前极值</td>
+<td align="center">O(n)</td>
+<td align="center">O(1)</td>
+<td align="center"><strong>O(1)</strong></td>
+</tr>
+<tr>
+<td align="left">插入新元素</td>
+<td align="center">O(1)</td>
+<td align="center">O(n log n)</td>
+<td align="center"><strong>O(log n)</strong></td>
+</tr>
+<tr>
+<td align="left">删除极值</td>
+<td align="center">O(n)</td>
+<td align="center">O(n log n)</td>
+<td align="center"><strong>O(log n)</strong></td>
+</tr>
+<tr>
+<td align="left">批量建堆</td>
+<td align="center">-</td>
+<td align="center">O(n log n)</td>
+<td align="center"><strong>O(n)</strong></td>
+</tr>
+</tbody></table>
+<p><strong>适用场景判断</strong>：当你需要**反复多次「取极值 + 插入新元素」**时，优先队列的效率会远高于每次重新排序。如果只是静态数据取一次极值，直接遍历或排序即可。</p>
+<hr>
+<h2 id="三、底层原理：二叉堆详解"><a href="#三、底层原理：二叉堆详解" class="headerlink" title="三、底层原理：二叉堆详解"></a>三、底层原理：二叉堆详解</h2><h3 id="3-1-二叉堆的本质"><a href="#3-1-二叉堆的本质" class="headerlink" title="3.1 二叉堆的本质"></a>3.1 二叉堆的本质</h3><p>二叉堆是一颗<strong>完全二叉树</strong>，且满足堆性质：</p>
+<ul>
+<li><strong>大顶堆</strong>：每个父节点的值 ≥ 左右子节点的值，堆顶是全局最大值</li>
+<li><strong>小顶堆</strong>：每个父节点的值 ≤ 左右子节点的值，堆顶是全局最小值</li>
+</ul>
+<p>由于是完全二叉树，二叉堆可以<strong>用数组直接存储</strong>，无需链表。假设数组下标从 0 开始：</p>
+<ul>
+<li>下标为 <code>i</code> 的节点，<strong>左孩子</strong>下标为 <code>2*i + 1</code></li>
+<li>下标为 <code>i</code> 的节点，<strong>右孩子</strong>下标为 <code>2*i + 2</code></li>
+<li>下标为 <code>i</code> 的节点，<strong>父节点</strong>下标为 <code>(i - 1) // 2</code></li>
+</ul>
+<h3 id="3-2-两个核心操作"><a href="#3-2-两个核心操作" class="headerlink" title="3.2 两个核心操作"></a>3.2 两个核心操作</h3><h4 id="①-上浮（sift-up）——插入元素时使用"><a href="#①-上浮（sift-up）——插入元素时使用" class="headerlink" title="① 上浮（sift up）——插入元素时使用"></a>① 上浮（sift up）——插入元素时使用</h4><ol>
+<li>把新元素放到数组末尾（堆的最底层）</li>
+<li>不断和父节点比较：如果比父节点更“优”（大顶堆就更大，小顶堆就更小），就和父节点交换位置</li>
+<li>直到到达堆顶，或不再满足交换条件</li>
+</ol>
+<p>时间复杂度：O(log n)，最多从树底走到树顶。</p>
+<h4 id="②-下沉（sift-down）——删除堆顶时使用"><a href="#②-下沉（sift-down）——删除堆顶时使用" class="headerlink" title="② 下沉（sift down）——删除堆顶时使用"></a>② 下沉（sift down）——删除堆顶时使用</h4><ol>
+<li>把数组最后一个元素移到堆顶（覆盖原堆顶）</li>
+<li>不断和左右孩子比较：和两个孩子中更“优”的那个交换位置</li>
+<li>直到到达叶子节点，或比两个孩子都更“优”</li>
+</ol>
+<p>时间复杂度：O(log n)，最多从树顶走到树底。</p>
+<h3 id="3-3-堆化（Heapify）"><a href="#3-3-堆化（Heapify）" class="headerlink" title="3.3 堆化（Heapify）"></a>3.3 堆化（Heapify）</h3><p>将一个无序数组直接调整成堆，时间复杂度 <strong>O(n)</strong>，比一个个插入元素（O(n log n)）效率更高。<br>做法：从最后一个非叶子节点开始，从后往前依次执行下沉操作。</p>
+<hr>
+<h2 id="四、主流语言内置-API-用法"><a href="#四、主流语言内置-API-用法" class="headerlink" title="四、主流语言内置 API 用法"></a>四、主流语言内置 API 用法</h2><p>面试和工程中<strong>不需要手写堆</strong>，直接调用语言内置 API 即可。</p>
+<h3 id="4-1-Python（heapq-模块）"><a href="#4-1-Python（heapq-模块）" class="headerlink" title="4.1 Python（heapq 模块）"></a>4.1 Python（heapq 模块）</h3><p>Python 内置的 <code>heapq</code> 只实现了<strong>小顶堆</strong>，要实现大顶堆，存入元素的相反数即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> heapq<br><br><span class="hljs-comment"># 1. 创建空堆</span><br>heap = []<br><br><span class="hljs-comment"># 2. 插入元素 O(log n)</span><br>heapq.heappush(heap, <span class="hljs-number">3</span>)<br>heapq.heappush(heap, <span class="hljs-number">1</span>)<br>heapq.heappush(heap, <span class="hljs-number">2</span>)<br><br><span class="hljs-comment"># 3. 弹出最小值 O(log n)</span><br>min_val = heapq.heappop(heap)  <span class="hljs-comment"># 返回 1</span><br><br><span class="hljs-comment"># 4. 查看堆顶（最小值） O(1)</span><br><span class="hljs-built_in">print</span>(heap[<span class="hljs-number">0</span>])  <span class="hljs-comment"># 输出 2</span><br><br><span class="hljs-comment"># 5. 列表原地堆化 O(n)</span><br>nums = [<span class="hljs-number">5</span>, <span class="hljs-number">2</span>, <span class="hljs-number">7</span>, <span class="hljs-number">1</span>, <span class="hljs-number">9</span>]<br>heapq.heapify(nums)<br><br><span class="hljs-comment"># 6. 大顶堆技巧：存负数</span><br>max_heap = []<br>heapq.heappush(max_heap, -<span class="hljs-number">3</span>)<br>heapq.heappush(max_heap, -<span class="hljs-number">1</span>)<br>max_val = -heapq.heappop(max_heap)  <span class="hljs-comment"># 返回 3</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2-Java（PriorityQueue）"><a href="#4-2-Java（PriorityQueue）" class="headerlink" title="4.2 Java（PriorityQueue）"></a>4.2 Java（PriorityQueue）</h3><p>默认是小顶堆，大顶堆需要传入比较器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.PriorityQueue;<br><br><span class="hljs-comment">// 小顶堆（默认）</span><br>PriorityQueue&lt;Integer&gt; minHeap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;();<br><br><span class="hljs-comment">// 大顶堆</span><br>PriorityQueue&lt;Integer&gt; maxHeap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">PriorityQueue</span>&lt;&gt;((a, b) -&gt; b - a);<br><br><span class="hljs-comment">// 常用方法</span><br>minHeap.offer(<span class="hljs-number">3</span>);    <span class="hljs-comment">// 插入</span><br>minHeap.poll();      <span class="hljs-comment">// 弹出最小值</span><br>minHeap.peek();      <span class="hljs-comment">// 查看最小值</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="4-3-C-（priority-queue）"><a href="#4-3-C-（priority-queue）" class="headerlink" title="4.3 C++（priority_queue）"></a>4.3 C++（priority_queue）</h3><p>默认是大顶堆，小顶堆需要传入 <code>greater</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;queue&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-comment">// 大顶堆（默认）</span><br>priority_queue&lt;<span class="hljs-type">int</span>&gt; maxHeap;<br><br><span class="hljs-comment">// 小顶堆</span><br>priority_queue&lt;<span class="hljs-type">int</span>, vector&lt;<span class="hljs-type">int</span>&gt;, greater&lt;<span class="hljs-type">int</span>&gt;&gt; minHeap;<br><br><span class="hljs-comment">// 常用方法</span><br>maxHeap.<span class="hljs-built_in">push</span>(<span class="hljs-number">3</span>);    <span class="hljs-comment">// 插入</span><br>maxHeap.<span class="hljs-built_in">pop</span>();      <span class="hljs-comment">// 弹出最大值</span><br>maxHeap.<span class="hljs-built_in">top</span>();      <span class="hljs-comment">// 查看最大值</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="五、经典应用场景与解题模板"><a href="#五、经典应用场景与解题模板" class="headerlink" title="五、经典应用场景与解题模板"></a>五、经典应用场景与解题模板</h2><h3 id="场景-1：Top-K-问题"><a href="#场景-1：Top-K-问题" class="headerlink" title="场景 1：Top K 问题"></a>场景 1：Top K 问题</h3><p><strong>题目特征</strong>：找第 K 大元素、前 K 个高频元素、前 K 小数字<br><strong>标准思路</strong>：求前 K 大用<strong>小顶堆</strong>，求前 K 小用<strong>大顶堆</strong>，堆的大小固定为 K。</p>
+<p><strong>例题：LeetCode 215. 数组中的第 K 个最大元素</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> heapq<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">findKthLargest</span>(<span class="hljs-params">nums, k</span>):<br>    heap = []<br>    <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>        heapq.heappush(heap, num)<br>        <span class="hljs-comment"># 堆大小超过k，弹出最小的，保证堆里始终是当前前k大的数</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(heap) &gt; k:<br>            heapq.heappop(heap)<br>    <span class="hljs-keyword">return</span> heap[<span class="hljs-number">0</span>]  <span class="hljs-comment"># 堆顶就是第k大的元素</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="场景-2：动态取极值（模拟类）"><a href="#场景-2：动态取极值（模拟类）" class="headerlink" title="场景 2：动态取极值（模拟类）"></a>场景 2：动态取极值（模拟类）</h3><p><strong>题目特征</strong>：每一轮取出当前最大&#x2F;最小值处理，处理完可能产生新元素再放回队列。<br><strong>典型题</strong>：最后一块石头的重量、任务调度器</p>
+<p><strong>例题：LeetCode 1046. 最后一块石头的重量</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> heapq<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">lastStoneWeight</span>(<span class="hljs-params">stones</span>):<br>    <span class="hljs-comment"># Python无原生大顶堆，存负数</span><br>    heap = [-s <span class="hljs-keyword">for</span> s <span class="hljs-keyword">in</span> stones]<br>    heapq.heapify(heap)<br>    <br>    <span class="hljs-keyword">while</span> <span class="hljs-built_in">len</span>(heap) &gt; <span class="hljs-number">1</span>:<br>        a = -heapq.heappop(heap)  <span class="hljs-comment"># 第一重的石头</span><br>        b = -heapq.heappop(heap)  <span class="hljs-comment"># 第二重的石头</span><br>        <span class="hljs-keyword">if</span> a != b:<br>            heapq.heappush(heap, -(a - b))<br>    <span class="hljs-keyword">return</span> -heap[<span class="hljs-number">0</span>] <span class="hljs-keyword">if</span> heap <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="场景-3：多路归并"><a href="#场景-3：多路归并" class="headerlink" title="场景 3：多路归并"></a>场景 3：多路归并</h3><p><strong>题目特征</strong>：合并 N 个有序数组&#x2F;链表，每次从所有队首中选最小的。<br><strong>典型题</strong>：LeetCode 23. 合并 K 个升序链表、丑数系列</p>
+<h3 id="场景-4：贪心算法配套"><a href="#场景-4：贪心算法配套" class="headerlink" title="场景 4：贪心算法配套"></a>场景 4：贪心算法配套</h3><p>很多贪心策略的核心是「每次选当前最优选项」，优先队列是最佳载体：</p>
+<ul>
+<li>哈夫曼编码：每次取两个权重最小的节点合并</li>
+<li>Dijkstra 最短路径：每次取出距离起点最近的节点扩展</li>
+<li>活动安排、会议室分配问题</li>
+</ul>
+<hr>
+<h2 id="六、入门刷题路径推荐"><a href="#六、入门刷题路径推荐" class="headerlink" title="六、入门刷题路径推荐"></a>六、入门刷题路径推荐</h2><p>按照从易到难的顺序刷完以下题目，即可掌握优先队列的核心思维：</p>
+<table>
+<thead>
+<tr>
+<th align="left">难度</th>
+<th align="left">题号</th>
+<th align="left">题目名称</th>
+<th align="left">考察点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">简单</td>
+<td align="left">703</td>
+<td align="left">数据流中的第 K 大元素</td>
+<td align="left">小顶堆模板</td>
+</tr>
+<tr>
+<td align="left">简单</td>
+<td align="left">1046</td>
+<td align="left">最后一块石头的重量</td>
+<td align="left">大顶堆模拟</td>
+</tr>
+<tr>
+<td align="left">中等</td>
+<td align="left">215</td>
+<td align="left">数组中的第 K 个最大元素</td>
+<td align="left">Top K 经典</td>
+</tr>
+<tr>
+<td align="left">中等</td>
+<td align="left">347</td>
+<td align="left">前 K 个高频元素</td>
+<td align="left">哈希表 + 堆</td>
+</tr>
+<tr>
+<td align="left">中等</td>
+<td align="left">23</td>
+<td align="left">合并 K 个升序链表</td>
+<td align="left">多路归并</td>
+</tr>
+<tr>
+<td align="left">中等</td>
+<td align="left">253</td>
+<td align="left">会议室 II</td>
+<td align="left">贪心 + 堆</td>
+</tr>
+<tr>
+<td align="left">困难</td>
+<td align="left">295</td>
+<td align="left">数据流的中位数</td>
+<td align="left">双堆技巧</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="七、常见误区与避坑"><a href="#七、常见误区与避坑" class="headerlink" title="七、常见误区与避坑"></a>七、常见误区与避坑</h2><ol>
+<li><strong>名字带队列但不是队列</strong>：不遵守先进先出原则，只按优先级出队，不要被名称误导。</li>
+<li><strong>优先队列不是全有序</strong>：它只保证堆顶是极值，内部其他元素的顺序是不确定的。</li>
+<li><strong>Python 没有原生大顶堆</strong>：一律用「存负数、取出来再取反」的技巧，不要手写大顶堆。</li>
+<li><strong>不要过度使用堆</strong>：静态数据只取一次极值时，直接 <code>sort()</code> 更简单，代码更少。</li>
+<li><strong>自定义元素优先级</strong>：元素是对象时，传入比较规则，或把「优先级值 + 元素」组成元组入堆。</li>
+</ol>
+<hr>
+<h2 id="八、一句话总结"><a href="#八、一句话总结" class="headerlink" title="八、一句话总结"></a>八、一句话总结</h2><p>优先队列（堆）是<strong>动态维护极值</strong>的最优数据结构。看到 Top K、多路归并、贪心取最优、反复取最大&#x2F;最小的场景，优先想到它，时间复杂度直接从 O(n²) 或 O(n log n) 优化到 O(n log k)。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" class="category-chain-item">算法笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" class="print-no-link">#数据结构</a>
+      
+        <a href="/tags/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/" class="print-no-link">#优先队列</a>
+      
+        <a href="/tags/%E5%A0%86/" class="print-no-link">#堆</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>优先队列（堆）</div>
+      <div>https://zyhblog.dpdns.org/2026/07/01/优先队列（堆）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>一人一口粥</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/01/Hexo%E7%AC%94%E8%AE%B0%E8%A7%84%E8%8C%83/" title="Hexo笔记规范">
+                        <span class="hidden-mobile">Hexo笔记规范</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
