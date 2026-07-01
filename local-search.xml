@@ -4,6 +4,44 @@
   
   
   <entry>
+    <title>本地git设置</title>
+    <link href="/2026/07/01/%E6%9C%AC%E5%9C%B0git%E8%AE%BE%E7%BD%AE/"/>
+    <url>/2026/07/01/%E6%9C%AC%E5%9C%B0git%E8%AE%BE%E7%BD%AE/</url>
+    
+    <content type="html"><![CDATA[<h1 id="设置GitHub加速端口"><a href="#设置GitHub加速端口" class="headerlink" title="设置GitHub加速端口"></a>设置GitHub加速端口</h1><p>因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global http.https://github.com.proxy http://127.0.0.1:7890<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>实用工具</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hexo笔记规范</title>
+    <link href="/2026/07/01/Hexo%E7%AC%94%E8%AE%B0%E8%A7%84%E8%8C%83/"/>
+    <url>/2026/07/01/Hexo%E7%AC%94%E8%AE%B0%E8%A7%84%E8%8C%83/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Front-matter格式"><a href="#Front-matter格式" class="headerlink" title="Front-matter格式"></a>Front-matter格式</h1><h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">---<br>title: 优先队列（堆）<br>date: 2026-07-01 12:00:00<br>tags: [算法,数据结构,优先队列,堆]<br><span class="hljs-section">categories: [算法笔记]</span><br><span class="hljs-section">---</span><br></code></pre></td></tr></table></figure><h2 id="同级多分类的时候"><a href="#同级多分类的时候" class="headerlink" title="同级多分类的时候"></a>同级多分类的时候</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs markdown">---<br>title: 优先队列（堆）<br>date: 2026-07-01 12:00:00<br>tags: [算法,数据结构,优先队列,堆]<br>categories: <br><span class="hljs-bullet">  -</span> [编程技术]<br><span class="hljs-bullet">  -</span> [算法笔记]<br><span class="hljs-bullet">  -</span> [生活记录]<br><span class="hljs-bullet">  -</span> [项目实战]<br><span class="hljs-bullet">  -</span> [问题排查]<br><span class="hljs-bullet">  -</span> [实用工具]<br><span class="hljs-section">  - [零碎随笔]</span><br><span class="hljs-section">---</span><br></code></pre></td></tr></table></figure><h2 id="上下级分类"><a href="#上下级分类" class="headerlink" title="上下级分类"></a>上下级分类</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">---<br>title: 优先队列（堆）<br>date: 2026-07-01 12:00:00<br>tags: [算法,数据结构,优先队列,堆]<br><span class="hljs-section">categories: [编程技术,Python]</span><br><span class="hljs-section">---</span><br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>实用工具</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>优先队列（堆）</title>
     <link href="/2026/07/01/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88%E5%A0%86%EF%BC%89/"/>
     <url>/2026/07/01/%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%EF%BC%88%E5%A0%86%EF%BC%89/</url>
@@ -29,25 +67,6 @@
       <tag>堆</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hexo笔记规范</title>
-    <link href="/2026/07/01/Hexo%E7%AC%94%E8%AE%B0%E8%A7%84%E8%8C%83/"/>
-    <url>/2026/07/01/Hexo%E7%AC%94%E8%AE%B0%E8%A7%84%E8%8C%83/</url>
-    
-    <content type="html"><![CDATA[<h1 id="Front-matter格式"><a href="#Front-matter格式" class="headerlink" title="Front-matter格式"></a>Front-matter格式</h1><h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">---<br>title: 优先队列（堆）<br>date: 2026-07-01 12:00:00<br>tags: [算法,数据结构,优先队列,堆]<br><span class="hljs-section">categories: [算法笔记]</span><br><span class="hljs-section">---</span><br></code></pre></td></tr></table></figure><h2 id="同级多分类的时候"><a href="#同级多分类的时候" class="headerlink" title="同级多分类的时候"></a>同级多分类的时候</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs markdown">---<br>title: 优先队列（堆）<br>date: 2026-07-01 12:00:00<br>tags: [算法,数据结构,优先队列,堆]<br>categories: <br><span class="hljs-bullet">  -</span> [编程技术]<br><span class="hljs-bullet">  -</span> [算法笔记]<br><span class="hljs-bullet">  -</span> [生活记录]<br><span class="hljs-bullet">  -</span> [项目实战]<br><span class="hljs-bullet">  -</span> [问题排查]<br><span class="hljs-bullet">  -</span> [实用工具]<br><span class="hljs-section">  - [零碎随笔]</span><br><span class="hljs-section">---</span><br></code></pre></td></tr></table></figure><h2 id="上下级分类"><a href="#上下级分类" class="headerlink" title="上下级分类"></a>上下级分类</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs markdown">---<br>title: 优先队列（堆）<br>date: 2026-07-01 12:00:00<br>tags: [算法,数据结构,优先队列,堆]<br><span class="hljs-section">categories: [编程技术,Python]</span><br><span class="hljs-section">---</span><br></code></pre></td></tr></table></figure>]]></content>
-    
-    
-    <categories>
-      
-      <category>实用工具</category>
-      
-    </categories>
-    
     
   </entry>
   
