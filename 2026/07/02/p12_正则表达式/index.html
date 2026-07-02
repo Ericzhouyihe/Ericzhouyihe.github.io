@@ -1,0 +1,1120 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="一人一口粥">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简介对字符串进行操作的需求很多，只凭索引切片、对象方法等方式有时是不够用的（比如：判断一个字符串是否是有效的 email 地址），此时可以考虑使用正则表达式。 123456789101112131415161718&quot;&quot;&quot;假设QQ邮箱的规则如下:- 结尾是 @qq.com- @前面只能是数字- 且长度为5-11位- 且不能以0开头&quot;&quot;&quot;im">
+<meta property="og:type" content="article">
+<meta property="og:title" content="p12_正则表达式">
+<meta property="og:url" content="https://zyhblog.dpdns.org/2026/07/02/p12_%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="简介对字符串进行操作的需求很多，只凭索引切片、对象方法等方式有时是不够用的（比如：判断一个字符串是否是有效的 email 地址），此时可以考虑使用正则表达式。 123456789101112131415161718&quot;&quot;&quot;假设QQ邮箱的规则如下:- 结尾是 @qq.com- @前面只能是数字- 且长度为5-11位- 且不能以0开头&quot;&quot;&quot;im">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-07-02T01:55:00.000Z">
+<meta property="article:modified_time" content="2026-07-02T02:01:15.704Z">
+<meta property="article:author" content="一人一口粥">
+<meta property="article:tag" content="Python基础">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>p12_正则表达式 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/KaTeX/0.16.2/katex.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/style.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"zyhblog.dpdns.org","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>zyh&#39;s blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="p12_正则表达式"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-07-02 09:55" pubdate>
+          2026年7月2日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          14k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          115 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">p12_正则表达式</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>对字符串进行操作的需求很多，只凭索引切片、对象方法等方式有时是不够用的（比如：判断一个字符串是否是有效的 email 地址），此时可以考虑使用正则表达式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">假设QQ邮箱的规则如下:</span><br><span class="hljs-string">- 结尾是 @qq.com</span><br><span class="hljs-string">- @前面只能是数字</span><br><span class="hljs-string">- 且长度为5-11位</span><br><span class="hljs-string">- 且不能以0开头</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">import</span> re<br><br><br>pattern = <span class="hljs-string">r&#x27;[1-9]\d&#123;4,10&#125;@qq\.com&#x27;</span><br>p = re.<span class="hljs-built_in">compile</span>(pattern)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">isValid</span>(<span class="hljs-params">email</span>):<br>    <span class="hljs-keyword">if</span> p.fullmatch(email):<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;有效的QQ邮箱&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;无效的QQ邮箱&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>正则表达式（Regular Expression），是对字符串操作的一种”逻辑公式”，它是由一些特定的字符组成的一个”匹配规则”，可以对要匹配的字符串指定该”规则”。</p>
+<p>许多语言都支持利用正则表达式进行字符串操作，Python也不例外，通过内置的 re 模块实现。</p>
+<h1 id="字符匹配"><a href="#字符匹配" class="headerlink" title="字符匹配"></a>字符匹配</h1><p>匹配机制：对要匹配的字符串的元素挨个判断是否与 “规则” 匹配。</p>
+<p>书写注意：正则表达式是字符串，所以书写时通常不要随意加空格。</p>
+<p>反斜杠问题：因为正则表达式和Python字符串都使用反斜杠字符来转义，有时就需要使用双倍的反斜杠才能达到想要的效果，而这很麻烦，所以强烈建议大家在写正则表达式时，用原始字符串</p>
+<p>正则表达式可以包含普通字符或者特殊字符（元字符）</p>
+<h2 id="普通字符"><a href="#普通字符" class="headerlink" title="普通字符"></a>普通字符</h2><ul>
+<li>大多数字符为普通字符，它们只会和自身匹配</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;test123&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;atest123b&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<h2 id="特殊字符（元字符）"><a href="#特殊字符（元字符）" class="headerlink" title="特殊字符（元字符）"></a>特殊字符（元字符）</h2><ul>
+<li>有些字符它们和自身并不匹配，而是匹配一些与众不同的东西或者影响正则表达式的其他部分（对其重复或改变含义）</li>
+<li>元字符：<code>.  ^  $  *  +  ?  { }  [ ]  \  |  ( )</code></li>
+</ul>
+<p><code>.</code></p>
+<ul>
+<li>匹配除了换行符以外的任意一个字符</li>
+<li>DOTALL 模式下，它将匹配包括换行符的任意一个字符</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;.&quot;</span>)<br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;abc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;9bc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;@bc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;.bc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;\tbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;\nbc&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;.&quot;</span>, flags=re.DOTALL)<br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;\nbc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>^</code></p>
+<ul>
+<li>匹配字符串的开头</li>
+<li>MULTILINE 模式下，还会继续匹配换行后的开头</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;^ab&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nabfg&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;^ab&quot;</span>, flags=re.MULTILINE)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nabfg&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>$</code></p>
+<ul>
+<li>匹配字符串的末尾 或者 匹配在字符串结尾的换行符之前的末尾</li>
+<li>MULTILINE 模式下，还会匹配换行符之前的末尾（换行符可以不在字符串末尾）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;cd$&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\n&quot;</span>))<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;cd$&quot;</span>, flags=re.MULTILINE)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nefcd&quot;</span>))<br><br><br><span class="hljs-string">&quot;&quot;&quot; 会找到两个（空的）匹配：一个在换行符之前，一个在字符串的末尾 &quot;&quot;&quot;</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;$&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\n&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>*</code></p>
+<ul>
+<li>对它前面的正则表达式匹配0到任意次重复，尽量多的匹配（贪婪）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab*&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;a&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ab&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abb&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>+</code></p>
+<ul>
+<li>对它前面的正则表达式匹配1到任意次重复， 尽量多的匹配（贪婪）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab+&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;a&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ab&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abb&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>?</code></p>
+<ul>
+<li>对它前面的正则表达式匹配0到1次， 尽量多的匹配（贪婪）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab?&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;a&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ab&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abb&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>*?</code> <code>+?</code> <code>??</code></p>
+<ul>
+<li><code>*</code> <code>+</code> <code>?</code> 都是贪婪的，它们对字符串进行尽可能多的匹配，有时候并不需要这种行为，可以在之后添加 <code>?</code>，就可以以非贪婪的方式进行匹配，则尽可能少的字符将会被匹配</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;&lt;.*&gt;&#x27;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&#x27;&lt;a&gt; b &lt;c&gt;&#x27;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;&lt;.*?&gt;&#x27;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&#x27;&lt;a&gt; b &lt;c&gt;&#x27;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab+?&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbc&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab??&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>{m}</code></p>
+<ul>
+<li>对其之前的正则表达式指定匹配 <em>m</em> 个重复</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab&#123;2&#125;&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>{m,n}</code></p>
+<ul>
+<li>对其之前的正则表达式进行 <em>m</em> 到 <em>n</em> 次匹配，在 <em>m</em> 和 <em>n</em> 之间取尽量多（贪婪方式）</li>
+<li>忽略 <em>m</em> 则下限默认为 0，忽略 <em>n</em> 则上限默认为无限次（逗号不能省略）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab&#123;2,4&#125;&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbbbc&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab&#123;,4&#125;&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ac&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abc&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab&#123;2,&#125;&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbbbc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>{m,n}?</code></p>
+<ul>
+<li>上面 <code>{m,n}</code> 的非贪婪模式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab&#123;2,4&#125;?&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbbbc&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab&#123;,4&#125;?&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ac&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abc&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;ab&#123;2,&#125;?&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abbbbbc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>|</code></p>
+<ul>
+<li>任意个正则表达式可以用 <code>|</code> 连接，比如 <code>A|B</code> 表示匹配正则表达式 <em>A</em> 或者 <em>B</em>，一旦有一个先匹配成功，另外的就不会再进行匹配</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;d|e|b&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;abc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;aebcd&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\</code></p>
+<ul>
+<li>转义特殊字符</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br><span class="hljs-comment"># 只匹配*号</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\*&quot;</span>)<br><span class="hljs-built_in">print</span>(p.fullmatch(<span class="hljs-string">&quot;*&quot;</span>))<br><br><span class="hljs-comment"># 只匹配+号</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\+&quot;</span>)<br><span class="hljs-built_in">print</span>(p.fullmatch(<span class="hljs-string">&quot;+&quot;</span>))<br><br><span class="hljs-comment"># 只匹配?号</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\?&quot;</span>)<br><span class="hljs-built_in">print</span>(p.fullmatch(<span class="hljs-string">&quot;?&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>用来表示一个特殊序列（由 <code>\ </code>和一个字符组成的特殊序列）</p>
+<p><code>\number</code></p>
+<p>匹配数字代表的分组里面的内容（每个括号是一个子组，子组从1开始编号），在 <code>[</code> 和 <code>]</code> 字符集内，任何数字转义都被看作是字符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br><span class="hljs-string">&quot;&quot;&quot; \1匹配的内容和第1组一定一样 &quot;&quot;&quot;</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;(.+) \1&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ab abc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;5 5&quot;</span>))<br><br><span class="hljs-string">&quot;&quot;&quot; 两个组匹配的内容不一定一样 &quot;&quot;&quot;</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;(.+) (.+)&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ab abc&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;5 5&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\A</code></p>
+<p>匹配字符串的开头，类似于 <code>^</code>，区别在于：MULTILINE模式下，<code>\A</code> 不识别换行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;^ab&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nabfg&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;^ab&quot;</span>, flags=re.MULTILINE)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nabfg&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\Aab&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nabfg&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\Aab&quot;</span>, flags=re.MULTILINE)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nabfg&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\b</code></p>
+<p>匹配空字符串，但只在单词开始或结尾的位置，即匹配一个单词边界</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;er\b&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;never&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;verb&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\ba\b&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;I have a dog&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\B</code></p>
+<p>匹配空字符串，但不能在单词开始或结尾的位置，即匹配非单词边界</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;er\B&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;never&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;verb&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\Ba\B&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;I have a dog&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\d</code></p>
+<p>匹配任意一个数字字符，等价于 <code>[0-9]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\d&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;a1234b&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\d+&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;a1234b&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\D</code></p>
+<p>匹配任意一个非数字字符，等价于 <code>[^0-9]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\D&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ab1234c&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\D+&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;ab1234c&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\s</code></p>
+<p>匹配任何一个空白符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;a\sb&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;adb a bc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\S</code></p>
+<p>匹配任何一个非空白符</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;a\Sb&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;adb a bc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\w</code></p>
+<p>匹配一个字母或一个数字或一个下划线，等价于 <code>[a-zA-Z0-9_]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;a\wb&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;adba9ba_ba b&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\W</code></p>
+<p>匹配一个非字母非数字非下划线的字符，等价于 <code>[^a-zA-Z0-9_]</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;a\Wb&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;adba9ba_ba b&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\Z</code></p>
+<p>只匹配字符串的末尾，且 MULTILINE 模式下，<code>\Z</code> 不识别换行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;cd\Z&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd&quot;</span>))<br><br><span class="hljs-string">&quot;&quot;&quot; 结尾是&#x27;\n&#x27;，不是&#x27;cd&#x27; &quot;&quot;&quot;</span><br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\n&quot;</span>))<br><br><span class="hljs-string">&quot;&quot;&quot; MULTILINE 模式下，\Z 不识别换行 &quot;&quot;&quot;</span><br>p2 = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;cd\Z&quot;</span>, flags=re.MULTILINE)<br><span class="hljs-built_in">print</span>(p2.findall(<span class="hljs-string">&quot;abcd\nef&quot;</span>))<br><br><span class="hljs-string">&quot;&quot;&quot; 只会找到一个（空的）匹配 &quot;&quot;&quot;</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\Z&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\n&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>\n</code>  <code>\t</code>  <code>\\</code>  <code>\&#39;</code>  <code>\&quot;</code></p>
+<p>绝大部分Python的标准转义字符也被正则表达式分析器支持</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\n&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;\n&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\t&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;\t&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\\&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;\\&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\&#x27;&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;&#x27;&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\&quot;&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&#x27;&quot;&#x27;</span>))<br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><code>[]</code></p>
+<p>用于表示一个字符集：</p>
+<ul>
+<li>字符可以单独列出，比如 <code>[amk]</code> 匹配 <code>&#39;a&#39;</code>， <code>&#39;m&#39;</code>， 或者 <code>&#39;k&#39;</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[amk]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;I have a monkey&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>可以表示字符范围，通过用 <code>-</code> 将两个字符连起来</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[a-y]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;ahzyqAHZYQ&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[0-5][A-Y]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;a0hzyq125A6HZYQ&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>特殊字符在字符集中，失去它的特殊含义</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[.+]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abc&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[.+]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;a.b+c.d+&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>特殊序列，如 <code>\d</code> <code>\s</code> <code>\w</code> 在字符集中可以被接受</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[\d]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;a1234b&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[\d+]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;a1234b+&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[a\sb]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;adb a bc&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[\w]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;adb_a b!c&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>不在字符集范围内的字符可以通过取反来进行匹配，如果字符集首字符是 <code>^</code> ，所有不在字符集内的字符将会被匹配， <code>^</code> 如果不在字符集首位，就没有特殊含义</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[^5]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;5a b512!5&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[^^]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;5a^b512!5&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>如果要匹配 <code>&#39;[&#39;</code> <code>&#39;]&#39;</code>，可以在它之前加上反斜杠</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[\[\]]&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;[]&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>(...)</code></p>
+<ul>
+<li>捕获分组，匹配括号内的任意正则表达式，并标识出该分组的开始和结尾。</li>
+<li>组从 0 开始编号，组 0 始终存在，它表示整个正则，所以Match的对象方法都将组 0 作为默认参数；子组从左到右编号，从 1 向上编号</li>
+<li>分组匹配的内容可以在之后其他分组用 <code>\number</code> 进行再次引用</li>
+<li>要匹配字符 <code>(</code> 或者 <code>)</code>，用 <code>\(</code> 或 <code>\)</code>，或者把它们包含在字符集里： <code>[(]</code>，<code>[)]</code></li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;b(.+)a(.+)e&quot;</span>)<br>m = p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;babacdefg&quot;</span>)<br><span class="hljs-built_in">print</span>(m)<br><span class="hljs-built_in">print</span>(m.group(<span class="hljs-number">1</span>), m.group(<span class="hljs-number">2</span>))<br><span class="hljs-built_in">print</span>(m.span(<span class="hljs-number">1</span>), m.span(<span class="hljs-number">2</span>))<br><span class="hljs-built_in">print</span>(m.start(<span class="hljs-number">1</span>), m.end(<span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(m.start(<span class="hljs-number">2</span>), m.end(<span class="hljs-number">2</span>))<br><br><span class="hljs-comment"># 多个分组，返回元组列表</span><br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;babacdefg&quot;</span>))<br><br><span class="hljs-comment"># 引用第1组匹配的内容</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;b(.+)a(\1)e&quot;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;babaabefg&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p><code>(?:…)</code></p>
+<ul>
+<li>非捕获分组，并不创建新的组合，所匹配的子字符串不能在执行匹配后被获取或是之后在模式中被引用</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;b(?:.+)a(?:.+)e&quot;</span>)<br>m = p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;babacdefg&quot;</span>)<br><span class="hljs-built_in">print</span>(m)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="使用正则表达式"><a href="#使用正则表达式" class="headerlink" title="使用正则表达式"></a>使用正则表达式</h1><h2 id="编译正则表达式"><a href="#编译正则表达式" class="headerlink" title="编译正则表达式"></a>编译正则表达式</h2><p>re.compile(pattern, flags&#x3D;0)</p>
+<ul>
+<li>pattern：正则表达式</li>
+<li>flags：编译模式，用于控制正则表达式的匹配方式</li>
+<li>编译一个正则表达式，返回一个Pattern类的实例对象</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;ab*&#x27;</span>, flags=<span class="hljs-number">0</span>)<br><span class="hljs-built_in">print</span>(p)<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="执行匹配"><a href="#执行匹配" class="headerlink" title="执行匹配"></a>执行匹配</h2><p>编译正则表达式得到 Pattern 实例对象，然后通过调用该对象的不同方法来执行匹配</p>
+<p><u>Pattern 实例对象支持以下方法：</u></p>
+<p>Pattern.search(string[, pos[, endpos]])</p>
+<ul>
+<li>string：要匹配的字符串</li>
+<li>pos：匹配的起始位置，默认为0</li>
+<li>endpos：匹配的结束位置，默认为字符串长度</li>
+<li>扫描整个字符串，寻找第一个成功的匹配，返回Match类的实例对象（该实例对象包含匹配相关的信息：起始和结束位置、匹配的子串等等）；如果没有匹配，则返回 None</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;og&#x27;</span>)<br>m = p.search(<span class="hljs-string">&quot;dog&quot;</span>)<br><span class="hljs-built_in">print</span>(m)<br><br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;dog&quot;</span>, <span class="hljs-number">2</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;dog&quot;</span>, endpos=<span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+
+<p>Pattern.match(string[, pos[, endpos]])</p>
+<ul>
+<li>string：要匹配的字符串</li>
+<li>pos：匹配的起始位置，默认为0</li>
+<li>endpos：匹配的结束位置，默认为字符串长度</li>
+<li>当字符串的起始位置匹配成功，返回Match类的实例对象（该实例对象包含匹配相关的信息：起始和结束位置、匹配的子串等等）；如果起始位置没有匹配，则返回 None</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;og&#x27;</span>)<br><br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;dog&quot;</span>))<br><span class="hljs-built_in">print</span>(p.search(<span class="hljs-string">&quot;dog&quot;</span>, <span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
+
+<p>Pattern.fullmatch(string[, pos[, endpos]])</p>
+<ul>
+<li>string：要匹配的字符串</li>
+<li>pos：匹配的起始位置，默认为0</li>
+<li>endpos：匹配的结束位置，默认为字符串长度</li>
+<li>当整个字符串都匹配成功，返回Match类的实例对象（该实例对象包含匹配相关的信息：起始和结束位置、匹配的子串等等），否则返回 None</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">&#x27;o[gh]&#x27;</span>)<br><br><span class="hljs-built_in">print</span>(p.fullmatch(<span class="hljs-string">&quot;ogh&quot;</span>))<br><span class="hljs-built_in">print</span>(p.fullmatch(<span class="hljs-string">&quot;og&quot;</span>))<br><span class="hljs-built_in">print</span>(p.fullmatch(<span class="hljs-string">&quot;oh&quot;</span>))<br><span class="hljs-built_in">print</span>(p.fullmatch(<span class="hljs-string">&quot;dog&quot;</span>))<br><span class="hljs-built_in">print</span>(p.fullmatch(<span class="hljs-string">&quot;dog&quot;</span>, <span class="hljs-number">1</span>))<br></code></pre></td></tr></table></figure>
+
+<p>Pattern.findall(string[, pos[, endpos]])</p>
+<ul>
+<li>string：要匹配的字符串</li>
+<li>pos：匹配的起始位置，默认为0</li>
+<li>endpos：匹配的结束位置，默认为字符串长度</li>
+<li>对字符串从左往右扫描，找到所有不重复匹配，以列表的形式返回，如果有子组，那么只保留子组的捕获内容，如果子组多个（至少两个子组），则以元组形式构建列表，如果没有找到匹配的，则返回空列表</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;\d&#x27;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;Ten years ago, Three dogs&quot;</span>))<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;10 years ago, 3 dogs&quot;</span>))<br><br><span class="hljs-comment"># 多个分组，返回元组列表</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;(\d+)-(\D)&#x27;</span>)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;Ten-years ago, Three-dogs&quot;</span>))<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;101-years ago, 3-dogs&quot;</span>))<br><br><span class="hljs-comment"># 当捕获分组被重复时, 组号也重复了, 所以后面组的结果会把前面组的结果覆盖</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;(\d)(\d)&#123;2&#125;&quot;</span>)  <span class="hljs-comment"># 等价于 (\d)(\d)(\d) 且后面两个组号都为2</span><br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;1234567890&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>Pattern.split(string, maxsplit&#x3D;0)</p>
+<ul>
+<li>string：要匹配的字符串</li>
+<li>maxsplit：最大分割次数，默认为 0，表示不限制次数</li>
+<li>按照匹配的子串将字符串分割，以列表形式返回</li>
+<li>如果有捕获分组，那么分组里匹配的内容也会包含在结果中</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;\W+&quot;</span>)<br><span class="hljs-built_in">print</span>(p.split(<span class="hljs-string">&#x27;Words, words, words.&#x27;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;(\W+)&quot;</span>)<br><span class="hljs-built_in">print</span>(p.split(<span class="hljs-string">&#x27;Words, words, words.&#x27;</span>))<br><br><span class="hljs-built_in">print</span>(p.split(<span class="hljs-string">&#x27;...Words, words, words...&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>Pattern.sub(repl, string, count&#x3D;0)</p>
+<ul>
+<li>repl：替换的字符串 或者 函数</li>
+<li>string：要被匹配后替换的字符串</li>
+<li>count：匹配后替换的最大次数，默认 0，表示替换所有的匹配</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;blue|white|red&#x27;</span>)<br><span class="hljs-string">&quot;&quot;&quot; 把每一个从左开始非重叠匹配的字符串用其他字符串替换 &quot;&quot;&quot;</span><br><span class="hljs-built_in">print</span>(p.sub(<span class="hljs-string">&#x27;colour&#x27;</span>, <span class="hljs-string">&#x27;blue socks and red shoes&#x27;</span>))<br><span class="hljs-built_in">print</span>(p.sub(<span class="hljs-string">&#x27;colour&#x27;</span>, <span class="hljs-string">&#x27;blue socks and red shoes&#x27;</span>, count=<span class="hljs-number">1</span>))<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">matchobj</span>):<br>    <span class="hljs-keyword">if</span> matchobj.group() == <span class="hljs-string">&#x27;-&#x27;</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27; &#x27;</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;-&#x27;</span><br><br><span class="hljs-string">&quot;&quot;&quot; 把每一个从左开始非重叠匹配的对象作为参数传入函数调用</span><br><span class="hljs-string">这个函数只能有一个 匹配对象 参数, 并返回一个替换字符串 &quot;&quot;&quot;</span><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&#x27;-&#123;1,2&#125;&#x27;</span>)<br><span class="hljs-built_in">print</span>(p.sub(func, <span class="hljs-string">&#x27;pro----gram-files&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+
+
+<p><u>Match 实例对象支持以下方法：</u></p>
+<p>Match.group(*groupN)</p>
+<ul>
+<li>groupN：对应的组号，默认为 0，返回整个匹配结果</li>
+<li>返回一个或者多个子组的匹配结果，如果有多个参数，结果就是一个元组</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;b(.+)a(.+)e&quot;</span>)<br>m = p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;babacdefg&quot;</span>)<br><span class="hljs-built_in">print</span>(m)<br><span class="hljs-built_in">print</span>(m.group())<br><span class="hljs-built_in">print</span>(m.group(<span class="hljs-number">0</span>))<br><span class="hljs-built_in">print</span>(m.group(<span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(m.group(<span class="hljs-number">2</span>))<br><span class="hljs-built_in">print</span>(m.group(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>))<br></code></pre></td></tr></table></figure>
+
+<p>Match.start([group])</p>
+<ul>
+<li>返回对应 group 匹配开始的位置，group默认为 0</li>
+</ul>
+<p>Match.end([group])</p>
+<ul>
+<li>返回对应 group 匹配结束的位置，group默认为 0</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;b(.+)a(.+)e&quot;</span>)<br>m = p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;babacdefg&quot;</span>)<br><span class="hljs-built_in">print</span>(m)<br><span class="hljs-built_in">print</span>(m.start(), m.end())<br><span class="hljs-built_in">print</span>(m.start(<span class="hljs-number">1</span>), m.end(<span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(m.start(<span class="hljs-number">2</span>), m.end(<span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+
+<p>Match.span([group])</p>
+<ul>
+<li>返回一个元组，包含 (Match.start([group]), Match.end([group]))，group默认为 0</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;b(.+)a(.+)e&quot;</span>)<br>m = p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;babacdefg&quot;</span>)<br><span class="hljs-built_in">print</span>(m)<br><span class="hljs-built_in">print</span>(m.span())<br><span class="hljs-built_in">print</span>(m.span(<span class="hljs-number">0</span>))<br><span class="hljs-built_in">print</span>(m.span(<span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(m.span(<span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="模块级别函数"><a href="#模块级别函数" class="headerlink" title="模块级别函数"></a>模块级别函数</h2><p>如果你不想创建Pattern实例对象并调用其方法，也可以直接使用re模块提供的函数：</p>
+<p>re.search(pattern, string, flags&#x3D;0)</p>
+<p>re.match(pattern, string, flags&#x3D;0)</p>
+<p>re.fullmatch(pattern, string, flags&#x3D;0)</p>
+<p>re.findall(pattern, string, flags&#x3D;0)</p>
+<p>re.split(pattern, string, maxsplit&#x3D;0, flags&#x3D;0)</p>
+<p>re.sub(pattern, repl, string, count&#x3D;0, flags&#x3D;0)</p>
+<h2 id="编译模式"><a href="#编译模式" class="headerlink" title="编译模式"></a>编译模式</h2><p>编译标志可以修改正则表达式的一些匹配方式，它在 re 模块中有两个名称：全名 和 缩写。其中需要掌握的有：</p>
+<p>re.I     &#x2F;     re.IGNORECASE</p>
+<ul>
+<li>进行忽略大小写匹配</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;[a-z]+&quot;</span>, flags=re.IGNORECASE)<br><span class="hljs-built_in">print</span>(p.<span class="hljs-keyword">match</span>(<span class="hljs-string">&quot;aAbBcC&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+
+
+<p>re.M     &#x2F;     re.MULTILINE</p>
+<ul>
+<li>多行匹配，影响 ^ 和 $</li>
+<li>设置以后， <code>^</code> 匹配字符串的开始，和每一行的开始；<code>$</code> 匹配字符串尾，和每一行的结尾</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;^ab&quot;</span>, flags=re.MULTILINE)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nabfg&quot;</span>))<br><br>p = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;cd$&quot;</span>, flags=re.MULTILINE)<br><span class="hljs-built_in">print</span>(p.findall(<span class="hljs-string">&quot;abcd\nefcd&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+
+
+<p>re.S    &#x2F;     re.DOTALL</p>
+<ul>
+<li>使 <code>.</code> 匹配包括换行在内的所有字符，没有设置时 <code>.</code> 是不能匹配换行符的</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> re<br><br><br>p1 = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;.&quot;</span>)<br>p2 = re.<span class="hljs-built_in">compile</span>(<span class="hljs-string">r&quot;.&quot;</span>, flags=re.DOTALL)<br><span class="hljs-built_in">print</span>(p1.search(<span class="hljs-string">&quot;\nbc&quot;</span>))<br><span class="hljs-built_in">print</span>(p2.search(<span class="hljs-string">&quot;\nbc&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+
+
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/" class="category-chain-item">编程技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python%E5%9F%BA%E7%A1%80/" class="print-no-link">#Python基础</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>p12_正则表达式</div>
+      <div>https://zyhblog.dpdns.org/2026/07/02/p12_正则表达式/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>一人一口粥</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年7月2日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/07/02/p13_numpy/" title="p13_numpy">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">p13_numpy</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/02/p14_pandas/" title="p14_pandas">
+                        <span class="hidden-mobile">p14_pandas</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -19,21 +19,22 @@
   <meta name="author" content="一人一口粥">
   <meta name="keywords" content="">
   
-    <meta name="description" content="设置GitHub加速端口因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可 1git config --global http.https:&#x2F;&#x2F;github.com.proxy http:&#x2F;&#x2F;127.0.0.1:7890">
+    <meta name="description" content="模块概念 模块是一个包含Python定义和语句的文件，把相关的代码分配到一个模块里，可以让代码更好用、更易懂。  模块导入 模块可以被别的程序引入，以使用该模块中定义的变量，函数等功能 习惯上（但不强制要求）把所有导入语句放在模块的开头 一个模块被另一个程序第一次导入时，会执行该模块     模块导入    import module   import module as alias   from">
 <meta property="og:type" content="article">
-<meta property="og:title" content="本地git设置">
-<meta property="og:url" content="https://zyhblog.dpdns.org/2026/07/01/%E6%9C%AC%E5%9C%B0git%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:title" content="p10_模块 &amp; 包">
+<meta property="og:url" content="https://zyhblog.dpdns.org/2026/07/02/p10_%E6%A8%A1%E5%9D%97%20&%20%E5%8C%85/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="设置GitHub加速端口因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可 1git config --global http.https:&#x2F;&#x2F;github.com.proxy http:&#x2F;&#x2F;127.0.0.1:7890">
+<meta property="og:description" content="模块概念 模块是一个包含Python定义和语句的文件，把相关的代码分配到一个模块里，可以让代码更好用、更易懂。  模块导入 模块可以被别的程序引入，以使用该模块中定义的变量，函数等功能 习惯上（但不强制要求）把所有导入语句放在模块的开头 一个模块被另一个程序第一次导入时，会执行该模块     模块导入    import module   import module as alias   from">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-07-01T13:50:00.000Z">
-<meta property="article:modified_time" content="2026-07-01T13:53:08.313Z">
+<meta property="article:published_time" content="2026-07-02T01:55:00.000Z">
+<meta property="article:modified_time" content="2026-07-02T02:01:05.797Z">
 <meta property="article:author" content="一人一口粥">
+<meta property="article:tag" content="Python基础">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>本地git设置 - Hexo</title>
+  <title>p10_模块 &amp; 包 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -282,7 +283,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="本地git设置"></span>
+            <span id="subtitle" data-typed-text="p10_模块 &amp; 包"></span>
           
         </div>
 
@@ -293,8 +294,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-07-01 21:50" pubdate>
-          2026年7月1日 晚上
+        <time datetime="2026-07-02 09:55" pubdate>
+          2026年7月2日 上午
         </time>
       </span>
     
@@ -305,7 +306,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          127 字
+          1.1k 字
         
       </span>
     
@@ -316,7 +317,7 @@
         
         
         
-          2 分钟
+          10 分钟
         
       </span>
     
@@ -355,13 +356,89 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">本地git设置</h1>
+            <h1 id="seo-header">p10_模块 &amp; 包</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="设置GitHub加速端口"><a href="#设置GitHub加速端口" class="headerlink" title="设置GitHub加速端口"></a>设置GitHub加速端口</h1><p>因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global http.https://github.com.proxy http://127.0.0.1:7890<br></code></pre></td></tr></table></figure>
+                <h1 id="模块概念"><a href="#模块概念" class="headerlink" title="模块概念"></a>模块概念</h1><ul>
+<li>模块是一个包含Python定义和语句的文件，把相关的代码分配到一个模块里，可以让代码更好用、更易懂。</li>
+</ul>
+<h1 id="模块导入"><a href="#模块导入" class="headerlink" title="模块导入"></a>模块导入</h1><ul>
+<li>模块可以被别的程序引入，以使用该模块中定义的变量，函数等功能</li>
+<li>习惯上（但不强制要求）把所有导入语句放在模块的开头</li>
+<li>一个模块被另一个程序第一次导入时，会执行该模块</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>模块导入</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>import module</td>
+</tr>
+<tr>
+<td>import module as alias</td>
+</tr>
+<tr>
+<td>from module import item</td>
+</tr>
+<tr>
+<td>from module import item as alias</td>
+</tr>
+<tr>
+<td>from module import *</td>
+</tr>
+</tbody></table>
+<p>&#x3D;&#x3D;注意：请慎用 from module import * ，很容易出现名称重复的情况，导致出现一些意外的问题&#x3D;&#x3D;</p>
+<h1 id="包的概念"><a href="#包的概念" class="headerlink" title="包的概念"></a>包的概念</h1><ul>
+<li>Python包本质上是一个文件夹，只是该文件夹会包含 __init__.py 模块</li>
+<li>和文件夹一样，包里面还可以存在子包，模块或者其它文件</li>
+</ul>
+<h1 id="包的作用"><a href="#包的作用" class="headerlink" title="包的作用"></a>包的作用</h1><ul>
+<li><strong>避免相同命名冲突：</strong> 如果在同一个包里，是不允许两个模块命名相同的，但是如果不在同一个包里，是可以的</li>
+<li><strong>模块分区：</strong> 把不同功能的模块归类到不同的包里，方便查询和修改。在比较大型的项目中常常需要编写大量的模块，此时我们可以使用包来对这些模块进行管理</li>
+</ul>
+<h1 id="包的导入"><a href="#包的导入" class="headerlink" title="包的导入"></a>包的导入</h1><table>
+<thead>
+<tr>
+<th>包的导入</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>import package</td>
+</tr>
+<tr>
+<td>import package as alias</td>
+</tr>
+<tr>
+<td>from package import module</td>
+</tr>
+<tr>
+<td>from package import module as alias</td>
+</tr>
+<tr>
+<td>from package.module import item</td>
+</tr>
+<tr>
+<td>from package.module import item as alias</td>
+</tr>
+</tbody></table>
+<h1 id="搜索路径"><a href="#搜索路径" class="headerlink" title="搜索路径"></a>搜索路径</h1><ul>
+<li>sys模块的path变量以列表的形式记录了Python解释器自动查找所需模块或包的路径；如果这些路径都找不到，则会报错：ModuleNotFoundError: No module named ‘xxx’</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sys<br><br><br><span class="hljs-built_in">print</span>(sys.path)<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="name-属性"><a href="#name-属性" class="headerlink" title="__name__属性"></a>__name__属性</h1><ul>
+<li>每个模块都有一个__name__属性，当其值是 ‘__main__‘ 时，说明该模块自身在运行，否则说明该模块因为被导入才执行的，此时其值为模块名</li>
+<li>在完成一个模块的编写之前，我们一般会对模块中的功能进行测试，看看各项功能是否正常运行。对于这些测试的代码，我们希望只在直接运行这个模块时执行，而在其它程序导入这个模块时不要执行，这个时候就可以借助__name__属性来实现。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">x, y</span>):<br>    <span class="hljs-built_in">print</span>(x + y)<br>    <span class="hljs-built_in">print</span>(x * <span class="hljs-number">2</span>)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    add(<span class="hljs-number">3</span>, <span class="hljs-number">4</span>)<br>    add(<span class="hljs-string">&#x27;3&#x27;</span>, <span class="hljs-string">&#x27;4&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
@@ -379,7 +456,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" class="category-chain-item">实用工具</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/" class="category-chain-item">编程技术</a>
   
   
 
@@ -391,6 +468,13 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python%E5%9F%BA%E7%A1%80/" class="print-no-link">#Python基础</a>
+      
+    </div>
+  
 </div>
 
 
@@ -399,8 +483,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>本地git设置</div>
-      <div>https://zyhblog.dpdns.org/2026/07/01/本地git设置/</div>
+      <div>p10_模块 &amp; 包</div>
+      <div>https://zyhblog.dpdns.org/2026/07/02/p10_模块 &amp; 包/</div>
     </div>
     <div class="license-meta">
       
@@ -412,7 +496,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年7月1日</div>
+          <div>2026年7月2日</div>
         </div>
       
       
@@ -444,9 +528,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/07/02/p15_matplotlib/" title="p15_matplotlib">
+                      <a href="/2026/07/02/p08_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B/" title="p08_面向对象编程">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">p15_matplotlib</span>
+                        <span class="hidden-mobile">p08_面向对象编程</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -454,8 +538,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/07/01/Hexo%E7%AC%94%E8%AE%B0%E8%A7%84%E8%8C%83/" title="Hexo笔记规范">
-                        <span class="hidden-mobile">Hexo笔记规范</span>
+                      <a href="/2026/07/02/p09_%E9%94%99%E8%AF%AF%20&amp;%20%E5%BC%82%E5%B8%B8/" title="p09_错误 &amp; 异常">
+                        <span class="hidden-mobile">p09_错误 &amp; 异常</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

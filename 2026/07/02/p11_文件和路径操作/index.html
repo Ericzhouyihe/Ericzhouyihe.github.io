@@ -19,21 +19,22 @@
   <meta name="author" content="一人一口粥">
   <meta name="keywords" content="">
   
-    <meta name="description" content="设置GitHub加速端口因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可 1git config --global http.https:&#x2F;&#x2F;github.com.proxy http:&#x2F;&#x2F;127.0.0.1:7890">
+    <meta name="description" content="路径操作路径决定了文件或目录在文件系统中的位置，可以是绝对路径或相对路径。 绝对路径：从根目录开始的完整路径。比如：  D:\PythonFiles\p01.py  相对路径：是相对于某个位置开始的路径。  .    表示当前目录..   表示当前目录的上一级目录  os模块中提供了很多对目录和文件操作的函数： os.getcwd()  返回表示当前工作目录的字符串  1234import osp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="本地git设置">
-<meta property="og:url" content="https://zyhblog.dpdns.org/2026/07/01/%E6%9C%AC%E5%9C%B0git%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:title" content="p11_文件和路径操作">
+<meta property="og:url" content="https://zyhblog.dpdns.org/2026/07/02/p11_%E6%96%87%E4%BB%B6%E5%92%8C%E8%B7%AF%E5%BE%84%E6%93%8D%E4%BD%9C/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="设置GitHub加速端口因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可 1git config --global http.https:&#x2F;&#x2F;github.com.proxy http:&#x2F;&#x2F;127.0.0.1:7890">
+<meta property="og:description" content="路径操作路径决定了文件或目录在文件系统中的位置，可以是绝对路径或相对路径。 绝对路径：从根目录开始的完整路径。比如：  D:\PythonFiles\p01.py  相对路径：是相对于某个位置开始的路径。  .    表示当前目录..   表示当前目录的上一级目录  os模块中提供了很多对目录和文件操作的函数： os.getcwd()  返回表示当前工作目录的字符串  1234import osp">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-07-01T13:50:00.000Z">
-<meta property="article:modified_time" content="2026-07-01T13:53:08.313Z">
+<meta property="article:published_time" content="2026-07-02T01:55:00.000Z">
+<meta property="article:modified_time" content="2026-07-02T02:01:10.549Z">
 <meta property="article:author" content="一人一口粥">
+<meta property="article:tag" content="Python基础">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>本地git设置 - Hexo</title>
+  <title>p11_文件和路径操作 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -282,7 +283,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="本地git设置"></span>
+            <span id="subtitle" data-typed-text="p11_文件和路径操作"></span>
           
         </div>
 
@@ -293,8 +294,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-07-01 21:50" pubdate>
-          2026年7月1日 晚上
+        <time datetime="2026-07-02 09:55" pubdate>
+          2026年7月2日 上午
         </time>
       </span>
     
@@ -305,7 +306,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          127 字
+          3.5k 字
         
       </span>
     
@@ -316,7 +317,7 @@
         
         
         
-          2 分钟
+          30 分钟
         
       </span>
     
@@ -355,13 +356,175 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">本地git设置</h1>
+            <h1 id="seo-header">p11_文件和路径操作</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="设置GitHub加速端口"><a href="#设置GitHub加速端口" class="headerlink" title="设置GitHub加速端口"></a>设置GitHub加速端口</h1><p>因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global http.https://github.com.proxy http://127.0.0.1:7890<br></code></pre></td></tr></table></figure>
+                <h1 id="路径操作"><a href="#路径操作" class="headerlink" title="路径操作"></a>路径操作</h1><p>路径决定了文件或目录在文件系统中的位置，可以是绝对路径或相对路径。</p>
+<p><strong>绝对路径</strong>：从根目录开始的完整路径。比如：</p>
+<blockquote>
+<p>D:\PythonFiles\p01.py</p>
+</blockquote>
+<p><strong>相对路径</strong>：是相对于某个位置开始的路径。</p>
+<blockquote>
+<p>.    表示当前目录<br>..   表示当前目录的上一级目录</p>
+</blockquote>
+<p><strong>os模块中提供了很多对目录和文件操作的函数：</strong></p>
+<p>os.getcwd()</p>
+<ul>
+<li>返回表示当前工作目录的字符串</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-built_in">print</span>(os.getcwd())<br></code></pre></td></tr></table></figure>
+
+<p>os.listdir(path)</p>
+<ul>
+<li>返回 path 指定的文件夹中包含的文件或文件夹的名字构成的列表</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br>cwd = os.getcwd()<br><span class="hljs-built_in">print</span>(os.listdir(cwd))<br></code></pre></td></tr></table></figure>
+
+<p>os.makedirs(name, exist_ok&#x3D;False)</p>
+<ul>
+<li>创建目录，并且还会自动创建到达最后一级目录所需要的中间目录</li>
+<li>exist_ok 为 False (默认值)，表示如果目标目录已存在将引发 FileExistsError</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br>os.makedirs(<span class="hljs-string">&#x27;./dir1/dir2/dir3&#x27;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>os.path.basename(path)</p>
+<ul>
+<li>返回路径 path 最后一级的名称，通常用来返回文件名</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-built_in">print</span>(os.path.basename(<span class="hljs-string">&#x27;./dir3/dir2/dir1/a.txt&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>os.path.dirname(path)</p>
+<ul>
+<li>返回路径 path 的目录名称</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-built_in">print</span>(os.path.dirname(<span class="hljs-string">&#x27;./dir3/dir2/dir1/a.txt&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>os.path.split(path)</p>
+<ul>
+<li>把路径分割成 dirname 和 basename，返回一个元组</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-built_in">print</span>(os.path.split(<span class="hljs-string">&#x27;./dir3/dir2/dir1/a.txt&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>os.path.splitext(path)</p>
+<ul>
+<li>把路径中的扩展名分割出来，返回一个元组</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-built_in">print</span>(os.path.splitext(<span class="hljs-string">&#x27;./dir3/dir2/dir1/a.txt&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>os.path.exists(path)</p>
+<ul>
+<li>path 路径存在则返回 True，不存在则返回 False</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br>p = <span class="hljs-string">r&#x27;D:\PythonFiles\p01.py&#x27;</span><br><span class="hljs-built_in">print</span>(os.path.exists(p))<br></code></pre></td></tr></table></figure>
+
+<p>os.path.isfile(path)</p>
+<ul>
+<li>判断路径是否为文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-built_in">print</span>(os.path.isfile(<span class="hljs-string">&quot;./dir3/dir2/dir1/a.txt&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>os.path.isdir(path)</p>
+<ul>
+<li>判断路径是否为目录</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br><span class="hljs-built_in">print</span>(os.path.isdir(<span class="hljs-string">&quot;./dir3/dir2/dir1&quot;</span>))<br></code></pre></td></tr></table></figure>
+
+<p>os.path.join(path, *paths)</p>
+<ul>
+<li>智能地拼接一个或多个路径部分</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> os<br><br><br>p1 = <span class="hljs-string">&#x27;D:\\PythonFiles\\&#x27;</span><br>p2 = <span class="hljs-string">r&#x27;dir1\dir2\dir3&#x27;</span><br>p3 = <span class="hljs-string">&#x27;p01.py&#x27;</span><br><span class="hljs-built_in">print</span>(os.path.join(p1, p2, p3))<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="文件读写"><a href="#文件读写" class="headerlink" title="文件读写"></a>文件读写</h1><p>从文件的编码方式来看，文件可以分为文本文件和二进制文件。</p>
+<p>文本文件：txt、html、json等； 二进制文件：图片、音频、视频等。</p>
+<p>open(file, mode&#x3D;’r’, encoding&#x3D;None) </p>
+<ul>
+<li>file：文件路径</li>
+<li>mode：文件打开的模式，默认为 ‘r’ 模式</li>
+<li>encoding：指定文本文件的编码方式，默认依赖系统，处理非ASCII文本时，”UTF-8” 通常是首选编码</li>
+<li>打开指定的文件，返回一个文件对象（迭代器对象）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">当前open以默认模式打开指定的文件, 返回一个文件对象,</span><br><span class="hljs-string">该对象为迭代器对象, 每次迭代会返回该文件中的一行数据</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;./exam.txt&#x27;</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">next</span>(file))<br><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> file:<br>    <span class="hljs-built_in">print</span>(i)<br></code></pre></td></tr></table></figure>
+
+<p><strong>mode 常用模式：</strong></p>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r</td>
+<td>以只读方式打开文件。文件的指针将会放在文件的开头。</td>
+</tr>
+<tr>
+<td>w</td>
+<td>打开一个文件只用于写入。如果该文件已存在则打开文件，并从开头开始编辑，即原有内容会被删除。如果该文件不存在，创建新的文件再写入。</td>
+</tr>
+<tr>
+<td>a</td>
+<td>打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。也就是说，新的内容将会被写入到已有内容之后。如果该文件不存在，创建新文件进行写入。</td>
+</tr>
+<tr>
+<td><strong>+</strong></td>
+<td>如果要以读写模式打开，加上 <strong>+</strong> 即可，比如：r+、w+、a+</td>
+</tr>
+</tbody></table>
+<p><strong>file 常用对象方法：</strong></p>
+<p>file.read(size&#x3D;-1)</p>
+<ul>
+<li>从 file 中读取至多 size 个字符并返回</li>
+<li>如果 size 为负值或 None，则读取至 EOF（End Of File）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&quot;./t01.txt&quot;</span>) <span class="hljs-keyword">as</span> file:<br>    <span class="hljs-built_in">print</span>(file.read(<span class="hljs-number">5</span>))<br>    <span class="hljs-built_in">print</span>(file.read(<span class="hljs-number">2</span>))<br>    <span class="hljs-built_in">print</span>(file.read())<br></code></pre></td></tr></table></figure>
+
+<p>file.write(s)</p>
+<ul>
+<li>将字符串 s 写入并返回写入的字符数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&quot;./t01.txt&quot;</span>, mode=<span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>    num = file.write(<span class="hljs-string">&#x27;\nhello baby&#x27;</span>)<br>    <span class="hljs-built_in">print</span>(num)<br></code></pre></td></tr></table></figure>
+
+<p>file.flush()</p>
+<ul>
+<li>刷新缓冲区，即将缓冲区中的数据立刻写入文件，同时清空缓冲区，不需要被动的等待缓冲区写入。一般情况下，文件关闭后会自动刷新缓冲区，但有时你需要在关闭前刷新它，这时就可以使用 flush() 方法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br><br><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">r&quot;./t01.txt&quot;</span>, mode=<span class="hljs-string">&#x27;a&#x27;</span>)<br>file.write(<span class="hljs-string">&#x27;\n123456789&#x27;</span>)<br>time.sleep(<span class="hljs-number">5</span>)  <span class="hljs-comment"># 文件需要等到关闭文件时才会把数据从缓冲区写入文件</span><br>file.close()  <span class="hljs-comment"># 关闭文件，自动刷新缓冲区，数据才写入文件</span><br><br>file = <span class="hljs-built_in">open</span>(<span class="hljs-string">r&quot;./t01.txt&quot;</span>, mode=<span class="hljs-string">&#x27;a&#x27;</span>)<br>file.write(<span class="hljs-string">&#x27;\n123456789&#x27;</span>)<br>file.flush()  <span class="hljs-comment"># 刷新缓冲区，数据立刻写入文件</span><br>time.sleep(<span class="hljs-number">5</span>)<br>file.close()<br></code></pre></td></tr></table></figure>
+
+<p>file.close()</p>
+<ul>
+<li>刷新缓冲区并关闭该文件。如果文件已经关闭，则此方法无效</li>
+<li>文件关闭后，对文件的任何操作（如：读取或写入）都会引发 ValueError</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">file = <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;./t01.txt&#x27;</span>)<br><span class="hljs-built_in">print</span>(file.read())<br>file.close()<br>file.read()  <span class="hljs-comment"># 引发ValueError</span><br></code></pre></td></tr></table></figure>
+
+<p>file.seek(offset)</p>
+<ul>
+<li>移动文件指针到指定位置</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;./exam.txt&#x27;</span>, mode=<span class="hljs-string">&#x27;w+&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>    file.write(<span class="hljs-string">&#x27;hello\nworld&#x27;</span>)<br>    file.seek(<span class="hljs-number">7</span>)<br>    <span class="hljs-built_in">print</span>(file.read())  <span class="hljs-comment"># &#x27;world&#x27;</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="with-语句"><a href="#with-语句" class="headerlink" title="with 语句"></a>with 语句</h1><ul>
+<li>这种写法如果在open之后close之前发生未知的异常，就不能确保打开的文件一定被正常关闭，这显然不是一个好的做法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">file = <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;./t01.txt&#x27;</span>, mode=<span class="hljs-string">&#x27;w&#x27;</span>)<br>file.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br>...<br>...<br>file.close()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>所以可以使用下面这种写法，确保close一定会被执行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">file = <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;./t01.txt&#x27;</span>, mode=<span class="hljs-string">&#x27;w&#x27;</span>)<br><span class="hljs-keyword">try</span>:<br>    file.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br>    ...<br>    ...<br><span class="hljs-keyword">finally</span>:<br>    file.close()<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>用 with 语句将会是一种更加简洁、优雅的方式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">r&#x27;./t01.txt&#x27;</span>, mode=<span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> file:<br>    file.write(<span class="hljs-string">&#x27;hello world&#x27;</span>)<br>    ...<br>    ...<br></code></pre></td></tr></table></figure>
+
+
                 
               </div>
             
@@ -379,7 +542,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7/" class="category-chain-item">实用工具</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/" class="category-chain-item">编程技术</a>
   
   
 
@@ -391,6 +554,13 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python%E5%9F%BA%E7%A1%80/" class="print-no-link">#Python基础</a>
+      
+    </div>
+  
 </div>
 
 
@@ -399,8 +569,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>本地git设置</div>
-      <div>https://zyhblog.dpdns.org/2026/07/01/本地git设置/</div>
+      <div>p11_文件和路径操作</div>
+      <div>https://zyhblog.dpdns.org/2026/07/02/p11_文件和路径操作/</div>
     </div>
     <div class="license-meta">
       
@@ -412,7 +582,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年7月1日</div>
+          <div>2026年7月2日</div>
         </div>
       
       
@@ -444,9 +614,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/07/02/p15_matplotlib/" title="p15_matplotlib">
+                      <a href="/2026/07/02/p09_%E9%94%99%E8%AF%AF%20&amp;%20%E5%BC%82%E5%B8%B8/" title="p09_错误 &amp; 异常">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">p15_matplotlib</span>
+                        <span class="hidden-mobile">p09_错误 &amp; 异常</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -454,8 +624,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/07/01/Hexo%E7%AC%94%E8%AE%B0%E8%A7%84%E8%8C%83/" title="Hexo笔记规范">
-                        <span class="hidden-mobile">Hexo笔记规范</span>
+                      <a href="/2026/07/02/p13_numpy/" title="p13_numpy">
+                        <span class="hidden-mobile">p13_numpy</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
