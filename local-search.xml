@@ -358,7 +358,7 @@
     <link href="/2026/07/01/%E6%9C%AC%E5%9C%B0git%E8%AE%BE%E7%BD%AE/"/>
     <url>/2026/07/01/%E6%9C%AC%E5%9C%B0git%E8%AE%BE%E7%BD%AE/</url>
     
-    <content type="html"><![CDATA[<h1 id="设置GitHub加速端口"><a href="#设置GitHub加速端口" class="headerlink" title="设置GitHub加速端口"></a>设置GitHub加速端口</h1><p>因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global http.https://github.com.proxy http://127.0.0.1:7890<br></code></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h1 id="查询git全局配置"><a href="#查询git全局配置" class="headerlink" title="查询git全局配置"></a>查询git全局配置</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global -l<br></code></pre></td></tr></table></figure><h1 id="设置GitHub加速端口"><a href="#设置GitHub加速端口" class="headerlink" title="设置GitHub加速端口"></a>设置GitHub加速端口</h1><p>因为平时提交和拉取老是超时，所以需要进行代理，将访问GitHub链接的设置到本地的代理端口即可</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git config --global http.https://github.com.proxy http://127.0.0.1:7890<br></code></pre></td></tr></table></figure>]]></content>
     
     
     <categories>
