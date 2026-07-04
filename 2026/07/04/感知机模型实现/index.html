@@ -19,21 +19,23 @@
   <meta name="author" content="一人一口粥">
   <meta name="keywords" content="">
   
-    <meta name="description" content="conda虚拟环境创建虚拟环境1conda create -n py310 python&#x3D;3.10 用版本比较新的库就创建3.12版本 1conda create -n py312 python&#x3D;3.12 同 conda create –name gpu_default python&#x3D;3.12 安装完之后查看pytorh版本 1python -V 或Python --version和什么">
+    <meta name="description" content="感知机模型实现流程感知机是一种二分类线性模型，用于寻找一个能够将正负样本分开的超平面。模型的分类函数为： $$f(x) &#x3D; sign(w \cdot x + b)$$ 其中：  $w$：权重向量 $b$：偏置项 $x$：输入样本 $sign$：符号函数，输出类别 $+1$ 或 $-1$  1. 准备训练数据示例中使用二维样本点进行二分类： 1234567891011import nump">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习和深度学习环境配置">
-<meta property="og:url" content="https://zyhblog.dpdns.org/2026/07/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%92%8C%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:title" content="感知机模型实现">
+<meta property="og:url" content="https://zyhblog.dpdns.org/2026/07/04/%E6%84%9F%E7%9F%A5%E6%9C%BA%E6%A8%A1%E5%9E%8B%E5%AE%9E%E7%8E%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="conda虚拟环境创建虚拟环境1conda create -n py310 python&#x3D;3.10 用版本比较新的库就创建3.12版本 1conda create -n py312 python&#x3D;3.12 同 conda create –name gpu_default python&#x3D;3.12 安装完之后查看pytorh版本 1python -V 或Python --version和什么">
+<meta property="og:description" content="感知机模型实现流程感知机是一种二分类线性模型，用于寻找一个能够将正负样本分开的超平面。模型的分类函数为： $$f(x) &#x3D; sign(w \cdot x + b)$$ 其中：  $w$：权重向量 $b$：偏置项 $x$：输入样本 $sign$：符号函数，输出类别 $+1$ 或 $-1$  1. 准备训练数据示例中使用二维样本点进行二分类： 1234567891011import nump">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2026-07-03T03:18:00.000Z">
-<meta property="article:modified_time" content="2026-07-04T02:11:35.402Z">
+<meta property="article:published_time" content="2026-07-04T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-07-04T04:01:43.683Z">
 <meta property="article:author" content="一人一口粥">
+<meta property="article:tag" content="感知机">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>机器学习和深度学习环境配置 - Hexo</title>
+  <title>感知机模型实现 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -282,7 +284,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="机器学习和深度学习环境配置"></span>
+            <span id="subtitle" data-typed-text="感知机模型实现"></span>
           
         </div>
 
@@ -293,8 +295,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2026-07-03 11:18" pubdate>
-          2026年7月3日 上午
+        <time datetime="2026-07-04 12:00" pubdate>
+          2026年7月4日 中午
         </time>
       </span>
     
@@ -305,7 +307,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          1.8k 字
         
       </span>
     
@@ -316,7 +318,7 @@
         
         
         
-          20 分钟
+          15 分钟
         
       </span>
     
@@ -355,51 +357,70 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">机器学习和深度学习环境配置</h1>
+            <h1 id="seo-header">感知机模型实现</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="conda虚拟环境"><a href="#conda虚拟环境" class="headerlink" title="conda虚拟环境"></a>conda虚拟环境</h1><h2 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda create -n py310 python=3.10<br></code></pre></td></tr></table></figure>
-<p>用版本比较新的库就创建3.12版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda create -n py312 python=3.12<br></code></pre></td></tr></table></figure>
-<p>同 conda create –name gpu_default python&#x3D;3.12</p>
-<p>安装完之后查看pytorh版本</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">python -V<br></code></pre></td></tr></table></figure>
-<p>或<code>Python --version</code>和什么指令一样，全面Python忽略大小写，但是后面V要严格一致</p>
-<h2 id="激活虚拟环境"><a href="#激活虚拟环境" class="headerlink" title="激活虚拟环境"></a>激活虚拟环境</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">conda activate py310<br></code></pre></td></tr></table></figure>
+                <h1 id="感知机模型实现流程"><a href="#感知机模型实现流程" class="headerlink" title="感知机模型实现流程"></a>感知机模型实现流程</h1><p>感知机是一种二分类线性模型，用于寻找一个能够将正负样本分开的超平面。模型的分类函数为：</p>
+<p>$$<br>f(x) &#x3D; sign(w \cdot x + b)<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$w$：权重向量</li>
+<li>$b$：偏置项</li>
+<li>$x$：输入样本</li>
+<li>$sign$：符号函数，输出类别 $+1$ 或 $-1$</li>
+</ul>
+<h2 id="1-准备训练数据"><a href="#1-准备训练数据" class="headerlink" title="1. 准备训练数据"></a>1. 准备训练数据</h2><p>示例中使用二维样本点进行二分类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br>p_x = np.array([<br>    [<span class="hljs-number">4.0</span>, <span class="hljs-number">2.0</span>],<br>    [<span class="hljs-number">3.0</span>, <span class="hljs-number">2.0</span>],<br>    [<span class="hljs-number">2.5</span>, <span class="hljs-number">1.0</span>],<br>    [<span class="hljs-number">2.0</span>, <span class="hljs-number">1.0</span>]<br>])<br><br>y = np.array([<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>])<br></code></pre></td></tr></table></figure>
 
-<h2 id="uv"><a href="#uv" class="headerlink" title="uv"></a>uv</h2><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> uv<br></code></pre></td></tr></table></figure>
-<p>导入uv之后可以用uv pip install指令加速下载</p>
-<h1 id="机器学习环境"><a href="#机器学习环境" class="headerlink" title="机器学习环境"></a>机器学习环境</h1><h2 id="scikit-learn版本"><a href="#scikit-learn版本" class="headerlink" title="scikit-learn版本"></a>scikit-learn版本</h2><p>Python 3.10</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">uv pip install scikit-learn==1.7.2<br></code></pre></td></tr></table></figure>
+<p>其中，<code>p_x</code> 表示训练样本，<code>y</code> 表示样本标签。</p>
+<h2 id="2-可视化样本点"><a href="#2-可视化样本点" class="headerlink" title="2. 可视化样本点"></a>2. 可视化样本点</h2><p>为了观察数据分布，可以将正样本和负样本分别画出：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-keyword">for</span> <span class="hljs-selector-tag">i</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(p_x)):<br>    <span class="hljs-keyword">if</span> <span class="hljs-attribute">y</span>[i] == <span class="hljs-number">1</span>:<br>        plt<span class="hljs-selector-class">.plot</span>(p_x<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[0]</span>, p_x<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[1]</span>, <span class="hljs-string">&#x27;ro&#x27;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        plt<span class="hljs-selector-class">.plot</span>(p_x<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[0]</span>, p_x<span class="hljs-selector-attr">[i]</span><span class="hljs-selector-attr">[1]</span>, <span class="hljs-string">&#x27;bo&#x27;</span>)<br><br>plt<span class="hljs-selector-class">.show</span>()<br></code></pre></td></tr></table></figure>
 
-<p>Python 3.12</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">uv pip install scikit-learn==1.6.1<br></code></pre></td></tr></table></figure>
+<p>红色点表示正类，蓝色点表示负类。</p>
+<h2 id="3-初始化模型参数"><a href="#3-初始化模型参数" class="headerlink" title="3. 初始化模型参数"></a>3. 初始化模型参数</h2><p>感知机训练前，需要初始化权重、偏置和学习率：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">w</span> = np.array([<span class="hljs-number">0</span>.<span class="hljs-number">4</span>, <span class="hljs-number">0</span>.<span class="hljs-number">4</span>])<br><span class="hljs-attribute">b</span> = <span class="hljs-number">0</span>.<span class="hljs-number">5</span><br><br><span class="hljs-attribute">alpha</span> = <span class="hljs-number">0</span>.<span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
 
-<h2 id="opnecv版本"><a href="#opnecv版本" class="headerlink" title="opnecv版本"></a>opnecv版本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">uv pip install opencv-python==4.9.0.80<br></code></pre></td></tr></table></figure>
+<p>其中 <code>alpha</code> 是学习率，用来控制每次参数更新的步长。</p>
+<h2 id="4-判断误分类点"><a href="#4-判断误分类点" class="headerlink" title="4. 判断误分类点"></a>4. 判断误分类点</h2><p>对于样本 $(x_i, y_i)$，如果模型预测值与真实标签不一致，则该点为误分类点：</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">y[i] != <span class="hljs-built_in">np</span>.<span class="hljs-built_in">sign</span>(<span class="hljs-built_in">np</span>.dot(w, p_x[i]) + b)<br></code></pre></td></tr></table></figure>
 
+<p>也可以写成数学形式：</p>
+<p>[ y_i(w \cdot x_i + b) \leq 0 ]</p>
+<p>当上述条件成立时，说明当前分类超平面没有正确分类该样本。</p>
+<h2 id="5-更新参数"><a href="#5-更新参数" class="headerlink" title="5. 更新参数"></a>5. 更新参数</h2><p>感知机的核心思想是：找到误分类点后，利用该样本更新参数，使分类超平面向正确方向移动。</p>
+<p>更新公式为：</p>
+<p>[ w &#x3D; w + \alpha y_i x_i ][ b &#x3D; b + \alpha y_i ]</p>
+<p>代码实现如下：</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs mel"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">100</span>):<br>    <span class="hljs-keyword">choice</span> = <span class="hljs-number">-1</span><br><br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> range(len(p_x)):<br>        <span class="hljs-keyword">if</span> y[j] != np.<span class="hljs-keyword">sign</span>(np.<span class="hljs-keyword">dot</span>(w, p_x[j]) + b):<br>            <span class="hljs-keyword">choice</span> = j<br>            <span class="hljs-keyword">break</span><br><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">choice</span> == <span class="hljs-number">-1</span>:<br>        <span class="hljs-keyword">break</span><br><br>    w = w + alpha * y[<span class="hljs-keyword">choice</span>] * p_x[<span class="hljs-keyword">choice</span>]<br>    b = b + alpha * y[<span class="hljs-keyword">choice</span>]<br><br><span class="hljs-keyword">print</span>(i)<br><span class="hljs-keyword">print</span>(<span class="hljs-string">&#x27;w:&#123;&#125;\nb:&#123;&#125;&#x27;</span>.<span class="hljs-keyword">format</span>(w, b))<br></code></pre></td></tr></table></figure>
 
+<p>这里使用的是随机梯度下降思想，即每次找到一个误分类点后立即更新参数。</p>
+<p>训练结果为：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">31</span><br><span class="hljs-attribute">w</span>:[-<span class="hljs-number">0</span>.<span class="hljs-number">15</span>  <span class="hljs-number">0</span>.<span class="hljs-number">6</span> ]<br><span class="hljs-attribute">b</span>:-<span class="hljs-number">0</span>.<span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
 
-<h1 id="深度学习环境"><a href="#深度学习环境" class="headerlink" title="深度学习环境"></a>深度学习环境</h1><h2 id="PyTorch版本"><a href="#PyTorch版本" class="headerlink" title="PyTorch版本"></a>PyTorch版本</h2><h3 id="CV"><a href="#CV" class="headerlink" title="CV"></a>CV</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">ROCM 6.0 (Linux only)</span><br>pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/rocm6.0<br><span class="hljs-meta prompt_"># </span><span class="language-bash">CUDA 11.8</span><br>pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu118<br><span class="hljs-meta prompt_"># </span><span class="language-bash">CUDA 12.1</span><br>pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu121<br><span class="hljs-meta prompt_"># </span><span class="language-bash">CPU only</span><br>pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cpu<br></code></pre></td></tr></table></figure>
+<p>说明模型经过若干次迭代后，找到了可以划分样本的参数。</p>
+<h2 id="6-绘制分类直线"><a href="#6-绘制分类直线" class="headerlink" title="6. 绘制分类直线"></a>6. 绘制分类直线</h2><p>二维情况下，分类边界满足：</p>
+<p>[ w_1x_1 + w_2x_2 + b &#x3D; 0 ]</p>
+<p>可以将其变形为：</p>
+<p>[ x_2 &#x3D; -\frac{w_1x_1 + b}{w_2} ]</p>
+<p>代码如下：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs inform7">line_x = <span class="hljs-comment">[0, 10]</span><br>line_y = <span class="hljs-comment">[0, 0]</span><br><br>for i in range(len(line_x)):<br>    if w<span class="hljs-comment">[1]</span> != 0:<br>        line_y<span class="hljs-comment">[i]</span> = (-w<span class="hljs-comment">[0]</span> * line_x<span class="hljs-comment">[i]</span> - b) / w<span class="hljs-comment">[1]</span><br>    else:<br>        line_x = <span class="hljs-comment">[-b / w<span class="hljs-comment">[0]</span>, -b / w<span class="hljs-comment">[0]</span>]</span><br>        line_y = <span class="hljs-comment">[0, 1]</span><br><br>plt.plot(line_x, line_y)<br>plt.show()<br></code></pre></td></tr></table></figure>
 
-<p>cpu流程：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">uv pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1<br></code></pre></td></tr></table></figure>
-<p>然后可以在终端运行进行测试：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">测试安装是否正常</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">1. 进入python命令⾏</span><br>python<br><span class="hljs-meta prompt_"># </span><span class="language-bash">2. python命令⾏中输入⼀下命令</span><br>import torch<br>torch.__version__<br>torch.rand(2,3)<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看正常的numpy 版本</span><br>import numpy as np<br>np.__version__<br></code></pre></td></tr></table></figure>
+<p>如果 $w_2 \neq 0$，可以直接根据公式计算直线上的点；如果 $w_2 &#x3D; 0$，说明分类边界是一条垂直线。</p>
+<h2 id="7-使用模型进行分类"><a href="#7-使用模型进行分类" class="headerlink" title="7. 使用模型进行分类"></a>7. 使用模型进行分类</h2><p>训练完成后，感知机模型可以通过以下公式进行预测：</p>
+<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs maxima">model = <span class="hljs-built_in">np</span>.<span class="hljs-built_in">sign</span>(<span class="hljs-built_in">np</span>.dot(w, x) + b)<br></code></pre></td></tr></table></figure>
 
-
-
-<p>GPU流程：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">uv pip install torch==2.3.1 torchvision==0.18.1 torchaudio==2.3.1 --index-url https://download.pytorch.org/whl/cu121<br></code></pre></td></tr></table></figure>
-
-<p>测试：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">测试安装是否正常</span><br><span class="hljs-meta prompt_"># </span><span class="language-bash">1. 进入python命令⾏</span><br>python<br><span class="hljs-meta prompt_"># </span><span class="language-bash">2. python命令⾏中输入⼀下命令</span><br>import torch<br>torch.__version__<br>torch.rand(2,3)<br>torch.rand(2,3).cuda()<br>torch.rand(2,3).to(device=torch.device(&#x27;cuda&#x27;))<br>torch.cuda.is_available()<br>torch.cuda.device_count()<br><span class="hljs-meta prompt_"># </span><span class="language-bash">查看正常的numpy 版本</span><br>import numpy as np<br>np.__version__<br></code></pre></td></tr></table></figure>
-
-<h3 id="NLP"><a href="#NLP" class="headerlink" title="NLP"></a>NLP</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">ROCM 6.1 (Linux only)</span><br>pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/rocm6.1<br><span class="hljs-meta prompt_"># </span><span class="language-bash">ROCM 6.2.4 (Linux only)</span><br>pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/rocm6.2.4<br><span class="hljs-meta prompt_"># </span><span class="language-bash">CUDA 11.8</span><br>pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu118<br><span class="hljs-meta prompt_"># </span><span class="language-bash">CUDA 12.4</span><br>pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124<br><span class="hljs-meta prompt_"># </span><span class="language-bash">CUDA 12.6</span><br>pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu126<br><span class="hljs-meta prompt_"># </span><span class="language-bash">CPU only</span><br>pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu<br></code></pre></td></tr></table></figure>
-
-
-
+<p>如果输出为 <code>1</code>，表示样本属于正类；如果输出为 <code>-1</code>，表示样本属于负类。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>感知机模型的实现流程可以概括为：</p>
+<ol>
+<li>初始化权重 <code>w</code> 和偏置 <code>b</code></li>
+<li>遍历训练数据，寻找误分类点</li>
+<li>使用误分类点更新参数</li>
+<li>重复迭代，直到没有误分类点或达到最大迭代次数</li>
+<li>使用最终的 <code>w</code> 和 <code>b</code> 得到分类超平面</li>
+</ol>
+<p>感知机适用于线性可分数据。当数据线性可分时，算法可以通过不断修正误分类点，最终得到一个能够正确分类训练样本的线性分类器。<br>`&#96;&#96;</p>
 
                 
               </div>
@@ -418,7 +439,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%95%88%E7%8E%87%E5%92%8C%E7%8E%AF%E5%A2%83/" class="category-chain-item">效率和环境</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B%E6%8A%80%E6%9C%AF/" class="category-chain-item">编程技术</a>
   
   
 
@@ -430,6 +451,15 @@
     </div>
   
   
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#机器学习</a>
+      
+        <a href="/tags/%E6%84%9F%E7%9F%A5%E6%9C%BA/" class="print-no-link">#感知机</a>
+      
+    </div>
+  
 </div>
 
 
@@ -438,8 +468,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>机器学习和深度学习环境配置</div>
-      <div>https://zyhblog.dpdns.org/2026/07/03/机器学习和深度学习环境配置/</div>
+      <div>感知机模型实现</div>
+      <div>https://zyhblog.dpdns.org/2026/07/04/感知机模型实现/</div>
     </div>
     <div class="license-meta">
       
@@ -451,7 +481,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2026年7月3日</div>
+          <div>2026年7月4日</div>
         </div>
       
       
@@ -483,18 +513,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/07/04/%E6%84%9F%E7%9F%A5%E6%9C%BA%EF%BC%8CSVM%E4%B8%8ESMO%E7%AE%97%E6%B3%95%E5%85%A5%E9%97%A8/" title="感知机，SVM与SMO算法入门">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">感知机，SVM与SMO算法入门</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/07/02/p02_conda%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" title="p02_conda创建虚拟环境">
-                        <span class="hidden-mobile">p02_conda创建虚拟环境</span>
+                      <a href="/2026/07/04/%E4%BB%80%E4%B9%88%E6%98%AF%E6%84%9F%E7%9F%A5%E6%9C%BA/" title="什么是感知机">
+                        <span class="hidden-mobile">什么是感知机</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
