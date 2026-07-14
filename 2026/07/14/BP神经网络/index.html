@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://zyhblog.dpdns.org/assets/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/image-20260714144158366.png">
 <meta property="og:image" content="https://zyhblog.dpdns.org/assets/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/image-20260714144519786.png">
 <meta property="article:published_time" content="2026-07-14T07:11:00.000Z">
-<meta property="article:modified_time" content="2026-07-14T07:11:48.319Z">
+<meta property="article:modified_time" content="2026-07-14T07:12:40.552Z">
 <meta property="article:author" content="一人一口粥">
 <meta property="article:tag" content="BP算法">
 <meta property="article:tag" content="机器学习">
@@ -391,7 +391,7 @@
 <h2 id="二、前向传播（Forward-Propagation）完整过程"><a href="#二、前向传播（Forward-Propagation）完整过程" class="headerlink" title="二、前向传播（Forward Propagation）完整过程"></a>二、前向传播（Forward Propagation）完整过程</h2><p>前向传播的核心是<strong>线性加权求和 + 非线性激活</strong>，逐层从输入传递到输出。</p>
 <h3 id="1-隐藏层计算"><a href="#1-隐藏层计算" class="headerlink" title="1. 隐藏层计算"></a>1. 隐藏层计算</h3><p><img src="/../assets/BP%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/image-20260714143446319.png" srcset="/img/loading.gif" lazyload alt="BP网络隐藏层计算"></p>
 <h4 id="（1）净输入（加权求和）"><a href="#（1）净输入（加权求和）" class="headerlink" title="（1）净输入（加权求和）"></a>（1）净输入（加权求和）</h4><p>神经元净输入公式：$net &#x3D; \sum (输入 \times 权重) + 偏置$</p>
-<p>以 $h_1$ 为例：<br>$$net_{h1} &#x3D; w_1 \times l_1 + w_2 \times l_2 + b_1 \times 1$$<br>代入数值：<br>$$<br>net_{h1} &#x3D; 0.1\times5 + 0.15\times10 + 0.35\times1 &#x3D; 2.35<br>$$</p>
+<p>以 $h_1$ 为例：<br>$$<br>net_{h1} &#x3D; w_1 \times l_1 + w_2 \times l_2 + b_1 \times 1<br>$$<br>代入数值：<br>$$<br>net_{h1} &#x3D; 0.1\times5 + 0.15\times10 + 0.35\times1 &#x3D; 2.35<br>$$</p>
 <p>同理计算另外两个隐藏神经元：<br>$$<br>net_{h2} &#x3D; 0.2\times5 + 0.25\times10 + 0.35 &#x3D; 3.85<br>$$<br>$$<br>net_{h3} &#x3D; 0.3\times5 + 0.35\times10 + 0.35 &#x3D; 5.35<br>$$</p>
 <h4 id="（2）Sigmoid激活输出"><a href="#（2）Sigmoid激活输出" class="headerlink" title="（2）Sigmoid激活输出"></a>（2）Sigmoid激活输出</h4><p>激活函数采用Sigmoid，公式为 $out &#x3D; \frac{1}{1+e^{-net}}$，将净输入映射到(0,1)区间。</p>
 <p>$$<br>out_{h1} &#x3D; \frac{1}{1+e^{-2.35}} \approx 0.912934<br>$$<br>$$<br>out_{h2} &#x3D; \frac{1}{1+e^{-3.85}} \approx 0.979164<br>$$<br>$$<br>out_{h3} &#x3D; \frac{1}{1+e^{-5.35}} \approx 0.995275<br>$$</p>
